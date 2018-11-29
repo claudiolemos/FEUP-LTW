@@ -1,10 +1,10 @@
 <?php
-  include_once('database/connection.php');
+  include_once('connection.php');
 
   /**
    * Gets the karma of one user
    * @param  int $user_id id of the user
-   * @return int user's karma
+   * @return int|null user's karma or null if the user doesn't exist
    */
   function getUserKarma($user_id){
     global $db;
@@ -22,7 +22,7 @@
                           	WHERE Users.id = Comments.user_id AND Comments.id = VoteOnComment.comment_id AND Comments.user_id = ?
                           	GROUP BY VoteOnComment.comment_id
                           )');
-    $stmt->execute(array($user_id));
-    return $stmt->fetchAll();
+    $stmt->execute(array($user_id, $user_id));
+    return $stmt->fetch()['karma'];
   }
 ?>
