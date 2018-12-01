@@ -1,5 +1,5 @@
 <?php
-  include_once('database/posts.php');
+  include_once(__DIR__.'/../database/posts.php');
 
   $posts = getPosts('new');
 ?>

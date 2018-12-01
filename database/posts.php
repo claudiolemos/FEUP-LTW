@@ -1,5 +1,5 @@
 <?php
-  include_once("includes/connection.php");
+  include_once(__DIR__."/../database/connection.php");
 
   /**
    * Gets the number of votes of one post

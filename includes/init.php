@@ -1,5 +1,5 @@
 <?php
-  include_once('../database/connection.php');
+  include_once(__DIR__.'/../database/connection.php');
 
   session_start();
 
