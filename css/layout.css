@@ -1,0 +1,116 @@
+:root {
+    --dark: #1A1A1A;
+    --light: #F0F0F0;
+    --red: #FF0000;
+    --orange: #FF6000;
+    --yellow: #FFFF00;
+    --green: #92FF00;
+    --blue: #3DC3F8;
+    --pink: #EA499C;
+}
+
+body {
+  display: grid;
+  grid-template-columns: [start] 4fr [middle] 1fr [end];
+  grid-template-rows: [start] auto [nav sort search] auto [posts sidebar] auto [footer] auto [end];
+}
+
+/* main layout */
+
+body > header {
+  grid-row: start / nav;
+  grid-column: start / end;
+}
+
+#sort {
+  grid-row: sort / posts;
+  grid-column: start / middle;
+}
+
+#search {
+  grid-row: sort / posts;
+  grid-column: middle / end;
+}
+
+#sidebar {
+  grid-row: sidebar / footer;
+  grid-column: middle / end;
+}
+
+#posts {
+  grid-row: posts / footer;
+  grid-column: start / middle;
+}
+
+body > footer {
+  grid-row: footer / end;
+  grid-column: start / end;
+}
+
+/* header layout */
+
+body > header {
+  display: grid;
+  grid-template-columns: [logo] 1fr [channels] 3fr [signup] 1fr [end];
+}
+
+#channels ul {
+  display: flex;
+  flex-direction: row;
+}
+
+#channels li {
+  display: block;
+  flex: 1;
+}
+
+/* sort layout */
+
+#sort ul {
+  display: flex;
+  flex-direction: row;
+}
+
+#sort li {
+  display: block;
+  flex: 1;
+}
+
+/* post blocks layout */
+
+#posts article {
+  display: grid;
+  grid-template-columns: [voting] 2em [image] 6em [start] auto [end];
+  grid-template-rows: [start] auto [preview] auto [info] auto [end];
+  margin: 0.5em 0.5em 2em;
+}
+
+#posts article .voting {
+  grid-column: voting / image;
+  grid-row: start / end;
+  display: grid;
+}
+
+#posts article > img {
+  grid-column: image / start;
+  grid-row: start / end;
+}
+
+#posts article > header .title {
+  grid-column: start / end;
+  grid-row: start / preview;
+  /* background-color: red; */
+  margin: 0;
+  font-size: 1.5em;
+}
+
+#posts article > header .preview {
+  grid-column: start / end;
+  grid-row: preview / info;
+  /* background-color: blue; */
+}
+
+#posts article > footer {
+  grid-column: start / end;
+  grid-row: info / end;
+}

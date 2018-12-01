@@ -1,3 +1,8 @@
+DROP TRIGGER IF EXISTS InsertVoteOnPost;
+DROP TRIGGER IF EXISTS RemoveVoteOnPost;
+DROP TRIGGER IF EXISTS InsertVoteOnComment;
+DROP TRIGGER IF EXISTS RemoveVoteOnComment;
+
 DROP TABLE IF EXISTS Subscriptions;
 DROP TABLE IF EXISTS VoteOnPost;
 DROP TABLE IF EXISTS VoteOnComment;
@@ -6,31 +11,34 @@ DROP TABLE IF EXISTS Comments;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Channels;
 
+-- Tables
 
 CREATE TABLE Users (
 	id 							INTEGER PRIMARY KEY,
-	username 				VARCHAR(15) UNIQUE NOT NULL,
+	username 				VARCHAR UNIQUE NOT NULL,
 	name 						VARCHAR NOT NULL,
 	email 					VARCHAR UNIQUE NOT NULL,
 	password 				VARCHAR NOT NULL,
-	cake_day 				DATE NOT NULL
+	cake_day 				DATE NOT NULL,
+	karma 					INT NOT NULL
 );
 
 CREATE TABLE Channels (
 	id 							INTEGER PRIMARY KEY,
-	name 						VARCHAR(50) NOT NULL,
+	name 						VARCHAR UNIQUE NOT NULL,
 	description 		VARCHAR NOT NULL,
 	creation_day 		DATE NOT NULL
 );
 
 CREATE TABLE Posts (
 	id 							INTEGER PRIMARY KEY,
-	title 					VARCHAR(50) NOT NULL,
+	title 					VARCHAR NOT NULL,
 	content 				VARCHAR,
 	link 						VARCHAR,
 	date 						DATE NOT NULL,
 	user_id 				INT NOT NULL,
 	channel_id 			INT NOT NULL,
+	votes 					INT NOT NULL,
 	FOREIGN KEY(user_id)	REFERENCES Users(id),
 	FOREIGN KEY(channel_id)	REFERENCES Channels(id)
 );
@@ -42,6 +50,7 @@ CREATE TABLE Comments (
 	post_id 				INT NOT NULL,
 	date				 		DATE NOT NULL,
 	parent_id				INT,
+	votes 					INT NOT NULL,
 	FOREIGN KEY(parent_id)	REFERENCES Comments(id)
 );
 
@@ -70,3 +79,33 @@ CREATE TABLE VoteOnComment (
 	FOREIGN KEY(user_id)	REFERENCES Users(id),
 	FOREIGN KEY(comment_id)	REFERENCES Comments(id)
 );
+
+-- Triggers
+
+CREATE TRIGGER InsertVoteOnPost
+AFTER INSERT ON VoteOnPost
+BEGIN
+	UPDATE Posts SET votes = votes + NEW.value WHERE Posts.id = NEW.post_id;
+	UPDATE Users SET karma = karma + NEW.value WHERE Users.id = (SELECT user_id FROM Posts WHERE Posts.id = NEW.post_id);
+END;
+
+CREATE TRIGGER RemoveVoteOnPost
+AFTER DELETE ON VoteOnPost
+BEGIN
+	UPDATE Posts SET votes = votes - OLD.value WHERE Posts.id = OLD.post_id;
+	UPDATE Users SET karma = karma - OLD.value WHERE Users.id = (SELECT user_id FROM Posts WHERE Posts.id = OLD.post_id);
+END;
+
+CREATE TRIGGER InsertVoteOnComment
+AFTER INSERT ON VoteOnComment
+BEGIN
+	UPDATE Comments SET votes = votes + NEW.value WHERE Comments.id = NEW.comment_id;
+	UPDATE Users SET karma = karma + NEW.value WHERE Users.id = (SELECT user_id FROM Comments WHERE Comments.id = NEW.comment_id);
+END;
+
+CREATE TRIGGER RemoveVoteOnComment
+AFTER DELETE ON VoteOnComment
+BEGIN
+	UPDATE Comments SET votes = votes - OLD.value WHERE Comments.id = OLD.comment_id;
+	UPDATE Users SET karma = karma - OLD.value WHERE Users.id = (SELECT user_id FROM Comments WHERE Comments.id = OLD.comment_id);
+END;

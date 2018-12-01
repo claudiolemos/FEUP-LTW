@@ -1,17 +1,29 @@
 <?php
-  include_once('connection.php');
+  /**
+   * Gets a channel
+   * @param  string name name of the channel
+   * @return array  contains all the channel info
+   */
+  function getChannel($name){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT * FROM Channels WHERE name = ?');
+    $stmt->execute(array($name));
+    return $stmt->fetch();
+  }
+
+  // function addChannel($channel_name, $channel_name)
 
   /**
    * Gets the number of subscribers of one channel
-   * @param  int $channel_id id of the channel
+   * @param  int $id id of the channel
    * @return int number of subscribers
    */
-  function getChannelSubscribers($channel_id){
-    global $db;
+  function getChannelSubscribers($id){
+    $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT count(*) as subscribers
                           FROM Channels, Subscriptions
                           WHERE Channels.id = ? AND Subscriptions.channel_id = ?');
-    $stmt->execute(array($channel_id, $channel_id));
+    $stmt->execute(array($id, $id));
     return $stmt->fetch()['subscribers'];
   }
 ?>
