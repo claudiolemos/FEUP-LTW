@@ -34,6 +34,7 @@
               <input type="submit" value="Login">
             </form>
             <a href="pages/register.php">Register</a>
+            <p id="error_messages"> <?php echo $error?> </p>
       <?php }
           else{ ?>
             <a href="pages/profile?id=<?=$_SESSION['username']?>"><?=$_SESSION['username']?></a>

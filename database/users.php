@@ -28,4 +28,20 @@
     else
       return false;
   }
+
+  /**
+   * Checks if a user exists
+   * @param  string $username user's username
+   * @return boolean true if user exists or false if it doesn't
+   */
+  function userExists($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT username FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+
+    if($stmt->fetch() != null)
+      return true;
+    else
+      return false;
+  }
 ?>

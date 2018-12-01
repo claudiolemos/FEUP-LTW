@@ -82,3 +82,8 @@ body > header a {
 #posts article .comments:after {
   content: ' comments';
 }
+
+#error_messages {
+  font-weight: bold;
+  color: red;
+}

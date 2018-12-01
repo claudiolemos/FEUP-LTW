@@ -3,6 +3,11 @@
 
   session_start();
 
+  if(isset($_SESSION['error'])){
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
+  }
+
   function generate_random_token() {
     return bin2hex(openssl_random_pseudo_bytes(32));
   }
