@@ -12,8 +12,11 @@
   $parent_comments = getParentComments($_GET['id']);
 
   foreach ($parent_comments as $comment) {
+    echo "<ul>\n";
+    echo "<li>", $comment['content'], "</li>\n";
     getChildComments($comment['id']);
   }
+  echo "</ul>\n";
 
   include('templates/common/header.php');
   include('templates/post.php');
