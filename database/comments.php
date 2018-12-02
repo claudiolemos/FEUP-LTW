@@ -48,4 +48,66 @@
 
     return $indent_level;
   }
+
+  /**
+   * Gets all comments on a post
+   * @param  int $post_id id of the post
+   * @return array of all comments on that post
+   */
+  function getPostComments($post_id){
+
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT * FROM Comments WHERE post_id = ? ORDER BY parent_id ASC');
+    $stmt->execute(array($post_id));
+    return $stmt->fetchAll();
+
+  }
+
+  /**
+  * Gets all top level comments
+  * @param  int $post_id id of the post
+  * @return array of all top level comments on that post
+  */
+  function getParentComments($post_id){
+      $db = Database::instance()->db();
+      $stmt = $db->prepare('SELECT * FROM Comments WHERE post_id = ? AND parent_id IS NULL');
+      $stmt->execute(array($post_id));
+      return $stmt->fetchAll();
+
+  }
+
+
+  /**
+  * Gets all children comments of a comment
+  * @param  int $parent_id id of the parent id
+  * @return array of all child comments of that parent ID
+  * TODO: MAX 4
+  */
+  function getChildComments($parent_id){
+
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT * FROM Comments WHERE parent_id = ?');
+        $stmt->execute(array($parent_id));
+        $childComments = $stmt->fetchAll();
+        
+        //if it has children
+        if (!empty($childComments))
+        {
+            echo "<ul>\n";
+            foreach ($childComments as $comment) {
+              echo "<li>", $comment['content'], getChildComments($comment['id']), "</li>\n";
+            }
+                
+            echo "</ul>\n";
+        }
+          //else no child comments
+    }
+
+
+
+
+
+
+
+
 ?>
