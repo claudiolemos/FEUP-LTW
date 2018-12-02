@@ -1,0 +1,18 @@
+.user-comment {
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  border: #c1c1c9 solid 1px;
+  color: #19191a;
+  width: 80%;
+  padding: 10px;
+  border-bottom-width: 5px !important;
+}
+
+
+.comment-info{
+	padding: 5px;
+}
+
+.comment-body{
+	padding: 5px;
+}

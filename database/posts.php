@@ -60,4 +60,15 @@
 
   function getTopPosts(){}
 
+
+  function getPostById($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT * FROM Posts WHERE id = ?');
+    $stmt->execute(array($id));
+    return $stmt->fetch();
+
+  }
+
+
+
 ?>
