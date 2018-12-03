@@ -83,6 +83,48 @@ body > header a {
   content: ' comments';
 }
 
+#comments article {
+  height: 5em;
+}
+
+
+#comments article .voting > button {
+  margin: 0;
+}
+
+#comments article .upvote {
+  background-color: green;
+  border-width: 0px;
+}
+
+#comments article .votes {
+  align-self: center;
+  text-align: center;
+}
+
+#comments article .downvote {
+  background-color: red;
+  border-width: 0px;
+}
+
+#comments article .voting > button:active {
+  background-color: black;
+}
+
+#comments article > img {
+  object-fit: cover;
+  width:100%;
+  height:100%;
+}
+
+#comments article .username:after {
+  content: ' @';
+}
+
+#comments article .comments:after {
+  content: ' comments';
+}
+
 #error_messages {
   color: red;
 }

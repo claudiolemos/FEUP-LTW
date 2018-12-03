@@ -12,7 +12,7 @@
 body {
   display: grid;
   grid-template-columns: [start] 4fr [middle] 1fr [end];
-  grid-template-rows: [start] auto [nav sort search] auto [posts sidebar] auto [footer] auto [end];
+  grid-template-rows: [start] auto [nav sort search] auto [posts sidebar] auto [comments] auto [footer] auto [end];
 }
 
 /* main layout */
@@ -38,7 +38,12 @@ body > header {
 }
 
 #posts {
-  grid-row: posts / footer;
+  grid-row: posts / comments;
+  grid-column: start / middle;
+}
+
+#comments {
+  grid-row: comments / footer;
   grid-column: start / middle;
 }
 
@@ -113,4 +118,33 @@ body > header {
 #posts article > footer {
   grid-column: start / end;
   grid-row: info / end;
+}
+
+#comments article {
+  display: grid;
+  grid-template-columns: [voting] 2em [image] 6em [start] auto [end];
+  grid-template-rows: [start] auto [preview] auto [end];
+  margin: 0.5em 0.5em 2em;
+}
+
+#comments article .voting {
+  grid-column: voting / image;
+  grid-row: start / end;
+  display: grid;
+}
+
+#comments article > img {
+  grid-column: image / start;
+  grid-row: start / end;
+}
+
+#comments article > header .preview {
+  grid-column: start / end;
+  grid-row: start / end;
+  /* background-color: blue; */
+}
+
+#comments article > footer {
+  grid-column: start / end;
+  grid-row: preview / end;
 }

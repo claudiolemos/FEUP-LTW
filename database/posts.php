@@ -60,4 +60,11 @@
 
   function getTopPosts(){}
 
+  function getPostOfUser($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel FROM Posts, Users, Channels WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Users.username = ? ORDER BY date DESC	');
+    $stmt->execute(array($username));
+    return $stmt->fetchAll();
+  }
+
 ?>

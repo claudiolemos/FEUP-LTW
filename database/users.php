@@ -1,14 +1,26 @@
 <?php
   /**
    * Gets the karma of one user
-   * @param  int $id id of the user
+   * @param  string $username username of the user
    * @return int|null user's karma or null if the user doesn't exist
    */
-  function getUserKarma($id){
+  function getUserKarma($username){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT karma FROM Users WHERE id = ?');
-    $stmt->execute(array($id));
+    $stmt = $db->prepare('SELECT karma FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
     return $stmt->fetch()['karma'];
+  }
+
+  /**
+   * Gets the karma of one user
+   * @param  string $username username of the user
+   * @return string|null user's karma or null if the user doesn't exist
+   */
+  function getUserCakeDay($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT cake_day FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetch()['cake_day'];
   }
 
   /**

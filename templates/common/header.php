@@ -4,11 +4,11 @@
     <title>Reddito</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/layout.css" rel="stylesheet">
-    <link href="../css/responsive.css" rel="stylesheet">
-    <link href="../css/comments.css" rel="stylesheet">
-    <link href="../css/forms.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/comments.css" rel="stylesheet">
+    <link href="css/forms.css" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -18,12 +18,12 @@
       </div>
       <nav id="channels">
         <ul>
-          <li><a href="index.html">Movies</a></li>
-          <li><a href="index.html">World</a></li>
-          <li><a href="index.html">Politics</a></li>
-          <li><a href="index.html">Sports</a></li>
-          <li><a href="index.html">Science</a></li>
-          <li><a href="index.html">Weather</a></li>
+          <li><a href="index.php">Movies</a></li>
+          <li><a href="index.php">World</a></li>
+          <li><a href="index.php">Politics</a></li>
+          <li><a href="index.php">Sports</a></li>
+          <li><a href="index.php">Science</a></li>
+          <li><a href="index.php">Weather</a></li>
         </ul>
       </nav>
       <div id="signup">
@@ -34,19 +34,18 @@
               <input type="submit" value="Login">
             </form>
             <a href="pages/register.php">Register</a>
-            <p id="error_messages"> <?php echo $error?> </p>
       <?php }
           else{ ?>
-            <a href="pages/profile?id=<?=$_SESSION['username']?>"><?=$_SESSION['username']?></a>
+            <a href="profilepage.php?id=<?=$_SESSION['username']?>"><?=$_SESSION['username']?></a>
             <a href="actions/logout.php">Logout</a>
       <?php } ?>
       </div>
     </header>
     <div id="sort">
       <ul>
-        <li><a href="index.html">Hot</a></li>
-        <li><a href="index.html">New</a></li>
-        <li><a href="index.html">Top</a></li>
+        <li><a href="index.php">Hot</a></li>
+        <li><a href="index.php">New</a></li>
+        <li><a href="index.php">Top</a></li>
       </ul>
     </div>
     <div id="search">
@@ -55,8 +54,3 @@
         <input type="submit" value="Submit">
       </form>
     </div>
-    <aside id="sidebar">
-      <h1>Vestibulum congue blandit</h1>
-      <h3>Description</h3>
-      <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
-    </aside>
