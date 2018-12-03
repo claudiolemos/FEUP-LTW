@@ -9,12 +9,16 @@
   $cakeday = getUserCakeDay($_GET['id']);
 ?>
 
-<aside id="sidebar">
+<form id="sidebar">
   <h1><?php echo($_GET['id'])?></h1>
   <h3>Karma: <?php echo($karma)?> </h3>
   <h3>Cake day: <?php echo($cakeday)?> </h3>
-  <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
-</aside>
+  <?php if(isset($_SESSION['username']) && $_SESSION['username'] == $_GET['id']) { ?>
+  <div class="post">
+    <button class="new_post"><a href="index.php">New Post</a></button>
+  </div>
+<?php }?>
+</form>
 <section id="posts">
   <?php foreach($posts as $post) { ?>
     <article class="link">
@@ -23,10 +27,11 @@
         <span class="votes"><?=$post['votes']?></span>
         <button class="downvote"></button>
       </div>
-      <img src="https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg" alt="Reddito logo">
+      <div class="thumbnail">
+        <img src="images/text_post.png" alt="Reddito logo">
+      </div>
       <header>
         <p class="title"><?=$post['title']?></p>
-        <p class="preview"><?=$post['content']?></p>
       </header>
       <footer>
         <span class="date"><?=$post['date']?></span>
@@ -45,7 +50,9 @@
         <span class="votes"><?=$comment['votes']?></span>
         <button class="downvote"></button>
       </div>
-      <img src="https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg" alt="Reddito logo">
+      <div class="thumbnail">
+        <img src="images/text_post.png" alt="Reddito logo">
+      </div>
       <header>
         <p class="preview"><?=$_GET['id']?> commented on <?=$comment['post']?> - <?=$comment['channel']?>, posted by <a href="profilepage.php?id=<?=$comment['user2']?>"> <?=$comment['user2']?></a></p>
       </header>

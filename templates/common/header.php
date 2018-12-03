@@ -36,8 +36,17 @@
             <a href="pages/register.php">Register</a>
       <?php }
           else{ ?>
-            <a href="profilepage.php?id=<?=$_SESSION['username']?>"><?=$_SESSION['username']?></a>
-            <a href="actions/logout.php">Logout</a>
+            <div class="dropdown">
+              <button class="dropbtn"><?=$_SESSION['username']?></button>
+              <!-- <div class="avatar">
+                  <img src="images\reddito.png">
+              </div> -->
+              <div class="dropdown-content">
+                <a href="profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
+                <a href="#">Settings</a>
+                <a href="actions/logout.php">Logout</a>
+              </div>
+            </div>
       <?php } ?>
       </div>
     </header>
