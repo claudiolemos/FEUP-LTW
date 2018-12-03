@@ -1,27 +1,39 @@
 :root {
-    --dark: #1A1A1A;
-    --light: #F0F0F0;
-    --red: #FF0000;
-    --orange: #FF6000;
-    --yellow: #FFFF00;
-    --green: #92FF00;
-    --blue: #3DC3F8;
-    --pink: #EA499C;
+  --light1: #f0f0f0;
+  --light2: #d9d9d9;
+  --dark1: #444444;
+  --dark2: #292929;
+  --blue1: #2763a7;
+  --blue2: #4484ce;
+  --blue3: #67a6ef;
+  --yellow1: #ecc200;
+  --yellow2: #fedc3d;
+  --yellow3: #ffeb8c;
+  --green1: #087a50;
+  --green2: #0aae72;
+  --green3: #44eaad;
+  --red1: #ba2a1f;
+  --red2: #f14234;
+  --red3: #ff8278;
+  --pink1: #d54a78;
+  --pink2: #fa578d;
+  --pink3: #ffa9c5;
 }
 
 body {
   width: auto;
   margin: 0;
-  background-color: var(--light);
+  background-color: var(--light1);
+  font-family: 'Open Sans';
 }
 
 body > header {
-  background-color: var(--dark);
+  background-color: var(--dark2);
   padding: 1em;
 }
 
 body > footer {
-  background-color: var(--dark);
+  background-color: var(--dark2);
   padding: 1em;
   color: white;
 }
@@ -31,9 +43,13 @@ body > header a {
   text-decoration: none;
 }
 
+body > header #logo {
+  font-family: 'Comfortaa';
+}
+
 #signup form > input{
-  background-color: var(--light);
-  border-color: var(--light);
+  background-color: var(--light1);
+  border-color: var(--light1);
   border-radius: 3px;
   border-style: solid;
   border-width: 1px;
@@ -41,38 +57,160 @@ body > header a {
   text-decoration-color: white;
 }
 
-#posts article {
-  height: 5em;
+#signup {
+  align-self: center;
 }
 
+#search {
+  align-self: center;
+}
+
+#search form > input{
+  background-color: var(--light2);
+  border-color: var(--light1);
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 7px;
+  text-decoration-color: white;
+}
+
+#posts {
+  margin-left: 2em;
+}
+
+#sidebar {
+  margin-right: 2em;
+}
+
+#posts article {
+  border-bottom-style:solid;
+  border-bottom-color: var(--light2);
+}
+
+#posts article .voting {
+  width: 2em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+#sort {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+#sort li a{
+  text-decoration: none;
+  color: black;
+}
+
+#sort li {
+  border-color: var(--dark1);
+  border-radius: 100px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 7px;
+  text-align: center;
+  margin-right: 1em;
+}
+
+#sidebar{
+  padding: 0em 1em;
+  text-align: justify;
+}
+
+body > header #channels {
+  /* background-color: var(--light1); */
+  margin: 2em;
+  align-self: center;
+}
+
+body > header #channels ul {
+  display: flex;
+  flex-direction: row;
+}
+
+body > header #channels li {
+  border-color: var(--light1);
+  border-radius: 100px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 7px;
+  text-align: center;
+  margin-right: 1em;
+}
+
+body > header #channels li:nth-child(1){
+  background-color: var(--blue2);
+}
+
+body > header #channels li:nth-child(2){
+  background-color: var(--red2);
+}
+
+body > header #channels li:nth-child(3){
+  background-color: var(--yellow2);
+}
+
+body > header #channels li:nth-child(4){
+  background-color: var(--green2);
+}
+
+body > header #channels li:nth-child(5){
+  background-color: var(--pink2);
+}
 
 #posts article .voting > button {
-  margin: 0;
+  width: 30px;
+  height: 30px;
+  border-width: 0;
+  border-radius: 100px;
 }
 
 #posts article .upvote {
-  background-color: green;
-  border-width: 0px;
+  background-color: var(--green2);
 }
 
 #posts article .votes {
-  align-self: center;
   text-align: center;
 }
 
 #posts article .downvote {
-  background-color: red;
-  border-width: 0px;
+  background-color: var(--red2);
 }
 
 #posts article .voting > button:active {
   background-color: black;
 }
 
-#posts article > img {
+#posts article .thumbnail {
+  margin-left: 1em;
+  width:5em;
+  height:5em;
+}
+
+body #sort li:nth-child(1):before{
+  content: url(/images/hot.svg);
+}
+
+body #sort li:nth-child(2):before{
+  content: url(/images/new.svg);
+}
+
+body #sort li:nth-child(3):before{
+  content: url(/images/top.svg);
+}
+
+#posts article .thumbnail > img {
   object-fit: cover;
   width:100%;
   height:100%;
+}
+
+#posts article > header, #posts article > footer  {
+  margin-left: 2em;
+  margin-top: 0;
 }
 
 #posts article .username:after {
@@ -82,7 +220,6 @@ body > header a {
 #posts article .comments:after {
   content: ' comments';
 }
-
 #error_messages {
   color: red;
 }

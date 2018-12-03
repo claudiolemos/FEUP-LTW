@@ -11,8 +11,8 @@
 
 body {
   display: grid;
-  grid-template-columns: [start] 4fr [middle] 1fr [end];
-  grid-template-rows: [start] auto [nav sort search] auto [posts sidebar] auto [footer] auto [end];
+  grid-template-columns: [start] 4fr [middle] 1.25fr [end];
+  grid-template-rows: [start] 7em [nav sort search] auto [posts sidebar] auto [footer] auto [end];
 }
 
 /* main layout */
@@ -50,8 +50,18 @@ body > footer {
 /* header layout */
 
 body > header {
-  display: grid;
-  grid-template-columns: [logo] 1fr [channels] 3fr [signup] 1fr [end];
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+body > header #logo {
+  display: flex;
+  justify-content: space-around;
+}
+
+body > header #channels {
+  flex-grow: 0.5;
 }
 
 #channels ul {
@@ -80,34 +90,28 @@ body > header {
 
 #posts article {
   display: grid;
-  grid-template-columns: [voting] 2em [image] 6em [start] auto [end];
-  grid-template-rows: [start] auto [preview] auto [info] auto [end];
-  margin: 0.5em 0.5em 2em;
+  grid-template-columns: [voting] 2em [image] 5em [start] auto [end];
+  grid-template-rows: [start] auto [info] auto [end];
+  margin-bottom: 1em;
 }
 
 #posts article .voting {
   grid-column: voting / image;
   grid-row: start / end;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 
-#posts article > img {
+#posts article .thumbnail {
   grid-column: image / start;
   grid-row: start / end;
 }
 
 #posts article > header .title {
   grid-column: start / end;
-  grid-row: start / preview;
-  /* background-color: red; */
+  grid-row: start / info;
   margin: 0;
   font-size: 1.5em;
-}
-
-#posts article > header .preview {
-  grid-column: start / end;
-  grid-row: preview / info;
-  /* background-color: blue; */
 }
 
 #posts article > footer {

@@ -12,10 +12,11 @@
         <span class="votes"><?=$post['votes']?></span>
         <button class="downvote"></button>
       </div>
-      <img src="https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg" alt="Reddito logo">
+      <div class="thumbnail">
+        <img src="images/text_post.png" alt="Reddito logo">
+      </div>
       <header>
         <p class="title"><?=$post['title']?></p>
-        <p class="preview"><?=$post['content']?></p>
       </header>
       <footer>
         <span class="date"><?=$post['date']?></span>

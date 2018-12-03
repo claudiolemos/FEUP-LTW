@@ -9,21 +9,21 @@
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/comments.css" rel="stylesheet">
     <link href="../css/forms.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans" rel="stylesheet">
   </head>
   <body>
     <header>
       <div id="logo">
-        <img src="images/reddito.png" alt="Reddito logo" style="width:75px; height:75px;">
-        <h1><a href="index.php">Reddito</a></h1>
+        <img src="images/reddito.png" alt="Reddit logo" style="width:75px; height:75px;">
+        <h1><a href="index.php">reddit</a></h1>
       </div>
       <nav id="channels">
         <ul>
-          <li><a href="index.html">Movies</a></li>
-          <li><a href="index.html">World</a></li>
-          <li><a href="index.html">Politics</a></li>
-          <li><a href="index.html">Sports</a></li>
-          <li><a href="index.html">Science</a></li>
-          <li><a href="index.html">Weather</a></li>
+          <li><a href="index.html">movies</a></li>
+          <li><a href="index.html">music</a></li>
+          <li><a href="index.html">gaming</a></li>
+          <li><a href="index.html">news</a></li>
+          <li><a href="index.html">sports</a></li>
         </ul>
       </nav>
       <div id="signup">
@@ -33,7 +33,7 @@
               <input type="password" name="password" placeholder="Password" required>
               <input type="submit" value="Login">
             </form>
-            <a href="pages/register.php">Register</a>
+            <a id="register" href="pages/register.php">Register</a>
             <p id="error_messages"> <?php echo $error?> </p>
       <?php }
           else{ ?>
@@ -58,5 +58,7 @@
     <aside id="sidebar">
       <h1>Vestibulum congue blandit</h1>
       <h3>Description</h3>
+      <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
+      <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
       <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
     </aside>
