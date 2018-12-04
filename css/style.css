@@ -97,7 +97,6 @@ body > header #logo {
 #sort {
   margin-top: 1em;
   display: flex;
-  flex-direction: row;
 }
 
 #sort li a{
@@ -110,9 +109,26 @@ body > header #logo {
   border-radius: 100px;
   border-style: solid;
   border-width: 1px;
-  padding: 7px;
-  text-align: center;
-  margin-right: 1em;
+  padding: 0px 10px 0px;
+}
+
+
+#sort li:before{
+  width: 15px;
+  height: 15px;
+  float: left;
+}
+
+#sort li[name=hot]:before{
+  content: url(/images/hot.svg);
+}
+
+#sort li[name=new]:before{
+  content: url(/images/new.svg);
+}
+
+#sort li[name=top]:before{
+  content: url(/images/top.svg);
 }
 
 #sidebar{
@@ -168,38 +184,31 @@ body > header #channels li:nth-child(5){
   border-radius: 100px;
 }
 
-#posts article .upvote {
-  background-color: var(--green2);
-}
-
 #posts article .votes {
   text-align: center;
 }
 
-#posts article .downvote {
-  background-color: var(--red2);
+#posts article .upvote:hover {
+  background-color: var(--green3);
+  content:'~';
 }
 
-#posts article .voting > button:active {
-  background-color: black;
+#posts article .upvoted {
+  background-color: var(--green2);
+}
+
+#posts article .downvote:hover {
+  background-color: var(--red3);
+}
+
+#posts article .downvoted {
+  background-color: var(--red2);
 }
 
 #posts article .thumbnail {
   margin-left: 1em;
   width:5em;
   height:5em;
-}
-
-body #sort li:nth-child(1):before{
-  content: url(/images/hot.svg);
-}
-
-body #sort li:nth-child(2):before{
-  content: url(/images/new.svg);
-}
-
-body #sort li:nth-child(3):before{
-  content: url(/images/top.svg);
 }
 
 #posts article .thumbnail > img {
@@ -222,4 +231,8 @@ body #sort li:nth-child(3):before{
 }
 #error_messages {
   color: red;
+}
+
+a:active{
+  color:blue;
 }

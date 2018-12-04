@@ -14,16 +14,24 @@
   }
 
   /**
-   * Checks if user has voted on a post
-   * @param  int  $user_id id of the user
-   * @param  int  $post_id id of the post
-   * @return int|null value of the vote or null if the user didn't vote
+   * Returns the proper class for a voting button on a post
+   * @param  string $user_id id of the user
+   * @param  int    $post_id id of the post
+   * @param  int    $value button's vote value (1 or -1)
+   * @return string button class (upvote or downvote - if not voted | upvoted or downvoted - if voted)
    */
-  function isPostVoted($user_id, $post_id){
+  function getPostVoteButtonClass($username, $post_id, $value){
+    if($username == null)
+      return $value == 1? "upvote" : "downvote";
+
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT value FROM VoteOnPost WHERE user_id = ? AND post_id = ?');
-    $stmt->execute(array($user_id, $post_id));
-    return $stmt->fetch()['value'];
+    $stmt = $db->prepare('SELECT value FROM VoteOnPost, Users WHERE user_id = id AND username = ? AND post_id = ?');
+    $stmt->execute(array($username, $post_id));
+
+    if($stmt->fetch()['value'] == $value)
+      return $value == 1? "upvoted" : "downvoted";
+    else
+      return $value == 1? "upvote" : "downvote";
   }
 
   /**

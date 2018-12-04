@@ -9,6 +9,7 @@
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/comments.css" rel="stylesheet">
     <link href="../css/forms.css" rel="stylesheet">
+    <script src="../js/homepage.js" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans" rel="stylesheet">
   </head>
   <body>
@@ -19,11 +20,11 @@
       </div>
       <nav id="channels">
         <ul>
-          <li><a href="index.html">movies</a></li>
-          <li><a href="index.html">music</a></li>
-          <li><a href="index.html">gaming</a></li>
-          <li><a href="index.html">news</a></li>
-          <li><a href="index.html">sports</a></li>
+          <li><a href="index.php">movies</a></li>
+          <li><a href="index.php">music</a></li>
+          <li><a href="index.php">gaming</a></li>
+          <li><a href="index.php">news</a></li>
+          <li><a href="index.php">sports</a></li>
         </ul>
       </nav>
       <div id="signup">
@@ -44,9 +45,9 @@
     </header>
     <div id="sort">
       <ul>
-        <li><a href="index.html">Hot</a></li>
-        <li><a href="index.html">New</a></li>
-        <li><a href="index.html">Top</a></li>
+        <li name="hot"><a href="index.php">Hot</a></li>
+        <li name="new"><a href="index.php">New</a></li>
+        <li name="top"><a href="index.php">Top</a></li>
       </ul>
     </div>
     <div id="search">
