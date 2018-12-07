@@ -44,4 +44,16 @@
     else
       return false;
   }
+
+  /**
+   * Gets an user id from their username
+   * @param  string $username user's username
+   * @return int user's id
+   */
+  function getUserID($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT id FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetch()['id'];
+  }
 ?>

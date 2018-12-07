@@ -66,7 +66,6 @@ CREATE TABLE VoteOnPost (
 	user_id 				INT NOT NULL,
 	post_id 				INT NOT NULL,
 	value						INT NOT NULL,
-	PRIMARY KEY(user_id, post_id),
 	FOREIGN KEY(user_id)	REFERENCES Users(id),
 	FOREIGN KEY(post_id)	REFERENCES Posts(id)
 );
@@ -75,7 +74,6 @@ CREATE TABLE VoteOnComment (
 	user_id 				INT NOT NULL,
 	comment_id 			INT NOT NULL,
 	value						INT NOT NULL,
-	PRIMARY KEY(user_id, comment_id),
 	FOREIGN KEY(user_id)	REFERENCES Users(id),
 	FOREIGN KEY(comment_id)	REFERENCES Comments(id)
 );
@@ -85,6 +83,7 @@ CREATE TABLE VoteOnComment (
 CREATE TRIGGER InsertVoteOnPost
 AFTER INSERT ON VoteOnPost
 BEGIN
+	DELETE FROM VoteOnPost WHERE user_id = NEW.user_id AND post_id = NEW.post_id AND value = NEW.value * -1;
 	UPDATE Posts SET votes = votes + NEW.value WHERE Posts.id = NEW.post_id;
 	UPDATE Users SET karma = karma + NEW.value WHERE Users.id = (SELECT user_id FROM Posts WHERE Posts.id = NEW.post_id);
 END;
@@ -99,6 +98,7 @@ END;
 CREATE TRIGGER InsertVoteOnComment
 AFTER INSERT ON VoteOnComment
 BEGIN
+	DELETE FROM VoteOnComment WHERE user_id = NEW.user_id AND comment_id = NEW.comment_id AND value = NEW.value * -1;
 	UPDATE Comments SET votes = votes + NEW.value WHERE Comments.id = NEW.comment_id;
 	UPDATE Users SET karma = karma + NEW.value WHERE Users.id = (SELECT user_id FROM Comments WHERE Comments.id = NEW.comment_id);
 END;

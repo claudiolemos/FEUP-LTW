@@ -1,18 +1,19 @@
 <?php
   include_once(__DIR__.'/../database/posts.php');
+  include_once(__DIR__.'/../database/users.php');
   $posts = getPosts('new');
 ?>
 
 <section id="posts">
   <?php foreach($posts as $post) { ?>
-    <article class="link">
+    <article id="<?=$post['id']?>">
       <div class="voting">
-          <button class="<?=getPostVoteButtonClass($_SESSION['username'], $post['id'], 1)?>" value="<?=$post['votes'] + 1?>"></button>
-        <span class="votes" value="<?=$post['votes']?>"><?=$post['votes']?></span>
-        <button class="<?=getPostVoteButtonClass($_SESSION['username'], $post['id'], -1)?>" value="<?=$post['votes'] - 1?>"></button>
+        <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)?>"></button>
+        <span class="votes"><?=$post['votes']?></span>
+        <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], -1)?>"></button>
       </div>
       <div class="thumbnail">
-        <img src="images/text_post.png" alt="Reddito logo">
+        <img src="<?=getPostThumbnail($post['id'])?>">
       </div>
       <header>
         <p class="title"><?=$post['title']?></p>
@@ -26,3 +27,5 @@
     </article>
     <?php } ?>
 </section>
+
+<script src="../js/homepage.js"></script>

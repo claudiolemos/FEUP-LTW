@@ -13,25 +13,57 @@
     return $stmt->fetch()['votes'];
   }
 
+  function addVote($user_id, $post_id, $value){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO VoteOnPost VALUES (?,?,?)');
+    $stmt->execute(array($user_id, $post_id, $value));
+  }
+
+  function removeVote($user_id, $post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('DELETE FROM VoteOnPost WHERE user_id = ? AND post_id = ?');
+    $stmt->execute(array($user_id, $post_id));
+  }
+
+  function getPostThumbnail($post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT content as text, link FROM Posts WHERE id = ?');
+    $stmt->execute(array($post_id));
+
+    if($stmt->fetch()['text'] != null)
+      return "images/text_post.png";
+    else if($stmt->fetch()['link'] != null)
+      return "images/link_post.png";
+  }
+
   /**
-   * Returns the proper class for a voting button on a post
-   * @param  string $user_id id of the user
+   * Gets the correct class for a post vote button
+   * @param  int    $user_id id of the user
    * @param  int    $post_id id of the post
    * @param  int    $value button's vote value (1 or -1)
    * @return string button class (upvote or downvote - if not voted | upvoted or downvoted - if voted)
    */
-  function getPostVoteButtonClass($username, $post_id, $value){
-    if($username == null)
+  function getVoteButtonClass($user_id, $post_id, $value){
+    if($user_id == null)
       return $value == 1? "upvote" : "downvote";
 
-    $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT value FROM VoteOnPost, Users WHERE user_id = id AND username = ? AND post_id = ?');
-    $stmt->execute(array($username, $post_id));
-
-    if($stmt->fetch()['value'] == $value)
+    if(hasVoted($user_id, $post_id) == $value)
       return $value == 1? "upvoted" : "downvoted";
     else
       return $value == 1? "upvote" : "downvote";
+  }
+
+  /**
+   * Gets the value of a vote, if a user has voted on a post
+   * @param  int $user_id id of the user
+   * @param  int $post_id id of the post
+   * @return int value of the vote
+   */
+  function hasVoted($user_id, $post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT value FROM VoteOnPost WHERE user_id = ? AND post_id = ?');
+    $stmt->execute(array($user_id, $post_id));
+    return $stmt->fetch()['value'];
   }
 
   /**

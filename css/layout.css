@@ -82,8 +82,7 @@ body > header #channels {
 }
 
 #sort li {
-  display: block;
-  flex: 1;
+  list-style: none;
 }
 
 /* post blocks layout */
