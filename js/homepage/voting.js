@@ -1,16 +1,10 @@
 let postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted');
 let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted');
 
-function encodeForAjax(data) {
-  return Object.keys(data).map(function(k){
-    return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
-  }).join('&');
-}
-
 for(var i = 0; i < postUpvote.length; i++) {
   postUpvote[i].addEventListener('click', function(event) {
     event.preventDefault();
-    let post_id = this.parentNode.parentNode['id'];
+    let post_id = this.parentNode.parentNode.id;
 
     let request = new XMLHttpRequest();
     request.open("post", "/../actions/api_post_voting.php", true);
@@ -41,7 +35,7 @@ for(var i = 0; i < postUpvote.length; i++) {
 for(var i = 0; i < postDownvote.length; i++) {
   postDownvote[i].addEventListener('click', function(event) {
     event.preventDefault();
-    let post_id = this.parentNode.parentNode['id'];
+    let post_id = this.parentNode.parentNode.id;
 
     let request = new XMLHttpRequest();
     request.open("post", "/../actions/api_post_voting.php", true);

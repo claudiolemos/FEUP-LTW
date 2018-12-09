@@ -299,8 +299,8 @@ button:hover {
   margin-top: 2px;
 }
 
-#sort li[name=hot]:before{
-  content: url(/images/hot.svg);
+#sort li[name=controversial]:before{
+  content: url(/images/controversial.svg);
 }
 
 #sort li[name=new]:before{

@@ -1,7 +1,7 @@
 <?php
   include_once(__DIR__.'/../database/posts.php');
   include_once(__DIR__.'/../database/users.php');
-  $posts = getPosts('new');
+  $posts = getPosts('controversial');
 ?>
 
 <section id="posts">
@@ -22,7 +22,7 @@
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
         <span class="username"><?=$post['username']?></span>
         <span class="channel"><?=$post['channel']?></span>
-        <span class="comments">2</span>
+        <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>
     <?php } ?>

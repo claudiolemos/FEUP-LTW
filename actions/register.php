@@ -10,8 +10,6 @@
     addUser($username, $password, $email);
     $_SESSION['username'] = $username;
   }
-  else
-    $_SESSION['error'] = 'User already exists';
 
   header("Location:".$_SERVER['HTTP_REFERER']."");
 ?>

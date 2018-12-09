@@ -5,39 +5,31 @@ let confirm = document.querySelector('#register-pop-up .container input[name=con
 
 if(username != null){
   username.addEventListener('keyup', function() {
-    let request = createRequest("username", username.value);
-    request.onreadystatechange=function(){changeIcon(request, username, "username");};
+    let request = createRequest("/../../actions/api_register.php", {type: "username", value: username.value});
+    request.onreadystatechange=function(){updateIcons(request, username, "username");};
   });
 }
 
 if(email != null){
   email.addEventListener('keyup', function() {
-    let request = createRequest("email", email.value);
-    request.onreadystatechange=function(){changeIcon(request, email, "email");};
+    let request = createRequest("/../../actions/api_register.php", {type: "email", value: email.value});
+    request.onreadystatechange=function(){updateIcons(request, email, "email");};
   });
 }
 
 if(password != null){
   password.addEventListener('keyup', function() {
-    changePasswordIcon();
+    updatePasswordIcons();
   });
 }
 
 if(confirm != null){
   confirm.addEventListener('keyup', function() {
-    changePasswordIcon();
+    updatePasswordIcons();
   });
 }
 
-function createRequest(type, value){
-  let request = new XMLHttpRequest();
-  request.open("post", "/../../actions/api_register.php", true);
-  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  request.send(encodeForAjax({type: type, value: value}));
-  return request;
-}
-
-function changePasswordIcon(){
+function updatePasswordIcons(){
   if(confirm.value != password.value && confirm.value != ""){
     password.style.backgroundImage = "none";
     confirm.style.backgroundImage = "url('/../../images/warning.svg')";
@@ -55,7 +47,7 @@ function changePasswordIcon(){
   }
 }
 
-function changeIcon(request, input, string){
+function updateIcons(request, input, string){
   if (request.readyState==4 && request.status==200 && input.value != ""){
     if(JSON.parse(request.responseText)){
       input.style.backgroundImage = "url('/../../images/warning.svg')";

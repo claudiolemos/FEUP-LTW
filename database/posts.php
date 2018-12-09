@@ -4,13 +4,25 @@
   /**
    * Gets the number of votes of one post
    * @param  int $id id of the post
-   * @return int|null number of votes or null if the post doesn't exist
+   * @return int number of votes
    */
   function getPostVotes($id){
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT votes FROM Posts WHERE id = ?');
     $stmt->execute(array($id));
     return $stmt->fetch()['votes'];
+  }
+
+  /**
+   * Gets the number of comments of one post
+   * @param  int $id id of the post
+   * @return int number of comments
+   */
+  function getNoComments($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT count(Comments.id) as comments FROM Posts, Comments WHERE Comments.post_id = Posts.id AND Posts.id = ?');
+    $stmt->execute(array($id));
+    return $stmt->fetch()['comments'];
   }
 
   /**
@@ -83,37 +95,51 @@
   }
 
   /**
-   * Returns a list of posts based on a type of sorting
-   * @param  string $sort type of sort
-   * @return array post id, title, content, link, date, votes username and channel
+   * Returns a post from the databse
+   * @param  int $post_id id of the post
+   * @return array post id, title, content, link, date, votes, username and channel
    */
-  function getPosts($sort){
-    switch ($sort) {
-    case 'hot':
-        return getHotPosts();
-        break;
-    case 'new':
-        return getNewPosts();
-        break;
-    case 'top':
-        return getTopPosts();
-        break;
-    }
+  function getPost($post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT * FROM Posts WHERE id = ?');
+    $stmt->execute(array($post_id));
+    return $stmt->fetch();
   }
 
   /**
-   * Returns a list of the most recent posts
+   * Returns a list of posts based on a type of sorting
+   * @param  string $sort type of sort
    * @return array post id, title, content, link, date, votes, username and channel
    */
-  function getNewPosts(){
+  function getPosts($sort){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel FROM Posts, Users, Channels WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id ORDER BY date DESC');
+
+    switch ($sort) {
+    case 'new':
+        $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                              FROM Posts, Users, Channels
+                              WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
+                              ORDER BY date DESC');
+        break;
+    case 'top':
+        $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                              FROM Posts, Users, Channels
+                              WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
+                              ORDER BY votes DESC, date ASC');
+        break;
+    case 'controversial':
+        $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
+                              FROM Posts p1, Users, Channels, (
+	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
+                              )
+                              WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post
+                              ORDER BY comments DESC, votes DESC');
+        break;
+    }
+
     $stmt->execute();
     return $stmt->fetchAll();
+
   }
-
-  function getHotPosts(){}
-
-  function getTopPosts(){}
 
 ?>

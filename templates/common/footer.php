@@ -3,9 +3,10 @@
 </footer>
 </body>
 
-<script src="../js/homepage/voting.js"></script>
-<script src="../js/homepage/sort.js"></script>
-<!-- <script src="../js/homepage/register.js"></script> -->
-<script src="../js/homepage/login.js"></script>
+<script src="../js/utils.js" defer></script>
+<script src="../js/homepage/voting.js" defer></script>
+<script src="../js/homepage/sort.js" defer></script>
+<script src="../js/homepage/register.js" defer></script>
+<script src="../js/homepage/login.js" defer></script>
 
 </html>

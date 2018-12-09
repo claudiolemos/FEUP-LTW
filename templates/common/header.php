@@ -14,7 +14,7 @@
 <body>
   <header>
     <div id="logo">
-      <img src="images/reddito.png" alt="Reddit logo" style="width:75px; height:75px;">
+      <img src="images/reddit.png" alt="Reddit logo" style="width:75px; height:75px;">
       <h1><a href="index.php">reddit</a></h1>
     </div>
     <nav id="channels">
@@ -81,9 +81,9 @@
   </header>
   <div id="sort">
     <ul>
-      <li name="hot"><a href="index.php">Hot</a></li>
-      <li name="new"><a href="index.php">New</a></li>
-      <li name="top"><a href="index.php">Top</a></li>
+      <li name="new">New</a></li>
+      <li name="top">Top</a></li>
+      <li name="controversial">Controversial</a></li>
     </ul>
   </div>
   <div id="search">
