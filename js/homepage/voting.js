@@ -1,8 +1,5 @@
-sortHot = document.querySelector('#sort li[name=hot]');
-sortNew = document.querySelector('#sort li[name=new]');
-sortTop = document.querySelector('#sort li[name=top]');
-postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted');
-postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted');
+let postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted');
+let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted');
 
 function encodeForAjax(data) {
   return Object.keys(data).map(function(k){
@@ -71,15 +68,3 @@ for(var i = 0; i < postDownvote.length; i++) {
 
   })
 }
-
-sortHot.addEventListener('click', function(event) {
-  event.preventDefault();
-});
-
-sortNew.addEventListener('click', function(event) {
-  event.preventDefault();
-});
-
-sortTop.addEventListener('click', function(event) {
-  event.preventDefault();
-});

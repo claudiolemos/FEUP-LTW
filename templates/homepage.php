@@ -19,7 +19,7 @@
         <p class="title"><?=$post['title']?></p>
       </header>
       <footer>
-        <span class="date"><?=$post['date']?></span>
+        <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
         <span class="username"><?=$post['username']?></span>
         <span class="channel"><?=$post['channel']?></span>
         <span class="comments">2</span>
@@ -27,5 +27,3 @@
     </article>
     <?php } ?>
 </section>
-
-<script src="../js/homepage.js"></script>

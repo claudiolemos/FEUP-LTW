@@ -13,18 +13,34 @@
     return $stmt->fetch()['votes'];
   }
 
+  /**
+   * Adds a vote to a post
+   * @param int $user_id id of the user that is adding a vote
+   * @param int $post_id id of the post that the vote is being added to
+   * @param int $value   value of the vote (1 or -1)
+   */
   function addVote($user_id, $post_id, $value){
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO VoteOnPost VALUES (?,?,?)');
     $stmt->execute(array($user_id, $post_id, $value));
   }
 
+  /**
+   * Removes a vote from a post
+   * @param  int $user_id id of the user that is removing a vote
+   * @param  int $post_id id of the post that the vote is being removed from
+   */
   function removeVote($user_id, $post_id){
     $db = Database::instance()->db();
     $stmt = $db->prepare('DELETE FROM VoteOnPost WHERE user_id = ? AND post_id = ?');
     $stmt->execute(array($user_id, $post_id));
   }
 
+  /**
+   * Gets correct post thumbnail, depending on wether it's a link or text post
+   * @param  int $post_id id of the post
+   * @return string link to the correct thumbnail
+   */
   function getPostThumbnail($post_id){
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT content as text, link FROM Posts WHERE id = ?');

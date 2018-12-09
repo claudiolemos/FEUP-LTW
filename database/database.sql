@@ -16,10 +16,9 @@ DROP TABLE IF EXISTS Channels;
 CREATE TABLE Users (
 	id 							INTEGER PRIMARY KEY,
 	username 				VARCHAR UNIQUE NOT NULL,
-	name 						VARCHAR NOT NULL,
 	email 					VARCHAR UNIQUE NOT NULL,
 	password 				VARCHAR NOT NULL,
-	cake_day 				DATE NOT NULL,
+	cake_day 				INTEGER NOT NULL,
 	karma 					INT NOT NULL
 );
 
@@ -27,7 +26,7 @@ CREATE TABLE Channels (
 	id 							INTEGER PRIMARY KEY,
 	name 						VARCHAR UNIQUE NOT NULL,
 	description 		VARCHAR NOT NULL,
-	creation_day 		DATE NOT NULL
+	creation_day 		INTEGER NOT NULL
 );
 
 CREATE TABLE Posts (
@@ -35,7 +34,7 @@ CREATE TABLE Posts (
 	title 					VARCHAR NOT NULL,
 	content 				VARCHAR,
 	link 						VARCHAR,
-	date 						DATE NOT NULL,
+	date 						INTEGER NOT NULL,
 	user_id 				INT NOT NULL,
 	channel_id 			INT NOT NULL,
 	votes 					INT NOT NULL,
@@ -48,7 +47,7 @@ CREATE TABLE Comments (
 	content 				VARCHAR,
 	user_id 				INT NOT NULL,
 	post_id 				INT NOT NULL,
-	date				 		DATE NOT NULL,
+	date				 		INTEGER NOT NULL,
 	parent_id				INT,
 	votes 					INT NOT NULL,
 	FOREIGN KEY(parent_id)	REFERENCES Comments(id)

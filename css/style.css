@@ -61,7 +61,11 @@ body > header #logo {
   align-self: center;
 }
 
-.dropbtn {
+#signup a {
+  color: black;
+}
+
+.dropdown-button {
     background-color: #F0F0F0;
     color: #1A1A1A;
     border-radius: 100px;
@@ -76,12 +80,12 @@ body > header #logo {
     cursor: pointer;
 }
 
-.dropdown {
+.user-dropdown {
     position: relative;
     display: inline-block;
 }
 
-.dropdown-content {
+.user-dropdown-content {
     display: none;
     position: absolute;
     background-color: #F0F0F0;
@@ -91,7 +95,7 @@ body > header #logo {
     z-index: 1;
 }
 
-.dropdown-content a {
+.user-dropdown-content a {
     color: black;
     padding: 12px 16px;
     border-radius: 10px;
@@ -99,15 +103,15 @@ body > header #logo {
     display: block;
 }
 
-.dropdown-content a:hover {
+.user-dropdown-content a:hover {
   background-color: #A1A1A1
 }
 
-.dropdown:hover .dropdown-content {
+.user-dropdown:hover .user-dropdown-content {
     display: block;
 }
 
-.dropdown:hover .dropbtn {
+.user-dropdown:hover .dropdown-button {
     background-color: #A1A1A1;
 }
 
@@ -119,6 +123,12 @@ body > header #logo {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+
+.container input{
+  background-repeat: no-repeat;
+  background-position: 1%;
+  background-size: 15px 15px;
 }
 
 /* Set a style for all buttons */
@@ -152,7 +162,7 @@ div .register > button {
 }
 
 div .container > button {
-    background-color: #4CAF50;
+    background-color: var(--red2);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -170,7 +180,7 @@ button:hover {
 }
 
 /* The Modal (background) */
-.modal {
+.pop-up {
     display: none; /* Hidden by default */
     position:fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -185,9 +195,9 @@ button:hover {
 }
 
 /* Modal Content/Box */
-.modal-content {
+.pop-up-content {
     background-color: var(--light1);
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     padding: 1%;
     border-radius: 10px;
     width: 25%; /* Could be more or less, depending on screen size */
@@ -210,18 +220,22 @@ button:hover {
 
 /* Add Zoom Animation */
 .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+    -webkit-animation: animatezoom 0.5s;
+    animation: animatezoom 0.5s
 }
 
 @-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)}
+    from {-webkit-transform: scale(0.5)}
     to {-webkit-transform: scale(1)}
+    from {-webkit-filter: opacity(0)}
+    to {-webkit-filter: opacity(1)}
 }
 
 @keyframes animatezoom {
-    from {transform: scale(0)}
+    from {transform: scale(0.5)}
     to {transform: scale(1)}
+    from {opacity: 0}
+    to {opacity: 1}
 }
 
 #search {
@@ -249,6 +263,7 @@ button:hover {
 #posts article {
   border-bottom-style:solid;
   border-bottom-color: var(--light2);
+  border-bottom-width: 1px;
 }
 
 #posts article .voting {

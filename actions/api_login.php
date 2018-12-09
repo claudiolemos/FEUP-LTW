@@ -7,12 +7,10 @@
 
   if(userExists($username)){
     if(isLoginCorrect($username, $password))
-    	$_SESSION['username'] = $username;
+    	echo json_encode("valid");
     else
-    	$_SESSION['error'] = 'Incorrect password';
+    	echo json_encode("password");
   }
   else
-    $_SESSION['error'] = 'Incorrect username';
-
-  header("Location:".$_SERVER['HTTP_REFERER']."");
+    echo json_encode("username");
 ?>
