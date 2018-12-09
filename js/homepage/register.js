@@ -34,7 +34,7 @@ function createRequest(type, value){
   request.open("post", "/../../actions/api_register.php", true);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.send(encodeForAjax({type: type, value: value}));
-  return request
+  return request;
 }
 
 function changePasswordIcon(){

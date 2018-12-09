@@ -30,5 +30,5 @@
 //   request.open("post", "/../../actions/api_login.php", true);
 //   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 //   request.send(encodeForAjax({username: username, password: password}));
-//   return request
+//   return request;
 // }

@@ -5,7 +5,7 @@
 
 <script src="../js/homepage/voting.js"></script>
 <script src="../js/homepage/sort.js"></script>
-<script src="../js/homepage/register.js"></script>
+<!-- <script src="../js/homepage/register.js"></script> -->
 <script src="../js/homepage/login.js"></script>
 
 </html>
