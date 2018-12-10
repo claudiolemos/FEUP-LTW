@@ -42,6 +42,13 @@ body > header {
   grid-column: start / middle;
 }
 
+#comments{
+  position:relative;
+  left:10px;
+  top:10px;
+  width: 100%;
+}
+
 body > footer {
   grid-row: footer / end;
   grid-column: start / end;
