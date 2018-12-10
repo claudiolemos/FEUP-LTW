@@ -1,27 +1,28 @@
 <?php
   include_once(__DIR__.'/../database/posts.php');
-
-  $posts = getPosts('new');
+  include_once(__DIR__.'/../database/users.php');
+  $posts = getPosts("top");
 ?>
 
 <section id="posts">
   <?php foreach($posts as $post) { ?>
-    <article class="link">
+    <article id="<?=$post['id']?>">
       <div class="voting">
-        <button class="upvote"></button>
+        <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)?>"></button>
         <span class="votes"><?=$post['votes']?></span>
-        <button class="downvote"></button>
+        <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], -1)?>"></button>
       </div>
-      <img src="https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg" alt="Reddito logo">
+      <div class="thumbnail">
+        <img src="<?=getPostThumbnail($post['id'])?>">
+      </div>
       <header>
         <p class="title"><?=$post['title']?></p>
-        <p class="preview"><?=$post['content']?></p>
       </header>
       <footer>
-        <span class="date"><?=$post['date']?></span>
+        <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
         <span class="username"><?=$post['username']?></span>
         <span class="channel"><?=$post['channel']?></span>
-        <span class="comments">2</span>
+        <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>
     <?php } ?>

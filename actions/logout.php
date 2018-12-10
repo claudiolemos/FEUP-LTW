@@ -1,5 +1,5 @@
 <?php
-  include_once("../includes/init.php");
-  unset($_SESSION['username']);
+  include_once(__DIR__."/../includes/init.php");
+  session_destroy();
   header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

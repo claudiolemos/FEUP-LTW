@@ -11,7 +11,9 @@
     return $stmt->fetch();
   }
 
-  // function addChannel($channel_name, $channel_name)
+  function addChannel($channel_name){
+
+  }
 
   /**
    * Gets the number of subscribers of one channel

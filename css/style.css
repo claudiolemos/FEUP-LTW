@@ -1,27 +1,39 @@
 :root {
-    --dark: #1A1A1A;
-    --light: #F0F0F0;
-    --red: #FF0000;
-    --orange: #FF6000;
-    --yellow: #FFFF00;
-    --green: #92FF00;
-    --blue: #3DC3F8;
-    --pink: #EA499C;
+  --light1: #f0f0f0;
+  --light2: #d9d9d9;
+  --dark1: #444444;
+  --dark2: #292929;
+  --blue1: #2763a7;
+  --blue2: #4484ce;
+  --blue3: #67a6ef;
+  --yellow1: #ecc200;
+  --yellow2: #fedc3d;
+  --yellow3: #ffeb8c;
+  --green1: #087a50;
+  --green2: #0aae72;
+  --green3: #44eaad;
+  --red1: #ba2a1f;
+  --red2: #f14234;
+  --red3: #ff8278;
+  --pink1: #d54a78;
+  --pink2: #fa578d;
+  --pink3: #ffa9c5;
 }
 
 body {
   width: auto;
   margin: 0;
-  background-color: var(--light);
+  background-color: var(--light1);
+  font-family: 'Open Sans';
 }
 
 body > header {
-  background-color: var(--dark);
+  background-color: var(--dark2);
   padding: 1em;
 }
 
 body > footer {
-  background-color: var(--dark);
+  background-color: var(--dark2);
   padding: 1em;
   color: white;
 }
@@ -31,9 +43,13 @@ body > header a {
   text-decoration: none;
 }
 
+body > header #logo {
+  font-family: 'Comfortaa';
+}
+
 #signup form > input{
-  background-color: var(--light);
-  border-color: var(--light);
+  background-color: var(--light1);
+  border-color: var(--light1);
   border-radius: 3px;
   border-style: solid;
   border-width: 1px;
@@ -41,38 +57,349 @@ body > header a {
   text-decoration-color: white;
 }
 
-#posts article {
-  height: 5em;
+#signup {
+  align-self: center;
 }
 
+#signup a {
+  color: black;
+}
+
+.dropdown-button {
+    background-color: #F0F0F0;
+    color: #1A1A1A;
+    border-radius: 100px;
+    border: 2px;
+    border-color: white;
+    border-style: solid;
+    padding: 9px;
+    padding-left: 2em;
+    padding-right: 2em;
+    text-align: center;
+    margin-right: 1em;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F0F0F0;
+    min-width: 160px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px;
+    z-index: 1;
+}
+
+.user-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.user-dropdown-content a:hover {
+  background-color: #A1A1A1
+}
+
+.user-dropdown:hover .user-dropdown-content {
+    display: block;
+}
+
+.user-dropdown:hover .dropdown-button {
+    background-color: #A1A1A1;
+}
+
+/* Full-width input fields */
+.container input[type=text], .container input[type=password], .container input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.container input{
+  background-repeat: no-repeat;
+  background-position: 1%;
+  background-size: 15px 15px;
+}
+
+/* Set a style for all buttons */
+div .login > button {
+    background-color: var(--light1);
+    color: var(--dark1);
+    padding: 13px 2em;
+    margin: 8px 0;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+div .register > button {
+    background-color: var(--light1);
+    color: var(--dark1);
+    padding: 13px 19px;
+    margin: 8px 0;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+div .container > button {
+    background-color: var(--red2);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.container {
+    padding: 16px;
+}
+
+/* The Modal (background) */
+.pop-up {
+    display: none; /* Hidden by default */
+    position:fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.pop-up-content {
+    background-color: var(--light1);
+    margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    padding: 1%;
+    border-radius: 10px;
+    width: 25%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.5s;
+    animation: animatezoom 0.5s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0.5)}
+    to {-webkit-transform: scale(1)}
+    from {-webkit-filter: opacity(0)}
+    to {-webkit-filter: opacity(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0.5)}
+    to {transform: scale(1)}
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
+#search {
+  align-self: center;
+}
+
+#search form > input{
+  background-color: var(--light2);
+  border-color: var(--light1);
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 7px;
+  text-decoration-color: white;
+}
+
+#posts {
+  margin-left: 2em;
+}
+
+#sidebar {
+  margin-right: 2em;
+}
+
+#posts article {
+  border-bottom-style:solid;
+  border-bottom-color: var(--light2);
+  border-bottom-width: 1px;
+}
+
+#posts article .voting {
+  width: 2em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+#sort {
+  margin-top: 1em;
+  display: flex;
+}
+
+#sort li a{
+  text-decoration: none;
+  color: black;
+}
+
+#sort li {
+  border-color: var(--dark1);
+  border-radius: 100px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+
+#sort li:before{
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin-top: 2px;
+}
+
+#sort li[name=controversial]:before{
+  content: url(/images/controversial.svg);
+}
+
+#sort li[name=new]:before{
+  content: url(/images/new.svg);
+}
+
+#sort li[name=top]:before{
+  content: url(/images/top.svg);
+}
+
+#sidebar{
+  padding: 0em 1em;
+  text-align: justify;
+}
+
+body > header #channels {
+  /* background-color: var(--light1); */
+  margin: 2em;
+  align-self: center;
+}
+
+body > header #channels ul {
+  display: flex;
+  flex-direction: row;
+}
+
+body > header #channels li {
+  border-color: var(--light1);
+  border-radius: 100px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 7px;
+  text-align: center;
+  margin-right: 1em;
+}
+
+body > header #channels li:nth-child(1){
+  background-color: var(--blue2);
+}
+
+body > header #channels li:nth-child(2){
+  background-color: var(--red2);
+}
+
+body > header #channels li:nth-child(3){
+  background-color: var(--yellow2);
+}
+
+body > header #channels li:nth-child(4){
+  background-color: var(--green2);
+}
+
+body > header #channels li:nth-child(5){
+  background-color: var(--pink2);
+}
 
 #posts article .voting > button {
-  margin: 0;
-}
-
-#posts article .upvote {
-  background-color: green;
-  border-width: 0px;
+  width: 30px;
+  height: 30px;
+  border-width: 0;
+  border-radius: 100px;
 }
 
 #posts article .votes {
-  align-self: center;
   text-align: center;
 }
 
-#posts article .downvote {
-  background-color: red;
-  border-width: 0px;
+#posts article .upvote:hover {
+  background-color: var(--green3);
+  content:'~';
 }
 
-#posts article .voting > button:active {
-  background-color: black;
+#posts article .upvoted {
+  background-color: var(--green2);
 }
 
-#posts article > img {
+#posts article .downvote:hover {
+  background-color: var(--red3);
+}
+
+#posts article .downvoted {
+  background-color: var(--red2);
+}
+
+#posts article .thumbnail {
+  margin-left: 1em;
+  width:5em;
+  height:5em;
+}
+
+#posts article .thumbnail > img {
   object-fit: cover;
   width:100%;
   height:100%;
+}
+
+#posts article > header, #posts article > footer  {
+  margin-left: 2em;
+  margin-top: 0;
 }
 
 #posts article .username:after {
@@ -82,7 +409,10 @@ body > header a {
 #posts article .comments:after {
   content: ' comments';
 }
-
 #error_messages {
   color: red;
+}
+
+a:active{
+  color:blue;
 }
