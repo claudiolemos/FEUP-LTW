@@ -1,33 +1,28 @@
 <!--Depois de dar merge isto deve ir para o init-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="../../js/post.js"></script>
+<script src="../../js/comments.js"></script>
 
 
 <section id="comments">
-  <div class="user-comment" id="user-comment-">
-    <div class="comment-voting">
-          <button class="upvote"></button>
-          <span class="votes">2</span>
-          <button class="downvote"></button>
-    </div>
-    <span id="comment-info">Ze - 22-10-2018</span>
-    <div class="comment-body">Comentario numero 1</div>
-    <button type="submit" class="replyBtn" value="">
-    Reply</button>
 
-    <div class="user-comment" id="user-comment-">
-      <span id="comment-info">Ze - 22-10-2018</span>
-      <div class="comment-body">Comentario numero 2</div>
-      <button type="submit" class="replyBtn" value="">
-        Reply</button> 
-    </div>
-  </div>
+<?php foreach ($parent_comments as $comment) {
 
-  <div class="user-comment" id="user-comment-">
-    <span id="comment-info">Ze - 22-10-2018</span>
-    <div class="comment-body">Comentario numero 2</div>
-      <button type="submit" class="replyBtn" value="">
-      Reply</button>
-  </div>
+    echo "<div class=".'user-comment'." id=".'user-comment-'. $comment['id'] .">";
+      echo "<div class=".'comment-voting'.">";
+        echo "<button class=".'upvote'."></button>";
+        echo "<span class=".'votes'.">". $comment['votes'] ."</span>";
+        echo "<button class=".'downvote'."></button>";
+      echo "</div>";
+      echo "<span id=".'comment-info'.">". $comment['user_id'] . " - " . $comment['date'] ."</span>";
+      echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
+      echo '<div class="write-comment-div" id="write-comment-div-'. $comment['id'] .'">';
+      echo "<button type=".'submit'." class=".'replyBtn'." value=". $comment['post_id'] . "-" .$comment['id']. "-" . getParentID($comment['id']) . ">". 'Reply' . "</button>";
+      echo '</div>';
+
+    getChildComments($comment['id']);
+
+    echo "</div>";
+  }
+
+?>
 
 </section>

@@ -64,13 +64,31 @@
   }
 
   /**
+   * Gets the parent_id of a comment
+   * @param  int $comment_id id of the comment
+   * @return int id of parent comment
+   */
+  function getParentID($comment_id){
+
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT parent_id FROM Comments WHERE Comments.id = ?');
+    $stmt->execute(array($comment_id));
+    $parent_id = $stmt->fetch()['parent_id'];
+
+    return $parent_id;
+
+  }
+
+
+
+  /**
   * Gets all top level comments
   * @param  int $post_id id of the post
   * @return array of all top level comments on that post
   */
   function getParentComments($post_id){
       $db = Database::instance()->db();
-      $stmt = $db->prepare('SELECT * FROM Comments WHERE post_id = ? AND parent_id IS NULL');
+      $stmt = $db->prepare('SELECT * FROM Comments WHERE post_id = ? AND parent_id IS NULL ORDER BY votes DESC');
       $stmt->execute(array($post_id));
       return $stmt->fetchAll();
 
@@ -86,21 +104,67 @@
   function getChildComments($parent_id){
 
         $db = Database::instance()->db();
-        $stmt = $db->prepare('SELECT * FROM Comments WHERE parent_id = ?');
+        $stmt = $db->prepare('SELECT * FROM Comments WHERE parent_id = ? ORDER BY votes DESC');
         $stmt->execute(array($parent_id));
         $childComments = $stmt->fetchAll();
         
         //if it has children
         if (!empty($childComments))
         {
-            echo "<ul>\n";
+            //echo "<ul>\n";
             foreach ($childComments as $comment) {
-              echo "<li>", $comment['content'], getChildComments($comment['id']), "</li>\n";
+              //echo "<li>", $comment['content'], getChildComments($comment['id']), "</li>\n";
+
+              echo "<div class=".'user-comment'." id=".'user-comment-'. $comment['id'] .">";
+                echo "<div class=".'comment-voting'.">";
+                  echo "<button class=".'upvote'."></button>";
+                  echo "<span class=".'votes'.">". $comment['votes'] ."</span>";
+                  echo "<button class=".'downvote'."></button>";
+                echo "</div>";
+                echo "<span id=".'comment-info'.">". $comment['user_id'] . " - " . $comment['date'] ."</span>";
+                echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
+                echo '<div class="write-comment-div" id="write-comment-div-'. $comment['id'] .'">';
+                echo "<button type=".'submit'." class=".'replyBtn'." value=". $comment['post_id'] . "-" .$comment['id']. "-" . getParentID($comment['id']) . ">". 'Reply' . "</button>";
+                echo "</div>";
+
+                getChildComments($comment['id']);
+
+              echo "</div>";
+
             }
                 
-            echo "</ul>\n";
+            //echo "</ul>\n";
+
         }
           //else no child comments
+    }
+
+
+  /**
+   * Adds a comment
+   * @param  string  $content content of the comment
+   * @param  int  $user_id id of the user
+   * @param  int  $post_id id of the post
+   * @param  date  $date comment date
+   * @param  int|undefined $parent_id id of the parent of this comment. undefined if top-level comment.
+   * @return array post_id, id of new comment and parent id
+   */
+    function addComment($content, $user_id, $post_id, $date, $parent_id){
+      $db = Database::instance()->db();
+      $stmt = $db->prepare('INSERT INTO Comments VALUES (NULL,?,?,?,?,?,0)');
+
+
+      if($parent_id == undefined)
+        $parent_id = NULL;
+
+
+      $stmt->execute(array($content, $user_id, $post_id, $date, $parent_id));
+
+      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id);
+
+      return $postID_commentID_parentID;
+
+
     }
 
 

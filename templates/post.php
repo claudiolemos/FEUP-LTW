@@ -1,3 +1,7 @@
+<!--Depois de dar merge isto deve ir para o init-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="../../js/post.js"></script>
+
 <section id="posts">
   <article class="link">
         <div class="voting">
@@ -17,7 +21,12 @@
           <span class="comments">2</span>
         </footer>
   </article>
+  <div class="write-comment-div" id="write-top-level-comment-div">
+    <button type="submit" class="write-comment" value="<?= $post['id'] ?>" id="""> Write Comment... </button>
+  </div>
+  
 
+  
   <?php include('templates/comments/list_comments.php'); ?>
 
 </section>
