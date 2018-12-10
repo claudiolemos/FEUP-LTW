@@ -26,4 +26,24 @@
     $stmt->execute(array($id, $id));
     return $stmt->fetch()['subscribers'];
   }
+
+  /**
+   * Gets the ID of a channel
+   * @param  string $channel channel's name
+   * @return int channel's ID. -1 if does not exist
+   */
+  function getChannelID($name){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT id FROM Channels WHERE name = ?');
+    $stmt->execute(array($name));
+
+
+    $channel_id = $stmt->fetch()['id'];
+
+    if($channel_id != null)
+      return $channel_id;
+    else
+      return -1;
+
+  }
 ?>
