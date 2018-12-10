@@ -5,14 +5,9 @@
   $username = strtolower(trim(strip_tags($_POST['username'])));
   $password = $_POST['password'];
 
-  if(userExists($username)){
+  if(userExists($username))
     if(isLoginCorrect($username, $password))
     	$_SESSION['username'] = $username;
-    else
-    	$_SESSION['error'] = 'Incorrect password';
-  }
-  else
-    $_SESSION['error'] = 'Incorrect username';
 
   header("Location:".$_SERVER['HTTP_REFERER']."");
 ?>

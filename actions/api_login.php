@@ -6,8 +6,10 @@
   $password = $_POST['password'];
 
   if(userExists($username)){
-    if(isLoginCorrect($username, $password))
+    if(isLoginCorrect($username, $password)){
     	echo json_encode("valid");
+      $_SESSION['username'] = $username;
+    }
     else
     	echo json_encode("password");
   }

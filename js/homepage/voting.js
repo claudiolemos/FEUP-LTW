@@ -3,6 +3,8 @@ let postDownvote = document.querySelectorAll('#posts article .downvote, #posts a
 
 for(var i = 0; i < postUpvote.length; i++) {
   postUpvote[i].addEventListener('click', function(event) {
+
+    console.log(1);
     event.preventDefault();
     let post_id = this.parentNode.parentNode.id;
 

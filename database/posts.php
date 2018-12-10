@@ -101,7 +101,9 @@
    */
   function getPost($post_id){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT * FROM Posts WHERE id = ?');
+    $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                          FROM Posts, Users, Channels
+                          WHERE Posts.id = ? AND Posts.channel_id = Channels.id AND Posts.user_id = Users.id');
     $stmt->execute(array($post_id));
     return $stmt->fetch();
   }
@@ -115,19 +117,19 @@
     $db = Database::instance()->db();
 
     switch ($sort) {
-    case 'new':
+    case "new":
         $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                               FROM Posts, Users, Channels
                               WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
                               ORDER BY date DESC');
         break;
-    case 'top':
+    case "top":
         $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                               FROM Posts, Users, Channels
                               WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
                               ORDER BY votes DESC, date ASC');
         break;
-    case 'controversial':
+    case "controversial":
         $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
                               FROM Posts p1, Users, Channels, (
 	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
