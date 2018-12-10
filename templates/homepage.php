@@ -4,6 +4,14 @@
   $posts = getPosts("top");
 ?>
 
+
+<div id="sort">
+  <ul>
+    <li name="new">New</a></li>
+    <li name="top">Top</a></li>
+    <li name="controversial">Controversial</a></li>
+  </ul>
+</div>
 <section id="posts">
   <?php foreach($posts as $post) { ?>
     <article id="<?=$post['id']?>">

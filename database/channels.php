@@ -28,4 +28,18 @@
     $stmt->execute(array($id, $id));
     return $stmt->fetch()['subscribers'];
   }
+
+  /**
+   * Searches the channels
+   * @param  string $query what the user is searching for
+   * @return array  channels that match the query
+   */
+  function searchChannels($query){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT name
+                          FROM Channels
+                          WHERE name LIKE ?');
+    $stmt->execute(array("%$query%"));
+    return $stmt->fetchAll();
+  }
 ?>

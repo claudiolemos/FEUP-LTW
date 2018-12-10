@@ -79,4 +79,18 @@
     $stmt->execute(array($username));
     return $stmt->fetch()['id'];
   }
+
+  /**
+   * Searches the users
+   * @param  string $query what the user is searching for
+   * @return array  users that match the query
+   */
+  function searchUsers($query){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT username
+                          FROM Users
+                          WHERE username LIKE ?');
+    $stmt->execute(array("%$query%"));
+    return $stmt->fetchAll();
+  }
 ?>
