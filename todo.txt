@@ -1,0 +1,11 @@
+- Comments CSS (BARRA DA ESQUERDA COMO A DE BAIXO)
+- DATE FORMAT POST_COMMENT
+- delete comment
+- comment/post upvoting
+- security
+- trocar IDS por usernames e verificar se user logado etc
+
+
+
+
+- api_check_mentions change to actual url
