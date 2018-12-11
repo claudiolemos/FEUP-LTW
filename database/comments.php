@@ -166,19 +166,4 @@
 
 
     }
-
-    /**
-     * Searches the comments
-     * @param  string $query what the user is searching for
-     * @return array  comments that match the query
-     */
-    function searchComments($query){
-      $db = Database::instance()->db();
-      $stmt = $db->prepare('SELECT Comments.id, Comments.content, Comments.post_id, Comments.date, Comments.votes, Posts.title as title, u1.username as user1, u2.username as user2, Channels.name as channel
-                            FROM Comments, Users u1 ,Users u2, Posts, Channels
-                            WHERE Comments.user_id = u1.id AND Comments.post_id = Posts.id AND Posts.channel_id = Channels.id AND Posts.user_id = u2.id AND (Comments.content LIKE ? OR Posts.title LIKE ? OR  u1.username LIKE ? OR Channels.name LIKE ?)
-                            ORDER BY Comments.date DESC');
-      $stmt->execute(array("%$query%", "%$query%", "%$query%", "%$query%"));
-      return $stmt->fetchAll();
-    }
 ?>

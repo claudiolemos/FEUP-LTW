@@ -260,16 +260,98 @@ button:hover {
   margin-right: 2em;
 }
 
-#posts article {
+#posts article, #search-posts article {
   border-bottom-style:solid;
   border-bottom-color: var(--light2);
   border-bottom-width: 1px;
 }
 
-#posts article .voting {
+#posts article:last-child, #search-posts article:last-child {
+  border-bottom-style:none;
+}
+
+.voting {
   width: 2em;
   margin-right: 1em;
   margin-bottom: 1em;
+}
+
+.voting > button {
+  width: 30px;
+  height: 30px;
+  border-width: 0;
+  border-radius: 100px;
+}
+
+article .votes {
+  text-align: center;
+}
+
+.upvote:hover {
+  background-color: var(--green3);
+}
+
+.upvoted {
+  background-color: var(--green2);
+}
+
+.downvote:hover {
+  background-color: var(--red3);
+}
+
+.downvoted {
+  background-color: var(--red2);
+}
+
+#posts article .thumbnail, #search-posts article .thumbnail{
+  margin-left: 1em;
+  width:5em;
+  height:5em;
+}
+
+#search-users .user-block .thumbnail {
+  width:5em;
+  height:5em;
+}
+
+#posts article .thumbnail > img, #search-posts article .thumbnail > img, #search-users .user-block .thumbnail > img {
+  object-fit: cover;
+  width:100%;
+  height:100%;
+}
+
+#search-users .blocks {
+  display: flex;
+  flex-direction: row;
+}
+
+#search-users .user-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--light2);
+  margin-right:1em;
+  padding: 1.5em 1.5em 1em;
+  border-radius: 20px;
+}
+
+#search-users .user-block .thumbnail > img{
+  border-radius: 50%;
+}
+
+
+
+#posts article > header, #posts article > footer, #search-posts article > header, #search-posts article > footer  {
+  margin-left: 2em;
+  margin-top: 0;
+}
+
+#posts article .username:after, #search-posts article .username:after {
+  content: ' @';
+}
+
+#posts article .comments:after, #search-posts article .comments:after {
+  content: ' comments';
 }
 
 #sort {
@@ -322,12 +404,13 @@ body > header #channels {
   align-self: center;
 }
 
-body > header #channels ul {
+body > header #channels ul, #search-channels ul {
   display: flex;
   flex-direction: row;
+  list-style: none;
 }
 
-body > header #channels li {
+body > header #channels li, #search-channels li {
   border-color: var(--light1);
   border-radius: 100px;
   border-style: solid;
@@ -337,82 +420,31 @@ body > header #channels li {
   margin-right: 1em;
 }
 
-body > header #channels li:nth-child(1){
+#search-channels li a{
+  text-decoration: none;
+  color: white;
+}
+
+body > header #channels li:nth-child(1), #search-channels li:nth-child(n){
   background-color: var(--blue2);
 }
 
-body > header #channels li:nth-child(2){
+body > header #channels li:nth-child(2), #search-channels li:nth-child(2n){
   background-color: var(--red2);
 }
 
-body > header #channels li:nth-child(3){
+body > header #channels li:nth-child(3), #search-channels li:nth-child(3n){
   background-color: var(--yellow2);
 }
 
-body > header #channels li:nth-child(4){
+body > header #channels li:nth-child(4), #search-channels li:nth-child(4n){
   background-color: var(--green2);
 }
 
-body > header #channels li:nth-child(5){
+body > header #channels li:nth-child(5), #search-channels li:nth-child(5n){
   background-color: var(--pink2);
 }
 
-#posts article .voting > button {
-  width: 30px;
-  height: 30px;
-  border-width: 0;
-  border-radius: 100px;
-}
-
-#posts article .votes {
-  text-align: center;
-}
-
-#posts article .upvote:hover {
-  background-color: var(--green3);
-  content:'~';
-}
-
-#posts article .upvoted {
-  background-color: var(--green2);
-}
-
-#posts article .downvote:hover {
-  background-color: var(--red3);
-}
-
-#posts article .downvoted {
-  background-color: var(--red2);
-}
-
-#posts article .thumbnail {
-  margin-left: 1em;
-  width:5em;
-  height:5em;
-}
-
-#posts article .thumbnail > img {
-  object-fit: cover;
-  width:100%;
-  height:100%;
-}
-
-#posts article > header, #posts article > footer  {
+#search-results{
   margin-left: 2em;
-  margin-top: 0;
-}
-
-#posts article .username:after {
-  content: ' @';
-}
-
-#posts article .comments:after {
-  content: ' comments';
-}
-#error_messages {
-  color: red;
-}
-
-a:active{
-  color:blue;
 }

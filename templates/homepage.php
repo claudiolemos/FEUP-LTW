@@ -1,7 +1,7 @@
 <?php
   include_once(__DIR__.'/../database/posts.php');
   include_once(__DIR__.'/../database/users.php');
-  $posts = getPosts("top");
+  $posts = getPosts("new");
 ?>
 
 
@@ -24,7 +24,7 @@
         <img src="<?=getPostThumbnail($post['id'])?>">
       </div>
       <header>
-        <p class="title"><?=$post['title']?></p>
+        <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a></p>
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>

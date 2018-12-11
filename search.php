@@ -1,7 +1,6 @@
 <?php
   include_once('includes/init.php');
   include_once('database/posts.php');
-  include_once('database/comments.php');
   include_once('database/channels.php');
   include_once('database/users.php');
 
@@ -9,7 +8,6 @@
     die("No search input!");
 
   $posts = searchPosts($_GET['query']);
-  $comments = searchComments($_GET['query']);
   $users = searchUsers($_GET['query']);
   $channels = searchChannels($_GET['query']);
 
