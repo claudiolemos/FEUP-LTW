@@ -42,6 +42,7 @@
     $stmt->execute(array("%$query%"));
     return $stmt->fetchAll();
   }
+  /*
    * Gets the ID of a channel
    * @param  string $channel channel's name
    * @return int channel's ID. -1 if does not exist
