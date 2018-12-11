@@ -63,17 +63,17 @@
   }
 
   /**
-   * Gets the ID of a channel
-   * @param  string $channel channel's name
-   * @return int channel's ID. -1 if does not exist
+   * Gets the name of a channel
+   * @param  int $channel channel's id
+   * @return string channel's name. -1 if does not exist
    */
-  function getChannelID($name){
+  function getChannelName($id){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT id FROM Channels WHERE name = ?');
-    $stmt->execute(array($name));
+    $stmt = $db->prepare('SELECT name FROM Channels WHERE id = ?');
+    $stmt->execute(array($id));
 
 
-    $channel_id = $stmt->fetch()['id'];
+    $channel_id = $stmt->fetch()['name'];
 
     if($channel_id != null)
       return $channel_id;
@@ -81,4 +81,6 @@
       return -1;
 
   }
+
+ 
 ?>

@@ -4,6 +4,7 @@
   include_once('database/comments.php');
   include_once('database/posts.php');
   include_once('database/users.php');
+  include_once('database/channels.php');
 
   if (!isset($_GET['id']))
     die("Wrong post id!");

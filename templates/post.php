@@ -19,7 +19,7 @@
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
         <span class="username"><?=getUserName($post['user_id'])?></span>
-        <span class="channel"><?=$post['channel_id']?></span>
+        <span class="channel"><?=getChannelName($post['channel_id'])?></span>
         <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>

@@ -7,9 +7,9 @@
 
     echo "<div class=".'user-comment'." id=".'user-comment-'. $comment['id'] .">";
       echo "<div class='voting comment-voting'>";
-        echo "<button class=".getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)."></button>";
+        echo "<button class=".getCommentVoteButtonClass(getUserID($_SESSION['username']), $comment['id'], 1)."></button>";
         echo "<span class='votes comment-votes'>".$comment['votes']."</span>";
-        echo "<button class=".getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], -1)."></button>";
+        echo "<button class=".getCommentVoteButtonClass(getUserID($_SESSION['username']), $comment['id'], -1)."></button>";
       echo "</div>";
       echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']) ."</span>";
       echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
