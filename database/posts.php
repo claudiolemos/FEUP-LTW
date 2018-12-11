@@ -55,12 +55,12 @@
    */
   function getPostThumbnail($post_id){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT content as text, link FROM Posts WHERE id = ?');
+    $stmt = $db->prepare('SELECT content as text FROM Posts WHERE id = ?');
     $stmt->execute(array($post_id));
 
     if($stmt->fetch()['text'] != null)
       return "images/text_post.png";
-    else if($stmt->fetch()['link'] != null)
+    else
       return "images/link_post.png";
   }
 
@@ -113,33 +113,62 @@
    * @param  string $sort type of sort
    * @return array post id, title, content, link, date, votes, username and channel
    */
-  function getPosts($sort){
+  function getPosts($sort, $channel = null){
     $db = Database::instance()->db();
 
-    switch ($sort) {
-    case "new":
-        $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
-                              FROM Posts, Users, Channels
-                              WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
-                              ORDER BY date DESC');
-        break;
-    case "top":
-        $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
-                              FROM Posts, Users, Channels
-                              WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
-                              ORDER BY votes DESC, date ASC');
-        break;
-    case "controversial":
-        $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
-                              FROM Posts p1, Users, Channels, (
-	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
-                              )
-                              WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post
-                              ORDER BY comments DESC, votes DESC');
-        break;
+    if($channel == null){
+      switch ($sort) {
+      case "new":
+          $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                                FROM Posts, Users, Channels
+                                WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
+                                ORDER BY date DESC');
+          break;
+      case "top":
+          $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                                FROM Posts, Users, Channels
+                                WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
+                                ORDER BY votes DESC, date ASC');
+          break;
+      case "controversial":
+          $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
+                                FROM Posts p1, Users, Channels, (
+  	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
+                                )
+                                WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post
+                                ORDER BY comments DESC, votes DESC');
+          break;
+      }
+
+      $stmt->execute();
+    }
+    else{
+      switch ($sort) {
+      case "new":
+          $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                                FROM Posts, Users, Channels
+                                WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ?
+                                ORDER BY date DESC');
+          break;
+      case "top":
+          $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                                FROM Posts, Users, Channels
+                                WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ?
+                                ORDER BY votes DESC, date ASC');
+          break;
+      case "controversial":
+          $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
+                                FROM Posts p1, Users, Channels, (
+  	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
+                                )
+                                WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post AND Channels.name = ?
+                                ORDER BY comments DESC, votes DESC');
+          break;
+      }
+
+      $stmt->execute(array($channel));
     }
 
-    $stmt->execute();
     return $stmt->fetchAll();
 
   }
@@ -169,5 +198,35 @@
                           ORDER BY date DESC');
     $stmt->execute(array("%$query%", "%$query%", "%$query%", "%$query%", "%$query%"));
     return $stmt->fetchAll();
+  }
+
+  /**
+   * Adds a text post to the database
+   * @param  string $title      post title
+   * @param  string $content    post content
+   * @param  int    $user_id    id of the poster
+   * @param  int    $channel_id id of the channel where the post is being posted
+   * @return int    id of the post that was submitted
+   */
+  function addTextPost($title, $content, $user_id, $channel_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO Posts VALUES (NULL, ?, ?, NULL, ?, ?, ?, 0)');
+    $stmt->execute(array($title, $content, time(), $user_id, $channel_id));
+    return $db->lastInsertId();
+  }
+
+  /**
+   * Adds a link post to the database
+   * @param  string $title      post title
+   * @param  string $link       post link
+   * @param  int    $user_id    id of the poster
+   * @param  int    $channel_id id of the channel where the post is being posted
+   * @return int    id of the post that was submitted
+   */
+  function addLinkPost($title, $link, $user_id, $channel_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO Posts VALUES (NULL, ?, NULL, ?, ?, ?, ?, 0)');
+    $stmt->execute(array($title, $link, time(), $user_id, $channel_id));
+    return $db->lastInsertId();
   }
 ?>

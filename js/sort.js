@@ -1,10 +1,11 @@
 let sort = document.querySelectorAll('#sort li');
-let postsNode = document.querySelector('#posts');
+let postsNode = document.querySelector('#posts, #channel-posts');
+let channelID = document.querySelector('#channel-id a') == null? null : document.querySelector('#channel-id a').innerHTML;
 
 for(var i = 0; i < sort.length; i++) {
   sort[i].addEventListener('click', function(event) {
     event.preventDefault();
-    let request = createRequest("/../../actions/api_sort.php", {sort: this.getAttribute("name")});
+    let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: this.getAttribute("name")}) : createRequest("/../../actions/api_sort.php", {sort: this.getAttribute("name"), id: channelID});
     request.onreadystatechange=function(){updatePosts(request);}
   });
 }

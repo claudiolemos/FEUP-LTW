@@ -11,6 +11,18 @@
     return $stmt->fetch();
   }
 
+  /**
+   * Gets a channel id from their name
+   * @param  string $channel channel's name
+   * @return int channel's id
+   */
+  function getChannelID($channel){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT id FROM Channels WHERE name = ?');
+    $stmt->execute(array($channel));
+    return $stmt->fetch()['id'];
+  }
+
   function addChannel($channel_name){
 
   }
