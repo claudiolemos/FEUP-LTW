@@ -1,9 +1,17 @@
 <?php
   include_once(__DIR__.'/../database/posts.php');
   include_once(__DIR__.'/../database/users.php');
-  $posts = getPosts("top");
+  $posts = getPosts("new");
 ?>
 
+
+<div id="sort">
+  <ul>
+    <li name="new">New</a></li>
+    <li name="top">Top</a></li>
+    <li name="controversial">Controversial</a></li>
+  </ul>
+</div>
 <section id="posts">
   <?php foreach($posts as $post) { ?>
     <article id="<?=$post['id']?>">
@@ -16,7 +24,7 @@
         <img src="<?=getPostThumbnail($post['id'])?>">
       </div>
       <header>
-        <p class="title"><?=$post['title']?></p>
+        <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a></p>
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>

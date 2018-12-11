@@ -154,11 +154,20 @@
     $stmt = $db->prepare('SELECT * FROM Posts WHERE id = ?');
     $stmt->execute(array($post_id));
     return $stmt->fetch();
-
   }
 
-
-
-
-
+  /**
+   * Searches the posts
+   * @param  string $query what the user is searching for
+   * @return array  posts that match the query
+   */
+  function searchPosts($query){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+                          FROM Posts, Users, Channels
+                          WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND (Posts.title LIKE ? OR Posts.content LIKE ? OR Posts.link LIKE ? OR Users.username LIKE ? OR Channels.name LIKE ?)
+                          ORDER BY date DESC');
+    $stmt->execute(array("%$query%", "%$query%", "%$query%", "%$query%", "%$query%"));
+    return $stmt->fetchAll();
+  }
 ?>

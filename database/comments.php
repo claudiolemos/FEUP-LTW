@@ -107,7 +107,7 @@
         $stmt = $db->prepare('SELECT * FROM Comments WHERE parent_id = ? ORDER BY votes DESC');
         $stmt->execute(array($parent_id));
         $childComments = $stmt->fetchAll();
-        
+
         //if it has children
         if (!empty($childComments))
         {
@@ -132,7 +132,7 @@
               echo "</div>";
 
             }
-                
+
             //echo "</ul>\n";
 
         }
@@ -166,10 +166,4 @@
 
 
     }
-
-
-
-
-
-
 ?>

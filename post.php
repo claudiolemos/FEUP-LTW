@@ -12,6 +12,7 @@
 
 
   include('templates/common/header.php');
+  include('templates/common/sidebar.php');
   include('templates/post.php');
   include('templates/common/footer.php');
 ?>
