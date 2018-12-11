@@ -141,13 +141,10 @@ body > header #channels {
   height: 50px;
   padding-right: 20px;
 }
-.votes{
-  padding-left: 5px;
 
-}
 
-.comment-body {
-
+.comment-votes {
+  padding-left: 10px;
   
 }
 

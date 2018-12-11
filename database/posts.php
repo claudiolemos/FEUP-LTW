@@ -59,9 +59,9 @@
     $stmt->execute(array($post_id));
 
     if($stmt->fetch()['text'] != null)
-      return "images/text_post.png";
+      return "/images/text_post.png";
     else if($stmt->fetch()['link'] != null)
-      return "images/link_post.png";
+      return "/images/link_post.png";
   }
 
   /**

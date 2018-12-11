@@ -67,22 +67,33 @@
     else
       return false;
   }
-  /*
+  /**
    * Gets the ID of an user
    * @param  string $username user's username
-   * @return int usernames ID. -1 if does not exist
+   * @return int usernames ID.
    */
   function getUserID($username){
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT id FROM Users WHERE username = ?');
     $stmt->execute(array($username));
 
-    $user_id = $stmt->fetch()['id'];
+    return $stmt->fetch()['id'];
 
-    if($user_id != null)
-      return $user_id;
-    else
-      return -1;
+
+  }
+
+  /**
+   * Gets the username of an user
+   * @param  int $id user's id
+   * @return string user's username.
+   */
+  function getUserName($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT username FROM Users WHERE id = ?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch()['username'];
+
 
   }
 

@@ -116,12 +116,12 @@
               //echo "<li>", $comment['content'], getChildComments($comment['id']), "</li>\n";
 
               echo "<div class=".'user-comment'." id=".'user-comment-'. $comment['id'] .">";
-                echo "<div class=".'comment-voting'.">";
-                  echo "<button class=".'upvote'."></button>";
-                  echo "<span class=".'votes'.">". $comment['votes'] ."</span>";
-                  echo "<button class=".'downvote'."></button>";
+                echo "<div class='voting comment-voting'>";
+                  echo "<button class=".getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)."></button>";
+                  echo "<span class='votes comment-votes'>".$comment['votes']."</span>";
+                  echo "<button class=".getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], -1)."></button>";
                 echo "</div>";
-                echo "<span id=".'comment-info'.">". $comment['user_id'] . " - " . $comment['date'] ."</span>";
+                echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']) ."</span>";
                 echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
                 echo '<div class="write-comment-div" id="write-comment-div-'. $comment['id'] .'">';
                 echo "<button type=".'submit'." class=".'replyBtn'." value=". $comment['post_id'] . "-" .$comment['id']. "-" . getParentID($comment['id']) . ">". 'Reply' . "</button>";
@@ -132,6 +132,13 @@
               echo "</div>";
 
             }
+
+            
+        
+        
+        
+      
+
 
             //echo "</ul>\n";
 
@@ -160,7 +167,7 @@
 
       $stmt->execute(array($content, $user_id, $post_id, $date, $parent_id));
 
-      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id, "date" => $date);
+      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id, "date" => gmdate("Y-m-d",$date));
 
       return $postID_commentID_parentID;
 
