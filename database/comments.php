@@ -160,7 +160,7 @@
 
       $stmt->execute(array($content, $user_id, $post_id, $date, $parent_id));
 
-      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id);
+      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id, "date" => $date);
 
       return $postID_commentID_parentID;
 

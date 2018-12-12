@@ -70,66 +70,87 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
         let post_comment_parent = this.value.split("-");
 
 
-		let date = new Date();
-		let dd = date.getDate();
-		let mm = date.getMonth()+1; //January is 0!
-		let yyyy = date.getFullYear();
-		date = yyyy + '-' + mm + '-' + dd;
-
 		let post_id = post_comment_parent[0];
-        let user_id = "3"; //TODO
         let parent_id = post_comment_parent[1]; //level comment, so parent_id is null
 
-        let request = new XMLHttpRequest();
-    	request.open("post", "/../actions/api_post_parent_comment.php", true); //TODO
-    	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        let checkmentions = new XMLHttpRequest();
+        checkmentions.open("post", "/../actions/api_check_mentions.php", true); 
+        checkmentions.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        checkmentions.send(encodeForAjax({content: comment}));
+
+        checkmentions.onreadystatechange = function () {
+            if(checkmentions.readyState === 4 && checkmentions.status === 200) {
+
+                comment = JSON.parse(this.responseText);
+
+                let request = new XMLHttpRequest();
+                request.open("post", "/../actions/api_post_comment.php", true); 
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         
-    	request.send(encodeForAjax({post_id: post_id, content: comment, date: date, parent_id: parent_id}));
+                request.send(encodeForAjax({post_id: post_id, content: comment, parent_id: parent_id}));
+       
+
+                request.onreadystatechange = function () {
+                    if(request.readyState === 4 && request.status === 200) {
 
 
-        request.onreadystatechange = function () {
-            if(request.readyState === 4 && request.status === 200) {
+                        if(this.responseText!=""){
 
-                let newID = JSON.parse(this.responseText)["comment_id"];
-                let post_id = JSON.parse(this.responseText)["post_id"];
-                let parent_id = JSON.parse(this.responseText)["parent_id"];
-                let user_id = JSON.parse(this.responseText)["user_id"];
+
+                            let newID = JSON.parse(this.responseText)["comment_id"];
+                            let post_id = JSON.parse(this.responseText)["post_id"];
+                            let parent_id = JSON.parse(this.responseText)["parent_id"];
+                            let user_id = JSON.parse(this.responseText)["user_id"];
+                            let date = JSON.parse(this.responseText)["date"];
+
+                            let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
+                                + "<div class="+"comment-voting"+">"
+                                + "<button class="+"upvote"+"></button>"
+                                + "<span class="+"votes"+">1</span>" 
+                                + "<button class="+"downvote"+"></button>"
+                                + "</div>"
+                                + "<span id="+"comment-info"+">"+ user_id + " - " + date +"</span>"
+                                + "<div class="+'comment-body'+">"+ comment + "</div>"
+                                + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
+                                + "<button type="+'submit'+" class="+'replyBtn'+" value="+ post_id +"-"+ newID +"-"+ parent_id +">"+ 'Reply' + "</button>"
+                                + '</div>'
+                                + "</div>";
+
+                            if(parent_id == null){
+
+                                $('#comments').prepend(newComment);
+                            }
+
+                            else{
+                                $('#write-comment-div-' + parent_id).after(newComment);
+                            }
 
                 
 
-                let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
-                    + "<div class="+"comment-voting"+">"
-                    + "<button class="+"upvote"+"></button>"
-                    + "<span class="+"votes"+">1</span>" //TODO: CONFIRMAR VOTES
-                    + "<button class="+"downvote"+"></button>"
-                    + "</div>"
-                    + "<span id="+"comment-info"+">"+ user_id + " - " + date +"</span>"
-                    + "<div class="+'comment-body'+">"+ comment + "</div>"
-                    + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
-                    + "<button type="+'submit'+" class="+'replyBtn'+" value="+ post_id +"-"+ newID +"-"+ parent_id +">"+ 'Reply' + "</button>"
-                    + '</div>'
-                    + "</div>";
+                            $('#user-comment-' + newID).show(300); 
 
-                if(parent_id == null){
+                        }
+                        else{
+                            alert("log in to post comments!");
+                        } 
 
-                    $('#comments').prepend(newComment);
-                }
 
-                else{
-                    $('#write-comment-div-' + parent_id).after(newComment);
-                }
+                        comment ="";
 
+                    }
+                };
                 
-
-                $('#user-comment-' + newID).show(300);  
-
-
-                comment ="";
-
-
+                        
             }
+
+
         };
+
+
+
+
 
 	}
 

@@ -1,5 +1,4 @@
-<!--Depois de dar merge isto deve ir para o init-->
-<script src="../../js/comments.js"></script>
+
 
 
 <section id="comments">

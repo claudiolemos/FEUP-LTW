@@ -55,6 +55,7 @@
     return $stmt->fetchAll();
   }
 
+
   /**
    * Tells if a user is subscribed to a channel
    * @param  string] $user    username
