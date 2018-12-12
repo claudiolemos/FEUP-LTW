@@ -4,26 +4,26 @@
   <title>Reddit</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../css/style.css" rel="stylesheet">
-  <link href="../css/layout.css" rel="stylesheet">
-  <link href="../css/responsive.css" rel="stylesheet">
-  <link href="../css/comments.css" rel="stylesheet">
-  <link href="../css/forms.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/layout.css" rel="stylesheet">
+  <link href="/css/responsive.css" rel="stylesheet">
+  <link href="/css/comments.css" rel="stylesheet">
+  <link href="/css/forms.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans" rel="stylesheet">
 </head>
 <body>
   <header>
     <div id="logo">
-      <img src="images/reddit.png" alt="Reddit logo" style="width:75px; height:75px;">
-      <h1><a href="index.php">reddit</a></h1>
+      <img src="/images/reddit.png" alt="Reddit logo" style="width:75px; height:75px;">
+      <h1><a href="/index.php">reddit</a></h1>
     </div>
     <nav id="channels">
       <ul>
-        <li><a href="index.php">movies</a></li>
-        <li><a href="index.php">music</a></li>
-        <li><a href="index.php">gaming</a></li>
-        <li><a href="index.php">news</a></li>
-        <li><a href="index.php">sports</a></li>
+        <li><a href="/index.php">movies</a></li>
+        <li><a href="/index.php">music</a></li>
+        <li><a href="/index.php">gaming</a></li>
+        <li><a href="/index.php">news</a></li>
+        <li><a href="/index.php">sports</a></li>
       </ul>
     </nav>
     <div id="signup">
@@ -33,7 +33,7 @@
         </div>
         <div id="login-pop-up" class="pop-up">
           <form method="post" class="pop-up-content animate" action="actions/login.php">
-            <div class="imgcontainer">
+            <div class="close-button">
               <span onclick="document.getElementById('login-pop-up').style.display='none'" class="close">&times;</span>
             </div>
             <div class="container">
@@ -50,7 +50,7 @@
         </div>
         <div id="register-pop-up" class="pop-up">
           <form method="post" class="pop-up-content animate" action="actions/register.php">
-            <div class="imgcontainer">
+            <div class="close-button">
               <span onclick="document.getElementById('register-pop-up').style.display='none'" class="close">&times;</span>
             </div>
             <div class="container">
@@ -71,9 +71,9 @@
         <div class="user-dropdown">
           <button class="dropdown-button"><?=$_SESSION['username']?></button>
           <div class="user-dropdown-content">
-            <a href="profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
+            <a href="/profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
             <a href="#">Settings</a>
-            <a href="actions/logout.php">Logout</a>
+            <a href="/actions/logout.php">Logout</a>
           </div>
         </div>
       <?php } ?>

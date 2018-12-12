@@ -28,8 +28,8 @@
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-        <span class="username"><?=$post['username']?></span>
-        <span class="channel"><?=$post['channel']?></span>
+        <span class="username"><a href="/profile.php/?id=<?=$post['username']?>"><?=$post['username']?></a></span>
+        <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>"><?=$post['channel']?></a></span>
         <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>

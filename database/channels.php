@@ -54,4 +54,41 @@
     $stmt->execute(array("%$query%"));
     return $stmt->fetchAll();
   }
+
+  /**
+   * Tells if a user is subscribed to a channel
+   * @param  string] $user    username
+   * @param  string  $channel channel's name
+   * @return boolean true if subscribed, false if not
+   */
+  function isSubscribed($user, $channel){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Users.username, Channels.name FROM Users, Channels, Subscriptions WHERE Users.id = Subscriptions.user_id AND Channels.id = Subscriptions.channel_id AND Users.username = ? AND Channels.name = ?');
+    $stmt->execute(array($user, $channel));
+    return $stmt->fetch() == null? false : true;
+  }
+
+  /**
+   * Adds or removes a suscription depending on wether the user is already subscribed or not
+   * @param  int $user       user's username
+   * @param  int $user_id    user's id
+   * @param  int $channel    channel's name
+   * @param  int $channel_id channel's id
+   * @return string new value for the subscribe button
+   */
+  function subscribe($user, $user_id, $channel, $channel_id){
+    $db = Database::instance()->db();
+
+    if(isSubscribed($user, $channel)){
+      $stmt = $db->prepare('DELETE FROM Subscriptions WHERE user_id = ? AND channel_id = ?');
+      $stmt->execute(array($user_id, $channel_id));
+      return Subscribe;
+    }
+    else{
+      $stmt = $db->prepare('INSERT INTO Subscriptions VALUES (?,?)');
+      $stmt->execute(array($user_id, $channel_id));
+      return Unsubscribe;
+    }
+  }
+
 ?>

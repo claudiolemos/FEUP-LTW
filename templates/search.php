@@ -23,8 +23,8 @@
           </header>
           <footer>
             <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-            <span class="username"><?=$post['username']?></span>
-            <span class="channel"><?=$post['channel']?></span>
+            <span class="username"><a href="/profile.php/?id=<?=$post['username']?>"><?=$post['username']?></a></span>
+            <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>"><?=$post['channel']?></a></span>
             <span class="comments"><?=getNoComments($post['id'])?></span>
           </footer>
         </article>
@@ -39,12 +39,14 @@
     <?php if($users != null) { ?>
       <div class="blocks">
         <?php foreach($users as $user) { ?>
-          <div class="user-block">
-            <div class="thumbnail">
-              <img src="/images/profile/default.svg">
+          <a href="/profile.php/?id=<?=$user['username']?>">
+            <div class="user-block">
+              <div class="thumbnail">
+                <img src="/images/profile/default.svg">
+              </div>
+              <p class="user"><?=$user['username']?></p>
             </div>
-            <p class="user"><?=$user['username']?></p>
-          </div>
+          </a>
         <?php } ?>
       </div>
     <?php } else { ?>
@@ -57,7 +59,7 @@
     <?php if($channels != null) { ?>
       <ul>
       <?php foreach($channels as $channel) { ?>
-        <li><a href="index.php"><?=$channel['name']?></a></li>
+        <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
       <?php } ?>
       </ul>
     <?php } else { ?>

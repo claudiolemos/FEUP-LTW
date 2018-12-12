@@ -29,7 +29,7 @@ function createArticle(post){
   request.onreadystatechange=function(){
     if(request.readyState==4 && request.status==200){
       let response = JSON.parse(request.responseText);
-      article.innerHTML = `<div class="voting"><button class="${response['upvote']}"></button><span class="votes">${response['votes']}</span><button class="${response['downvote']}"></button></div><div class="thumbnail"><img src="${response['thumbnail']}"></div><header><p class="title">${response['title']}</p></header><footer><span class="date">${response['date']}</span><span class="username"> ${response['username']}</span><span class="channel"> ${response['channel']}</span><span class="comments"> ${response['comments']}</span></footer>`;
+      article.innerHTML = `<div class="voting"><button class="${response['upvote']}"></button><span class="votes">${response['votes']}</span><button class="${response['downvote']}"></button></div><div class="thumbnail"><img src="${response['thumbnail']}"></div><header><p class="title"><a href="/post.php/?id=${post['id']}">${response['title']}</a></p></header><footer><span class="date">${response['date']}</span><span class="username"><a href="/profile.php/?id=${response['username']}"> ${response['username']}</a></span><span class="channel"><a href="/channel.php/?id=${response['channel']}"> ${response['channel']}</a></span><span class="comments"> ${response['comments']}</span></footer>`;
       postsNode.append(article);
     }
   }
