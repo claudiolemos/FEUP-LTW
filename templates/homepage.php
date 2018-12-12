@@ -10,6 +10,9 @@
     <li name="new">New</a></li>
     <li name="top">Top</a></li>
     <li name="controversial">Controversial</a></li>
+    <?php if(isset($_SESSION['username'])){ ?>
+    <li name="subscribed">Subscribed</a></li>
+    <?php } ?>
   </ul>
 </div>
 <section id="posts">

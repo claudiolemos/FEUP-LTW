@@ -1,5 +1,5 @@
 <div id="search">
-  <form method="get" action="search.php">
+  <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
     <input type="submit" value="Submit">
   </form>

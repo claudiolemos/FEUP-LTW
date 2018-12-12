@@ -1,3 +1,9 @@
+<?php
+  include_once(__DIR__.'/../../database/channels.php');
+  $topChannels = getTopChannels();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -19,11 +25,9 @@
     </div>
     <nav id="channels">
       <ul>
-        <li><a href="/index.php">movies</a></li>
-        <li><a href="/index.php">music</a></li>
-        <li><a href="/index.php">gaming</a></li>
-        <li><a href="/index.php">news</a></li>
-        <li><a href="/index.php">sports</a></li>
+        <?php foreach($topChannels as $channel) { ?>
+          <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
+        <?php } ?>
       </ul>
     </nav>
     <div id="signup">

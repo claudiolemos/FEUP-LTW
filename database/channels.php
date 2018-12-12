@@ -91,4 +91,20 @@
     }
   }
 
+  /**
+   * Returns top 5 subscribed channels
+   * @return array channel's name
+   */
+  function getTopChannels(){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Channels.name, count(*) as subscribers
+                          FROM Channels, Subscriptions
+                          WHERE Subscriptions.channel_id = Channels.id
+                          GROUP BY name
+                          ORDER BY subscribers DESC
+                          LIMIT 5');
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
 ?>

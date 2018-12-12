@@ -389,6 +389,10 @@ article .votes {
   content: url(/images/top.svg);
 }
 
+#sort li[name=subscribed]:before{
+  content: url(/images/subscribed.svg);
+}
+
 body > header #channels {
   /* background-color: var(--light1); */
   margin: 2em;

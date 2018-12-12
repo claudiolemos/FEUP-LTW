@@ -1,12 +1,27 @@
-let sort = document.querySelectorAll('#sort li');
+let sort = document.querySelectorAll('#sort li[name=new], #sort li[name=top], #sort li[name=controversial]');
+let sortSubscriptions = document.querySelector('#sort li[name=subscribed]');
 let postsNode = document.querySelector('#posts, #channel-posts');
 let channelID = document.querySelector('#channel-id a') == null? null : document.querySelector('#channel-id a').innerHTML;
+
+let currentSort;
+let sortSubscribed = false;
 
 for(var i = 0; i < sort.length; i++) {
   sort[i].addEventListener('click', function(event) {
     event.preventDefault();
-    let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: this.getAttribute("name")}) : createRequest("/../../actions/api_sort.php", {sort: this.getAttribute("name"), id: channelID});
+    currentSort = this.getAttribute("name");
+    let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: currentSort}) : createRequest("/../../actions/api_sort.php", {sort: currentSort, id: channelID});
     request.onreadystatechange=function(){updatePosts(request);}
+  });
+}
+
+if(sortSubscriptions != null){
+  sortSubscriptions.addEventListener('click', function(event) {
+    event.preventDefault();
+    sortSubscribed = !sortSubscribed;
+
+    sortSubscriptions.style.backgroundColor = sortSubscribed? "var(--red2)" : "transparent";
+
   });
 }
 
