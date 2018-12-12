@@ -56,4 +56,35 @@
     else
       return false;
   }
+
+  /**
+   * Checks user's email
+   * @param  string $username user's username
+   * @param  string $email user's email
+   * @return boolean true if email is the same or false if it doesn't
+   */
+  function userEmail($username, $email){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT email FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+
+    if($stmt->fetch()['email'] == $email)
+      return true;
+    else
+      return false;
+  }
+
+  function updateUserPassword($username, $password){
+    $db = Database::instance()->db();
+    $hash = hash('sha256', $password);
+    $stmt = $db->prepare('UPDATE Users SET password = ? where username = ?');
+    $stmt->execute(array($hash, $username));
+  }
+
+  function updateUserEmail($username,  $email){
+    $db = Database::instance()->db();
+    $hash = hash('sha256', $password);
+    $stmt = $db->prepare('UPDATE Users SET email = ? where username = ?');
+    $stmt->execute(array($email, $username));
+  }
 ?>

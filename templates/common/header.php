@@ -94,8 +94,8 @@
           <img src="images\reddito.png">
         </div> -->
         <div class="dropdown-content">
-          <a href="profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
-          <a href="settingspage.php?id=<?=$_SESSION['username']?>">Settings</a>
+          <a href="profile.php?id=<?=$_SESSION['username']?>">Profile</a>
+          <a href="settings.php?id=<?=$_SESSION['username']?>">Settings</a>
           <a href="actions/logout.php">Logout</a>
         </div>
       </div>

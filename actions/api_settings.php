@@ -3,11 +3,22 @@
   include_once(__DIR__."/../database/users.php");
 
   $username = $_SESSION['username'];
-  $password = $_POST['password'];
+  $type = $_POST['type'];
+  $value = $_POST['value'];
 
-  if(isLoginCorrect($username, $password)){
-  	echo json_encode("valid");
+  if($type == "password"){
+    if(isLoginCorrect($username, $value)){
+    	echo json_encode("valid");
+    }
+    else
+    	echo json_encode("password");
   }
-  else
-  	echo json_encode("password");
+
+  else if ($type == "email") {
+    if(userEmail($username, $value))
+      echo json_encode("valid");
+    else {
+      echo json_encode("email");
+    }
+  }
 ?>

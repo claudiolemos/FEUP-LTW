@@ -10,19 +10,17 @@
 <?php if(isset($_SESSION['username']) && $_GET['id'] == $_SESSION['username']) {?>
   <div id="update_settings">
     <form method="settings" action="actions/settings.php">
-      <input type="password" name="curr_pwd" id="pwd" placeholder="Password" required>
-      <input type="password" name="new_pwd" id="new_pwd" placeholder="Password" required >
-      <input type="password" name="conf_new_pwd" id="conf_new_pwd" placeholder="Password" required >
-      <br>
-      <span id='message'></span>
-      <br>
+      <label for="email">Current Password</label>
+      <input type="password" name="curr-pwd" placeholder="Current Password" >
+      <label for="password">New Password</label>
+      <input type="password" name="new-pwd" placeholder="New Password"  >
+      <label for="password">Confirm New Password</label>
+      <input type="password" name="conf-new-pwd" placeholder="Confirm New Password"  >
       <label for="email">Current Email</label>
-      <input type="email" name="curr_email" placeholder="Email" required>
+      <input type="email" name="curr-email" placeholder="Email">
       <label for="email">New Email</label>
-      <input type="email" name="new_email" placeholder="Email" required>
-      <div class="submit_button">
-        <input type="submit" value="Submit">
-      </div>
+      <input type="email" name="new-email" placeholder="Email">
+      <button type="submit">Save</button>
     </form>
   </div>
 <?php }

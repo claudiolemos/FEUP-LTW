@@ -54,7 +54,7 @@
         <img src="images/text_post.png" alt="Reddito logo">
       </div>
       <header>
-        <p class="preview"><?=$_GET['id']?> commented on <?=$comment['post']?> - <?=$comment['channel']?>, posted by <a href="profilepage.php?id=<?=$comment['user2']?>"> <?=$comment['user2']?></a></p>
+        <p class="preview"><?=$_GET['id']?> commented on <?=$comment['post']?> - <?=$comment['channel']?>, posted by <a href="profile.php?id=<?=$comment['user2']?>"> <?=$comment['user2']?></a></p>
       </header>
       <footer>
         <span class="date"><?=$comment['date']?></span>
