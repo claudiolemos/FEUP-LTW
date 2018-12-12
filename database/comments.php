@@ -108,6 +108,8 @@
         $stmt->execute(array($parent_id));
         $childComments = $stmt->fetchAll();
 
+        $uID = getUserID($_SESSION['username']);
+
         //if it has children
         if (!empty($childComments))
         {
@@ -117,11 +119,15 @@
 
               echo "<div class=".'user-comment'." id=".'user-comment-'. $comment['id'] .">";
                 echo "<div class='voting comment-voting'>";
-                  echo "<button class=".getCommentVoteButtonClass(getUserID($_SESSION['username']), $comment['id'], 1)."></button>";
+                  echo "<button class=".getCommentVoteButtonClass($uID, $comment['id'], 1)."></button>";
                   echo "<span class='votes comment-votes'>".$comment['votes']."</span>";
-                  echo "<button class=".getCommentVoteButtonClass(getUserID($_SESSION['username']), $comment['id'], -1)."></button>";
+                  echo "<button class=".getCommentVoteButtonClass($uID, $comment['id'], -1)."></button>";
                 echo "</div>";
-                echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']) ."</span>";
+                echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']);
+                if ($uID == $comment['user_id']) {
+                  echo " - <img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
+                }
+                echo "</span>";
                 echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
                 echo '<div class="write-comment-div" id="write-comment-div-'. $comment['id'] .'">';
                 echo "<button type=".'submit'." class=".'replyBtn'." value=". $comment['post_id'] . "-" .$comment['id']. "-" . getParentID($comment['id']) . ">". 'Reply' . "</button>";
@@ -227,6 +233,16 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('DELETE FROM VoteOnComment WHERE user_id = ? AND comment_id = ?');
     $stmt->execute(array($user_id, $comment_id));
+  }
+
+  /**
+   * Removes a comment (comment stays in DB and website, text is changed to [DELETED])
+   * @param  int $comment_id id of the comment that is being removed
+   */
+  function deleteComment($comment_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Comments SET content = "[DELETED]" WHERE id = ?');
+    $stmt->execute(array($comment_id));
   }
 
 

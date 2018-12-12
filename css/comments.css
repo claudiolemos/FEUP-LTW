@@ -90,5 +90,12 @@
   font-size: 0.7em;
   line-height: 1.4em;
   cursor:pointer;
-
 }
+
+
+.comment-trashcan{
+  width: 16px;
+  height: 16px;
+  cursor:pointer;
+}
+

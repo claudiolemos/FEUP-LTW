@@ -13,6 +13,9 @@
   $post = getPostById($_GET['id']);
 
 
+  if(isset($_SESSION['username']))
+    $uID = getUserID($_SESSION['username']);
+
 
   $parent_comments = getParentComments($_GET['id']);
 
