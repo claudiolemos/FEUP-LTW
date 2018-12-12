@@ -108,4 +108,18 @@
     return $stmt->fetchAll();
   }
 
+  /**
+   * Gets a list of a user's subscribed channels
+   * @param  string $username user's username
+   * @return array
+   */
+  function getSubscriptions($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Channels.name
+                          FROM Channels, Users, Subscriptions
+                          WHERE Channels.id = Subscriptions.channel_id AND Subscriptions.user_id = Users.id AND Users.username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetchAll();
+  }
+
 ?>

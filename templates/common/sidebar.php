@@ -1,3 +1,8 @@
+<?php
+  include_once(__DIR__.'/../../database/channels.php');
+  $channels = getSubscriptions($_SESSION['username']);
+?>
+
 <div id="search">
   <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
@@ -5,9 +10,16 @@
   </form>
 </div>
 <aside id="sidebar">
-  <h1>Vestibulum congue blandit</h1>
-  <h3>Description</h3>
-  <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
-  <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
-  <p>Proin lectus felis, fringilla nec magna ut, vestibulum volutpat elit. Suspendisse in quam sed tellus fringilla luctus quis non sem. Aenean varius molestie justo, nec tincidunt massa congue vel. Sed tincidunt interdum laoreet. Vivamus vel odio bibendum, tempus metus vel.</p>
+  <div id="subscription-list">
+    <h3>My Subscriptions</h3>
+    <?php if($channels != null){ ?>
+      <ul>
+        <?php foreach($channels as $channel) { ?>
+            <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
+        <?php } ?>
+      </ul>
+    <?php } else { ?>
+      <span>You haven't subscribed to a channel</span>
+    <?php } ?>
+  </div>
 </aside>
