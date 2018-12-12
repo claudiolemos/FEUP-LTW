@@ -37,7 +37,7 @@ body > header {
   grid-column: middle / end;
 }
 
-#posts, #search-posts {
+#posts, #search-posts, #channel-posts {
   grid-row: posts / footer;
   grid-column: start / middle;
 }
@@ -72,7 +72,7 @@ body > header #logo {
   justify-content: space-around;
 }
 
-body > header #channels {
+body > header #channels, body > header #channel {
   flex-grow: 0.5;
 }
 
@@ -99,33 +99,33 @@ body > header #channels {
 
 /* post blocks layout */
 
-#posts article, #search-posts article {
+#posts article, #search-posts article, #channel-posts article {
   display: grid;
   grid-template-columns: [voting] 2em [image] 5em [start] auto [end];
   grid-template-rows: [start] auto [info] auto [end];
   margin-bottom: 1em;
 }
 
-#posts article .voting, #search-posts article .voting {
+#posts article .voting, #search-posts article .voting, #channel-posts article .voting {
   grid-column: voting / image;
   grid-row: start / end;
   display: flex;
   flex-direction: column;
 }
 
-#posts article .thumbnail, #search-posts article .thumbnail {
+#posts article .thumbnail, #search-posts article .thumbnail, #channel-posts article .thumbnail {
   grid-column: image / start;
   grid-row: start / end;
 }
 
-#posts article > header .title, #search-posts article > header .title {
+#posts article > header .title, #search-posts article > header .title, #channel-posts article > header .title {
   grid-column: start / end;
   grid-row: start / info;
   margin: 0;
   font-size: 1.5em;
 }
 
-#posts article > footer, #search-posts article > footer {
+#posts article > footer, #search-posts article > footer, #channel-posts article > footer {
   grid-column: start / end;
   grid-row: info / end;
 }

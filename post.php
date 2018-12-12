@@ -1,5 +1,5 @@
 <?php
-  include_once('database/connection.php');
+  include_once('includes/init.php');
   include_once('database/comments.php');
   include_once('database/posts.php');
 

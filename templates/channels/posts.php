@@ -1,7 +1,7 @@
 <?php
-  include_once(__DIR__.'/../database/posts.php');
-  include_once(__DIR__.'/../database/users.php');
-  $posts = getPosts("new");
+  include_once(__DIR__.'/../../database/posts.php');
+  include_once(__DIR__.'/../../database/users.php');
+  $posts = getPosts("new",$_GET['id']);
 ?>
 
 
@@ -10,12 +10,9 @@
     <li name="new">New</a></li>
     <li name="top">Top</a></li>
     <li name="controversial">Controversial</a></li>
-    <?php if(isset($_SESSION['username'])){ ?>
-    <li name="subscribed">Subscribed</a></li>
-    <?php } ?>
   </ul>
 </div>
-<section id="posts">
+<section id="channel-posts">
   <?php foreach($posts as $post) { ?>
     <article id="<?=$post['id']?>">
       <div class="voting">

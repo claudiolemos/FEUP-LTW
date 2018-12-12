@@ -1,5 +1,5 @@
-let postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted, #search-posts article .upvote, #search-posts article .upvoted');
-let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted, #search-posts article .downvote, #search-posts article .downvoted');
+let postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted, #search-posts article .upvote, #search-posts article .upvoted, #channel-posts article .upvote, #channel-posts article .upvoted');
+let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted, #search-posts article .downvote, #search-posts article .downvoted, #channel-posts article .downvote, #channel-posts article .downvoted');
 let username = document.querySelector('.dropdown-button') == null? null : document.querySelector('.dropdown-button').innerHTML;
 
 if(username != null){

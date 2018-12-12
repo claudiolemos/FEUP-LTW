@@ -155,7 +155,7 @@ div .register > button {
 }
 
 /* Center the image and position the close button */
-.imgcontainer {
+.close-button {
     text-align: center;
     margin: 24px 0 12px 0;
     position: relative;
@@ -252,21 +252,17 @@ button:hover {
   text-decoration-color: white;
 }
 
-#posts {
-  margin-left: 2em;
+#posts, #channel-posts {
+  margin: 0em 2em;
 }
 
-#sidebar {
-  margin-right: 2em;
-}
-
-#posts article, #search-posts article {
+#posts article, #search-posts article, #channel-posts article {
   border-bottom-style:solid;
   border-bottom-color: var(--light2);
   border-bottom-width: 1px;
 }
 
-#posts article:last-child, #search-posts article:last-child {
+#posts article:last-child, #search-posts article:last-child, #channel-posts article:last-child {
   border-bottom-style:none;
 }
 
@@ -303,7 +299,7 @@ article .votes {
   background-color: var(--red2);
 }
 
-#posts article .thumbnail, #search-posts article .thumbnail{
+#posts article .thumbnail, #search-posts article .thumbnail, #channel-posts article .thumbnail{
   margin-left: 1em;
   width:5em;
   height:5em;
@@ -314,7 +310,7 @@ article .votes {
   height:5em;
 }
 
-#posts article .thumbnail > img, #search-posts article .thumbnail > img, #search-users .user-block .thumbnail > img {
+#posts article .thumbnail > img, #search-posts article .thumbnail > img, #channel-posts article .thumbnail > img, #search-users .user-block .thumbnail > img {
   object-fit: cover;
   width:100%;
   height:100%;
@@ -341,16 +337,16 @@ article .votes {
 
 
 
-#posts article > header, #posts article > footer, #search-posts article > header, #search-posts article > footer  {
+#posts article > header, #posts article > footer, #search-posts article > header, #search-posts article > footer, #channel-posts article > header, #channel-posts article > footer  {
   margin-left: 2em;
   margin-top: 0;
 }
 
-#posts article .username:after, #search-posts article .username:after {
+#posts article .username:after, #search-posts article .username:after, #channel-posts article .username:after {
   content: ' @';
 }
 
-#posts article .comments:after, #search-posts article .comments:after {
+#posts article .comments:after, #search-posts article .comments:after, #channel-posts article .comments:after {
   content: ' comments';
 }
 
@@ -393,9 +389,8 @@ article .votes {
   content: url(/images/top.svg);
 }
 
-#sidebar{
-  padding: 0em 1em;
-  text-align: justify;
+#sort li[name=subscribed]:before{
+  content: url(/images/subscribed.svg);
 }
 
 body > header #channels {
@@ -424,6 +419,17 @@ body > header #channels li, #search-channels li {
   text-decoration: none;
   color: white;
 }
+
+#sidebar{
+  background-color: var(--light2);
+  padding: 0em 1em;
+  text-align: justify;
+  margin-right: 2em;
+  margin-bottom: 2em;
+  border-radius: 15px;
+}
+
+
 
 body > header #channels li:nth-child(1), #search-channels li:nth-child(n){
   background-color: var(--blue2);

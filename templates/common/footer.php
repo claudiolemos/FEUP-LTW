@@ -8,5 +8,6 @@
 <script src="../js/sort.js" defer></script>
 <script src="../js/register.js" defer></script>
 <script src="../js/login.js" defer></script>
+<script src="../js/subscribe.js" defer></script>
 
 </html>

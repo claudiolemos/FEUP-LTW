@@ -1,11 +1,27 @@
-let sort = document.querySelectorAll('#sort li');
-let postsNode = document.querySelector('#posts');
+let sort = document.querySelectorAll('#sort li[name=new], #sort li[name=top], #sort li[name=controversial]');
+let sortSubscriptions = document.querySelector('#sort li[name=subscribed]');
+let postsNode = document.querySelector('#posts, #channel-posts');
+let channelID = document.querySelector('#channel-id a') == null? null : document.querySelector('#channel-id a').innerHTML;
+
+let currentSort;
+let sortSubscribed = false;
 
 for(var i = 0; i < sort.length; i++) {
   sort[i].addEventListener('click', function(event) {
     event.preventDefault();
-    let request = createRequest("/../../actions/api_sort.php", {sort: this.getAttribute("name")});
+    currentSort = this.getAttribute("name");
+    let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: currentSort}) : createRequest("/../../actions/api_sort.php", {sort: currentSort, id: channelID});
     request.onreadystatechange=function(){updatePosts(request);}
+  });
+}
+
+if(sortSubscriptions != null){
+  sortSubscriptions.addEventListener('click', function(event) {
+    event.preventDefault();
+    sortSubscribed = !sortSubscribed;
+
+    sortSubscriptions.style.backgroundColor = sortSubscribed? "var(--red2)" : "transparent";
+
   });
 }
 
@@ -28,7 +44,7 @@ function createArticle(post){
   request.onreadystatechange=function(){
     if(request.readyState==4 && request.status==200){
       let response = JSON.parse(request.responseText);
-      article.innerHTML = `<div class="voting"><button class="${response['upvote']}"></button><span class="votes">${response['votes']}</span><button class="${response['downvote']}"></button></div><div class="thumbnail"><img src="${response['thumbnail']}"></div><header><p class="title">${response['title']}</p></header><footer><span class="date">${response['date']}</span><span class="username"> ${response['username']}</span><span class="channel"> ${response['channel']}</span><span class="comments"> ${response['comments']}</span></footer>`;
+      article.innerHTML = `<div class="voting"><button class="${response['upvote']}"></button><span class="votes">${response['votes']}</span><button class="${response['downvote']}"></button></div><div class="thumbnail"><img src="${response['thumbnail']}"></div><header><p class="title"><a href="/post.php/?id=${post['id']}">${response['title']}</a></p></header><footer><span class="date">${response['date']}</span><span class="username"><a href="/profile.php/?id=${response['username']}"> ${response['username']}</a></span><span class="channel"><a href="/channel.php/?id=${response['channel']}"> ${response['channel']}</a></span><span class="comments"> ${response['comments']}</span></footer>`;
       postsNode.append(article);
     }
   }
