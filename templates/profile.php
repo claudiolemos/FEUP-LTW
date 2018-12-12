@@ -8,7 +8,7 @@
   $karma = getUserKarma($_GET['id']);
   $cakeday = getUserCakeDay($_GET['id']);
 ?>
-
+<?php if(userExists($_GET['id'])) {?>
 <form id="sidebar">
   <h1><?php echo($_GET['id'])?></h1>
   <h3>Karma: <?php echo($karma)?> </h3>
@@ -64,3 +64,6 @@
     </article>
     <?php } ?>
 </section>
+<?php } else {?>
+  <h1>User doesn't exist!</h1>
+<?php } ?>

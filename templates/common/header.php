@@ -27,27 +27,79 @@
         </ul>
       </nav>
       <div id="signup">
-      <?php if(!isset($_SESSION['username'])) { ?>
-            <form method="post" action="actions/login.php">
-              <input type="text" name="username" placeholder="Username" required>
-              <input type="password" name="password" placeholder="Password" required>
-              <input type="submit" value="Login">
-            </form>
-            <a href="pages/register.php">Register</a>
-      <?php }
-          else{ ?>
-            <div class="dropdown">
-              <button class="dropbtn"><?=$_SESSION['username']?></button>
-              <!-- <div class="avatar">
-                  <img src="images\reddito.png">
-              </div> -->
-              <div class="dropdown-content">
-                <a href="profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
-                <a href="#">Settings</a>
-                <a href="actions/logout.php">Logout</a>
+        <?php if(!isset($_SESSION['username'])) { ?>
+          <div class="login">
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+          </div>
+          <div id="id01" class="modal">
+            <form method="post" class="modal-content animate" action="actions/login.php">
+              <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
               </div>
+              <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" name="username" placeholder="Username" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+              </div>
+            </form>
+          </div>
+          <script>
+          // Get the modal
+          var modal = document.getElementById('id01');
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+        </script>
+        <div class="register">
+          <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Register</button>
+        </div>
+        <div id="id02" class="modal">
+          <form method="post" class="modal-content animate" action="actions/register.php">
+            <div class="imgcontainer">
+              <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
-      <?php } ?>
+            <div class="container">
+              <label for="uname"><b>Username</b></label>
+              <input type="text" name="username" placeholder="Username" required>
+                <label for="email"><b>Email</b></label>
+                <input type="email" name="email" placeholder="Email" required>
+              <label for="psw"><b>Password</b></label>
+              <input type="password" name="password" placeholder="Password" required>
+              <label for="conf_psw"><b>Comfirm Password</b></label>
+              <input type="password" name="conf_psw" placeholder="Comfirm Password" required>
+              <button type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+        <script>
+        // Get the modal
+        var modal2 = document.getElementById('id02');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal2) {
+            modal.style.display = "none";
+          }
+        }
+      </script>
+      <?php }
+      else{ ?>
+        <div class="dropdown">
+          <button class="dropbtn"><?=$_SESSION['username']?></button>
+          <!-- <div class="avatar">
+          <img src="images\reddito.png">
+        </div> -->
+        <div class="dropdown-content">
+          <a href="profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
+          <a href="settingspage.php?id=<?=$_SESSION['username']?>">Settings</a>
+          <a href="actions/logout.php">Logout</a>
+        </div>
+      </div>
+    <?php } ?>
       </div>
     </header>
     <div id="sort">
