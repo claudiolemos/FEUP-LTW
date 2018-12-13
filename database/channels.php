@@ -122,4 +122,29 @@
     return $stmt->fetchAll();
   }
 
+  /**
+   * Selects a random channel
+   * @return string name of the random channel selected
+   */
+  function getRandomChannel(){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT name
+                          FROM Channels
+                          ORDER BY RANDOM()
+                          LIMIT 1');
+    $stmt->execute();
+    return $stmt->fetch()['name'];
+  }
+
+  /**
+   * Creates a new channel
+   * @param  string $name        name of the channel that is being created
+   * @param  string $description description of the channel that is being created
+   */
+  function createChannel($name, $description){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO Channels VALUES (NULL,?,?,?)');
+    $stmt->execute(array($name, $description, time()));
+  }
+
 ?>

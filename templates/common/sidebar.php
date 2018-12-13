@@ -10,16 +10,38 @@
   </form>
 </div>
 <aside id="sidebar">
-  <div id="subscription-list">
-    <h3>My Subscriptions</h3>
-    <?php if($channels != null){ ?>
-      <ul>
-        <?php foreach($channels as $channel) { ?>
-            <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
-        <?php } ?>
-      </ul>
-    <?php } else { ?>
-      <span>You haven't subscribed to a channel</span>
-    <?php } ?>
+  <?php if(isset($_SESSION['username'])){ ?>
+    <div id="subscription-list">
+      <h3>My Subscriptions</h3>
+      <?php if($channels != null){ ?>
+        <ul>
+          <?php foreach($channels as $channel) { ?>
+              <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
+          <?php } ?>
+        </ul>
+      <?php } else { ?>
+        <span>You haven't subscribed to a channel</span>
+      <?php } ?>
+    </div>
+    <div class="create-channel">
+      <button onclick="document.getElementById('create-channel-pop-up').style.display='block'" >Create Channel</button>
+    </div>
+    <div id="create-channel-pop-up" class="pop-up">
+      <form method="post" class="pop-up-content animate" action="/../actions/create_channel.php">
+        <div class="close-button">
+          <span onclick="document.getElementById('create-channel-pop-up').style.display='none'" class="close">&times;</span>
+        </div>
+        <div class="container">
+          <label><a>Name</a></label>
+          <input type="text" name="name" placeholder="Name" required>
+          <label><a>Description</a></label>
+          <input type="textarea" name="description" placeholder="Description" required>
+          <button type="submit">Create channel</button>
+        </div>
+      </form>
+    </div>
+  <?php } ?>
+  <div class="random-channel">
+    <button onclick="location.href='/channel.php/?id=<?=getRandomChannel()?>';">Random channel</button>
   </div>
 </aside>

@@ -23,7 +23,7 @@ if(form != null){
 
 for(let i = 0; i < loginInput.length; i++){
   if(loginInput[i] != null){
-    loginInput[i].addEventListener('keyup', function(event) {
+    loginInput[i].addEventListener('change', function(event) {
       let request = createRequest("/../../actions/api_login.php", {username: loginUsername.value, password: loginPassword.value});
 
       request.onreadystatechange=function(){

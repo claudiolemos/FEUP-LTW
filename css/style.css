@@ -240,12 +240,21 @@ button:hover {
 
 #search {
   align-self: center;
+  margin-right: 2em;
+}
+
+#search form{
+  display: flex;
+}
+
+#search form input[name=query]{
+  flex-grow: 20;
 }
 
 #search form > input{
   background-color: var(--light2);
   border-color: var(--light1);
-  border-radius: 3px;
+  border-radius: 15px;
   border-style: solid;
   border-width: 1px;
   padding: 7px;

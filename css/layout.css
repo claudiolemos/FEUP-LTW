@@ -12,7 +12,7 @@
 body {
   display: grid;
   grid-template-columns: [start] 4fr [middle] 1.25fr [end];
-  grid-template-rows: [start] 7em [nav sort search] auto [posts search-results sidebar] auto [footer] auto [end];
+  grid-template-rows: [start] 7em [nav sort search-results search] auto [posts sidebar] auto [footer] auto [end];
 }
 
 /* main layout */
@@ -148,13 +148,10 @@ body > header #channels, body > header #channel {
 
 .comment-body {
 
-  
+
 }
 
 #comment-info {
 
-  
+
 }
-
-
-

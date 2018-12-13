@@ -1,3 +1,7 @@
+<?php
+  $channel = getChannel($_GET['id']);
+?>
+
 <div id="search">
   <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
@@ -6,7 +10,10 @@
 </div>
 <aside id="sidebar">
   <div id="channel-id">
-      <a><?=$_GET['id']?></a>
+      <div class="name"><?=$channel['name']?></div>
+      <div class="description"><?=$channel['description']?></div>
+      <div class="subscribers"><?=getChannelSubscribers($channel['id'])?></div>
+      <div class="creation"><?=time_elapsed($channel['creation_day'])?></div>
   </div>
   <?php if(isset($_SESSION['username'])){ ?>
     <div class="subscription">
