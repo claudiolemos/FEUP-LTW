@@ -49,7 +49,7 @@
     //get channelID from channelName
     $channelID = getChannelID($channelName);
 
-    if($channelID!= -1){. //if channel exists
+    if($channelID!= -1){ //if channel exists
       $channelHTML = '<a href="/channel.php/?id='.$channelID.'">@'.$channelName.'</a>'; 
 
       //replace channelName with link to channel page in content

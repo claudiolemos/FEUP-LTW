@@ -77,7 +77,13 @@
     $stmt = $db->prepare('SELECT id FROM Users WHERE username = ?');
     $stmt->execute(array($username));
 
-    return $stmt->fetch()['id'];
+    
+    $user_id = $stmt->fetch()['id'];
+    if($user_id != null)
+      return $user_id;
+    else
+      return -1;
+
 
 
   }

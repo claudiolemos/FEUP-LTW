@@ -20,7 +20,12 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT id FROM Channels WHERE name = ?');
     $stmt->execute(array($channel));
-    return $stmt->fetch()['id'];
+
+    $channel_id = $stmt->fetch()['id'];
+    if($channel_id != null)
+      return $channel_id;
+    else
+      return -1;
   }
 
   function addChannel($channel_name){
