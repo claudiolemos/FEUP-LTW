@@ -106,10 +106,10 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                             let date = JSON.parse(this.responseText)["date"];
 
                             let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
-                                + "<div class="+"comment-voting"+">"
-                                + "<button class="+"upvote"+"></button>"
-                                + "<span class="+"votes"+">1</span>" 
-                                + "<button class="+"downvote"+"></button>"
+                                + "<div class='voting comment-voting'>"
+                                + "<button class='upvoted'></button>"
+                                + "<span class='votes comment-votes'>"+'1'+"</span>" 
+                                + "<button class="+'downvote'+"></button>"
                                 + "</div>"
                                 + "<span id="+"comment-info"+">"+ user_id + " - " + date +"</span>"
                                 + "<div class="+'comment-body'+">"+ comment + "</div>"
@@ -191,6 +191,33 @@ $(document.body).on('click', '.replyBtn' ,function(e){
         $('#replyDiv-'+this.value).show(300);                 
         
     }        
+});
+
+
+
+$(document.body).on('click', '.comment-trashcan' ,function(e){
+
+    var commentID = this.id.replace("user-delete-","");
+
+    
+    let request = new XMLHttpRequest();
+    request.open("post", "/../actions/api_delete_comment.php", true); 
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    request.send(encodeForAjax({comment_id: commentID}));
+
+    request.onreadystatechange = function () {
+
+        if(request.readyState === 4 && request.status === 200) {
+            $('#user-comment-'+commentID+'>.comment-body').replaceWith("<div class="+'comment-body'+">[DELETED]</div>");  
+        }
+
+
+    };
+
+
+
+         
 });
 
 

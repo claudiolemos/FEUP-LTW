@@ -78,6 +78,7 @@
   cursor:pointer;
 }
 
+
 .replyBtn{
   height: 20px;
   border-radius: 3px 3px 3px 3px;
@@ -89,6 +90,12 @@
   font-size: 0.7em;
   line-height: 1.4em;
   cursor:pointer;
- 
-
 }
+
+
+.comment-trashcan{
+  width: 16px;
+  height: 16px;
+  cursor:pointer;
+}
+

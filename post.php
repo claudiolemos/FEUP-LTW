@@ -1,14 +1,24 @@
 <?php
   include_once('includes/init.php');
+  include_once('database/connection.php');
   include_once('database/comments.php');
   include_once('database/posts.php');
+  include_once('database/users.php');
+  include_once('database/channels.php');
 
   if (!isset($_GET['id']))
     die("Wrong post id!");
 
 
   $post = getPostById($_GET['id']);
+
+
+  if(isset($_SESSION['username']))
+    $uID = getUserID($_SESSION['username']);
+
+
   $parent_comments = getParentComments($_GET['id']);
+
 
 
   include('templates/common/header.php');

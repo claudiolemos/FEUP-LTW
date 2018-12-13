@@ -20,7 +20,12 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT id FROM Channels WHERE name = ?');
     $stmt->execute(array($channel));
-    return $stmt->fetch()['id'];
+
+    $channel_id = $stmt->fetch()['id'];
+    if($channel_id != null)
+      return $channel_id;
+    else
+      return -1;
   }
 
   function addChannel($channel_name){
@@ -109,6 +114,7 @@
   }
 
   /**
+
    * Gets a list of a user's subscribed channels
    * @param  string $username user's username
    * @return array
@@ -146,5 +152,27 @@
     $stmt = $db->prepare('INSERT INTO Channels VALUES (NULL,?,?,?)');
     $stmt->execute(array($name, $description, time()));
   }
+
+
+   * Gets the name of a channel
+   * @param  int $channel channel's id
+   * @return string channel's name. -1 if does not exist
+   */
+  function getChannelName($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT name FROM Channels WHERE id = ?');
+    $stmt->execute(array($id));
+
+
+    $channel_id = $stmt->fetch()['name'];
+
+    if($channel_id != null)
+      return $channel_id;
+    else
+      return -1;
+
+  }
+
+
 
 ?>
