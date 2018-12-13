@@ -3,24 +3,28 @@
 <script src="../../js/post.js"></script>
 
 <section id="posts">
-  <article class="link">
-        <div class="voting">
-          <button class="upvote"></button>
-          <span class="votes"><?=$post['votes']?></span>
-          <button class="downvote"></button>
-        </div>
-        <img src="https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg" alt="Reddito logo">
-        <header>
-          <p class="title"><?=$post['title']?></p>
-          <p class="preview"><?=$post['content']?></p>
-        </header>
-        <footer>
-          <span class="date"><?=$post['date']?></span>
-          <span class="username"><?=$post['username']?></span>
-          <span class="channel"><?=$post['channel']?></span>
-          <span class="comments">2</span>
-        </footer>
-  </article>
+
+  <article id="<?=$post['id']?>">
+      <div class="voting">
+        <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)?>"></button>
+        <span class="votes"><?=$post['votes']?></span>
+        <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], -1)?>"></button>
+      </div>
+      <div class="thumbnail">
+        <img src="<?=getPostThumbnail($post['id'])?>">
+      </div>
+      <header>
+        <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a></p>
+      </header>
+      <footer>
+        <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
+        <span class="username"><?=getUserName($post['user_id'])?></span>
+        <span class="channel"><?=getChannelName($post['channel_id'])?></span>
+        <span class="comments"><?=getNoComments($post['id'])?></span>
+      </footer>
+    </article>
+
+
   <div class="write-comment-div" id="write-top-level-comment-div">
     <button type="submit" class="write-comment" value="<?= $post['id'] ?>" id="""> Write Comment... </button>
   </div>

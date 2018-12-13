@@ -9,7 +9,7 @@
 
   //check for user mentions
   //check if comment mentions a user. - regex: \/u\/[^\s]+   ex: /u/ze 
-  $regexUsers = '/\/u\/[^\s]+/';
+  $regexUsers = '/#[^\s]+/';
   $regexChannels = '/@[^\s]+/';
   $result = "";
 
@@ -23,16 +23,22 @@
   //search for usernames in content
   foreach ($output_array_users[0] as $users) {
     $username = "";
-    $username = str_replace("/u/", "", $users);
+    $username = str_replace("#", "", $users);
 
     //get userID from username
     $userID = getUserID($username);
 
-    $userHTML = 'link_para_user_' . $userID; 
+    if($userID!=-1){//if user exists
 
-    //replace username with link to users page in content
-    $search = '/u/'.$username;
-    $content = str_replace($search, $userHTML, $content);
+      $userHTML = '<a href="/profile.php/?id='.$userID.'">#'.$username.'</a>'; 
+
+      //replace username with link to users page in content
+      $search = '#'.$username;
+      $content = str_replace($search, $userHTML, $content);
+
+    }
+
+    
   }
 
   //search for channels in content
@@ -43,11 +49,16 @@
     //get channelID from channelName
     $channelID = getChannelID($channelName);
 
-    $channelHTML = 'link_para_channel_' . $channelID; 
+    if($channelID!= -1){. //if channel exists
+      $channelHTML = '<a href="/channel.php/?id='.$channelID.'">@'.$channelName.'</a>'; 
 
-    //replace channelName with link to channel page in content
-    $search = '@'.$channelName;
-    $content = str_replace($search, $channelHTML, $content);
+      //replace channelName with link to channel page in content
+      $search = '@'.$channelName;
+      $content = str_replace($search, $channelHTML, $content);
+
+    }
+
+    
 
   }
 

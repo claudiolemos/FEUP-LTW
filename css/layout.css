@@ -138,16 +138,13 @@ body > header #channels, body > header #channel {
   position: relative;
   float: left;
   width: 10px;
-  height: 50px;
+  height: 82px;
   padding-right: 20px;
 }
-.votes{
-  padding-left: 5px;
 
-}
 
-.comment-body {
-
+.comment-votes {
+  padding-left: 10px;
   
 }
 

@@ -108,6 +108,8 @@
         $stmt->execute(array($parent_id));
         $childComments = $stmt->fetchAll();
 
+        $uID = getUserID($_SESSION['username']);
+
         //if it has children
         if (!empty($childComments))
         {
@@ -116,12 +118,16 @@
               //echo "<li>", $comment['content'], getChildComments($comment['id']), "</li>\n";
 
               echo "<div class=".'user-comment'." id=".'user-comment-'. $comment['id'] .">";
-                echo "<div class=".'comment-voting'.">";
-                  echo "<button class=".'upvote'."></button>";
-                  echo "<span class=".'votes'.">". $comment['votes'] ."</span>";
-                  echo "<button class=".'downvote'."></button>";
+                echo "<div class='voting comment-voting'>";
+                  echo "<button class=".getCommentVoteButtonClass($uID, $comment['id'], 1)."></button>";
+                  echo "<span class='votes comment-votes'>".$comment['votes']."</span>";
+                  echo "<button class=".getCommentVoteButtonClass($uID, $comment['id'], -1)."></button>";
                 echo "</div>";
-                echo "<span id=".'comment-info'.">". $comment['user_id'] . " - " . $comment['date'] ."</span>";
+                echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']);
+                if ($uID == $comment['user_id']) {
+                  echo " - <img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
+                }
+                echo "</span>";
                 echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
                 echo '<div class="write-comment-div" id="write-comment-div-'. $comment['id'] .'">';
                 echo "<button type=".'submit'." class=".'replyBtn'." value=". $comment['post_id'] . "-" .$comment['id']. "-" . getParentID($comment['id']) . ">". 'Reply' . "</button>";
@@ -132,6 +138,13 @@
               echo "</div>";
 
             }
+
+            
+        
+        
+        
+      
+
 
             //echo "</ul>\n";
 
@@ -160,10 +173,77 @@
 
       $stmt->execute(array($content, $user_id, $post_id, $date, $parent_id));
 
-      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id, "date" => $date);
+      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id, "date" => gmdate("Y-m-d",$date));
 
       return $postID_commentID_parentID;
 
 
     }
+
+
+    /**
+   * Gets the correct class for a comment vote button
+   * @param  int    $user_id id of the user
+   * @param  int    $comment_id id of the comment
+   * @param  int    $value button's vote value (1 or -1)
+   * @return string button class (upvote or downvote - if not voted | upvoted or downvoted - if voted)
+   */
+  function getCommentVoteButtonClass($user_id, $comment_id, $value){
+    if($user_id == null)
+      return $value == 1? "upvote" : "downvote";
+
+    if(hasVotedComment($user_id, $comment_id) == $value)
+      return $value == 1? "upvoted" : "downvoted";
+    else
+      return $value == 1? "upvote" : "downvote";
+  }
+
+  /**
+   * Gets the value of a vote, if a user has voted on a comment
+   * @param  int $user_id id of the user
+   * @param  int $comment_id id of the comment
+   * @return int value of the vote
+   */
+  function hasVotedComment($user_id, $comment_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT value FROM VoteOnComment WHERE user_id = ? AND comment_id = ?');
+    $stmt->execute(array($user_id, $comment_id));
+    return $stmt->fetch()['value'];
+  }
+
+
+  /**
+   * Adds a vote to a comment
+   * @param int $user_id id of the user that is adding a vote
+   * @param int $comment_id id of the comment that the vote is being added to
+   * @param int $value   value of the vote (1 or -1)
+   */
+  function addCommentVote($user_id, $comment_id, $value){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO VoteOnComment VALUES (?,?,?)');
+    $stmt->execute(array($user_id, $comment_id, $value));
+  }
+
+  /**
+   * Removes a vote from a comment
+   * @param  int $user_id id of the user that is removing a vote
+   * @param  int $comment_id id of the comment that the vote is being removed from
+   */
+  function removeCommentVote($user_id, $comment_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('DELETE FROM VoteOnComment WHERE user_id = ? AND comment_id = ?');
+    $stmt->execute(array($user_id, $comment_id));
+  }
+
+  /**
+   * Removes a comment (comment stays in DB and website, text is changed to [DELETED])
+   * @param  int $comment_id id of the comment that is being removed
+   */
+  function deleteComment($comment_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Comments SET content = "[DELETED]" WHERE id = ?');
+    $stmt->execute(array($comment_id));
+  }
+
+
 ?>

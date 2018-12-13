@@ -108,4 +108,25 @@
     return $stmt->fetchAll();
   }
 
+  /**
+   * Gets the name of a channel
+   * @param  int $channel channel's id
+   * @return string channel's name. -1 if does not exist
+   */
+  function getChannelName($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT name FROM Channels WHERE id = ?');
+    $stmt->execute(array($id));
+
+
+    $channel_id = $stmt->fetch()['name'];
+
+    if($channel_id != null)
+      return $channel_id;
+    else
+      return -1;
+
+  }
+
+
 ?>
