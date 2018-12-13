@@ -153,7 +153,7 @@
     $stmt->execute(array($name, $description, time()));
   }
 
-
+  /**
    * Gets the name of a channel
    * @param  int $channel channel's id
    * @return string channel's name. -1 if does not exist
