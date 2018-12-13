@@ -114,6 +114,46 @@
   }
 
   /**
+
+   * Gets a list of a user's subscribed channels
+   * @param  string $username user's username
+   * @return array
+   */
+  function getSubscriptions($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Channels.name
+                          FROM Channels, Users, Subscriptions
+                          WHERE Channels.id = Subscriptions.channel_id AND Subscriptions.user_id = Users.id AND Users.username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetchAll();
+  }
+
+  /**
+   * Selects a random channel
+   * @return string name of the random channel selected
+   */
+  function getRandomChannel(){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT name
+                          FROM Channels
+                          ORDER BY RANDOM()
+                          LIMIT 1');
+    $stmt->execute();
+    return $stmt->fetch()['name'];
+  }
+
+  /**
+   * Creates a new channel
+   * @param  string $name        name of the channel that is being created
+   * @param  string $description description of the channel that is being created
+   */
+  function createChannel($name, $description){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO Channels VALUES (NULL,?,?,?)');
+    $stmt->execute(array($name, $description, time()));
+  }
+
+
    * Gets the name of a channel
    * @param  int $channel channel's id
    * @return string channel's name. -1 if does not exist
@@ -132,6 +172,7 @@
       return -1;
 
   }
+
 
 
 ?>

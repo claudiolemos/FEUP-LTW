@@ -1,5 +1,6 @@
 <?php
   include_once('includes/init.php');
+  include_once('utils.php');
   include_once('database/posts.php');
   include_once('database/channels.php');
 

@@ -4,27 +4,27 @@ let registerPassword = document.querySelector('#register-pop-up .container input
 let confirmPassword = document.querySelector('#register-pop-up .container input[name=confirm]');
 
 if(registerUsername != null){
-  registerUsername.addEventListener('keyup', function() {
+  registerUsername.addEventListener('change', function() {
     let request = createRequest("/../../actions/api_register.php", {type: "username", value: registerUsername.value});
-    request.onreadystatechange=function(){updateIcons(request, registerUsername, "username");};
+    request.onreadystatechange=function(){updateLoginIcons(request, registerUsername, "username");};
   });
 }
 
 if(registerEmail != null){
-  registerEmail.addEventListener('keyup', function() {
+  registerEmail.addEventListener('change', function() {
     let request = createRequest("/../../actions/api_register.php", {type: "email", value: registerEmail.value});
-    request.onreadystatechange=function(){updateIcons(request, registerEmail, "email");};
+    request.onreadystatechange=function(){updateLoginIcons(request, registerEmail, "email");};
   });
 }
 
 if(registerPassword != null){
-  registerPassword.addEventListener('keyup', function() {
+  registerPassword.addEventListener('change', function() {
     updatePasswordIcons();
   });
 }
 
 if(confirmPassword != null){
-  confirmPassword.addEventListener('keyup', function() {
+  confirmPassword.addEventListener('change', function() {
     updatePasswordIcons();
   });
 }
@@ -47,7 +47,7 @@ function updatePasswordIcons(){
   }
 }
 
-function updateIcons(request, input, string){
+function updateLoginIcons(request, input, string){
   if (request.readyState==4 && request.status==200 && input.value != ""){
     if(JSON.parse(request.responseText)){
       input.style.backgroundImage = "url('/../../images/warning.svg')";
