@@ -1,6 +1,6 @@
 <?php
   include_once(__DIR__.'/../../database/channels.php');
-  $channels = getSubscriptions($_SESSION['username']);
+  $subscribedChannels = getSubscriptions($_SESSION['username']);
 ?>
 
 <div id="search">
@@ -13,9 +13,9 @@
   <?php if(isset($_SESSION['username'])){ ?>
     <div id="subscription-list">
       <h3>My Subscriptions</h3>
-      <?php if($channels != null){ ?>
+      <?php if($subscribedChannels != null){ ?>
         <ul>
-          <?php foreach($channels as $channel) { ?>
+          <?php foreach($subscribedChannels as $channel) { ?>
               <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
           <?php } ?>
         </ul>

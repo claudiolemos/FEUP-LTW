@@ -7,9 +7,9 @@
   if (!isset($_GET['query']))
     die("No search input!");
 
-  $posts = searchPosts($_GET['query']);
-  $users = searchUsers($_GET['query']);
-  $channels = searchChannels($_GET['query']);
+  $searchPosts = searchPosts($_GET['query']);
+  $searchUsers = searchUsers($_GET['query']);
+  $searchChannels = searchChannels($_GET['query']);
 
   include('templates/common/header.php');
   include('templates/common/sidebar.php');

@@ -12,7 +12,6 @@ if(form != null){
       if (request.readyState==4 && request.status==200){
         switch (JSON.parse(request.responseText)){
           case "valid":
-            console.log(1);
             location.reload();
             break;
         }
@@ -26,21 +25,26 @@ for(let i = 0; i < loginInput.length; i++){
     loginInput[i].addEventListener('change', function(event) {
       let request = createRequest("/../../actions/api_login.php", {username: loginUsername.value, password: loginPassword.value});
 
-      request.onreadystatechange=function(){
-        if (request.readyState==4 && request.status==200){
-          switch (JSON.parse(request.responseText)) {
-            case "valid":
-              loginUsername.setCustomValidity("");
-              loginPassword.setCustomValidity("");
-              break;
-            case "username":
-              loginUsername.setCustomValidity("Username doesn't exist");
-              loginPassword.setCustomValidity("");
-              break;
-            case "password":
-              loginUsername.setCustomValidity("");
-              loginPassword.setCustomValidity("Incorrect password");
-              break;
+      loginUsername.setCustomValidity("");
+      loginPassword.setCustomValidity("");
+
+      if(loginUsername.value != "" && loginPassword.value != ""){
+        request.onreadystatechange=function(){
+          if (request.readyState==4 && request.status==200){
+            switch (JSON.parse(request.responseText)) {
+              case "valid":
+                loginUsername.setCustomValidity("");
+                loginPassword.setCustomValidity("");
+                break;
+              case "username":
+                loginUsername.setCustomValidity("Username doesn't exist");
+                loginPassword.setCustomValidity("");
+                break;
+              case "password":
+                loginUsername.setCustomValidity("");
+                loginPassword.setCustomValidity("Incorrect password");
+                break;
+            }
           }
         }
       }

@@ -7,8 +7,8 @@
   <h1>Search Results</h1>
   <section id="search-posts">
     <h2>Posts</h2>
-    <?php if($posts != null) { ?>
-      <?php foreach($posts as $post) { ?>
+    <?php if($searchPosts != null) { ?>
+      <?php foreach($searchPosts as $post) { ?>
         <article id="<?=$post['id']?>">
           <div class="voting">
             <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)?>"></button>
@@ -36,9 +36,9 @@
 
   <section id="search-users">
     <h2>Users</h2>
-    <?php if($users != null) { ?>
+    <?php if($searchUsers != null) { ?>
       <div class="blocks">
-        <?php foreach($users as $user) { ?>
+        <?php foreach($searchUsers as $user) { ?>
           <a href="/profile.php/?id=<?=$user['username']?>">
             <div class="user-block">
               <div class="thumbnail">
@@ -56,9 +56,9 @@
 
   <section id="search-channels">
     <h2>Channels</h2>
-    <?php if($channels != null) { ?>
+    <?php if($searchChannels != null) { ?>
       <ul>
-      <?php foreach($channels as $channel) { ?>
+      <?php foreach($searchChannels as $channel) { ?>
         <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
       <?php } ?>
       </ul>
