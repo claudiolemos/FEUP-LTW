@@ -20,8 +20,8 @@
 <body>
   <header>
     <div id="logo">
-      <img src="/images/reddit.png" alt="Reddit logo" style="width:75px; height:75px;">
-      <h1><a href="/index.php">reddit</a></h1>
+      <a href="/"><img src="/images/reddit.png" alt="Reddit logo" style="width:75px; height:75px;"></a>
+      <h1><a href="/">reddit</a></h1>
     </div>
     <nav id="channels">
       <ul>

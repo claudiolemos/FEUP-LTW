@@ -35,6 +35,14 @@ function updatePosts(request){
 
     for(let i = 0; i < posts.length; i++)
       createArticle(posts[i], i);
+
+    // postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted, #search-posts article .upvote, #search-posts article .upvoted, #channel-posts article .upvote, #channel-posts article .upvoted');
+    // postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted, #search-posts article .downvote, #search-posts article .downvoted, #channel-posts article .downvote, #channel-posts article .downvoted');
+
+    // if(username != null)
+    //   addVotingListeners(postUpvote, postDownvote);
+    // else
+    //   addVotingOnClick(postUpvote, postDownvote);
   }
 }
 

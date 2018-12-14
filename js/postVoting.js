@@ -2,9 +2,14 @@ let postUpvote = document.querySelectorAll('#posts article .upvote, #posts artic
 let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted, #search-posts article .downvote, #search-posts article .downvoted, #channel-posts article .downvote, #channel-posts article .downvoted');
 let username = document.querySelector('.dropdown-button') == null? null : document.querySelector('.dropdown-button').innerHTML;
 
-if(username != null){
-  for(var i = 0; i < postUpvote.length; i++) {
-    postUpvote[i].addEventListener('click', function(event) {
+if(username != null)
+  addVotingListeners(postUpvote, postDownvote);
+else
+  addVotingOnClick(postUpvote, postDownvote);
+
+function addVotingListeners(upvoteButtons, downvoteButtons) {
+  for(var i = 0; i < upvoteButtons.length; i++) {
+    upvoteButtons[i].addEventListener('click', function(event) {
       event.preventDefault();
       let post_id = this.parentNode.parentNode.id;
 
@@ -34,8 +39,8 @@ if(username != null){
     })
   }
 
-  for(var i = 0; i < postDownvote.length; i++) {
-    postDownvote[i].addEventListener('click', function(event) {
+  for(var i = 0; i < downvoteButtons.length; i++) {
+    downvoteButtons[i].addEventListener('click', function(event) {
       event.preventDefault();
       let post_id = this.parentNode.parentNode.id;
 
@@ -65,11 +70,12 @@ if(username != null){
     })
   }
 }
-else{
-  for(var i = 0; i < postUpvote.length; i++)
-    postUpvote[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
+
+function addVotingOnClick(upvoteButtons, downvoteButtons) {
+  for(var i = 0; i < upvoteButtons.length; i++)
+    upvoteButtons[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
 
 
-  for(var i = 0; i < postDownvote.length; i++)
-    postDownvote[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
+  for(var i = 0; i < downvoteButtons.length; i++)
+    downvoteButtons[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
 }
