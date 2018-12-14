@@ -28,10 +28,6 @@
       return -1;
   }
 
-  function addChannel($channel_name){
-
-  }
-
   /**
    * Gets the number of subscribers of one channel
    * @param  int $id id of the channel
