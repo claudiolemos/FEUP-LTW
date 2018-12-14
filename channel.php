@@ -4,17 +4,14 @@
   include_once('database/posts.php');
   include_once('database/channels.php');
 
-
   include('templates/common/header.php');
 
-  if(isset($_GET['id'])){
+  if(getChannelID($_GET['id']) != -1){
     include('templates/channels/sidebar.php');
     include('templates/channels/posts.php');
+    include('templates/common/footer.php');
   }
-  else if(!isset($_GET['id'])){
-    include('templates/404/404.php');
-
+  else{
+    include('templates/404/channels.php');
   }
-
-  include('templates/common/footer.php');
 ?>

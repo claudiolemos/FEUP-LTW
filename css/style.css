@@ -463,3 +463,10 @@ body > header #channels li:nth-child(5), #search-channels li:nth-child(5n){
 #search-results{
   margin-left: 2em;
 }
+
+#error-block{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2.5em auto 2.5em;
+}

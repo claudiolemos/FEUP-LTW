@@ -166,9 +166,19 @@
       return $channel_id;
     else
       return -1;
-
   }
 
+  /**
+   * Gets channel where the post belongs
+   * @param  int $post_id id of the post
+   * @return array channel where the post belongs
+   */
+  function getChannelFromPost($post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Channels.name, Channels.creation_day, Channels.description, Channels.id FROM Channels, Posts WHERE Posts.channel_id = Channels.id AND Posts.id = ?');
+    $stmt->execute(array($post_id));
+    return $stmt->fetch();
+  }
 
 
 ?>
