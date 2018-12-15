@@ -16,7 +16,7 @@ currentPassword.addEventListener('change', function(event) {
           console.log("Valid!");
           break;
         case "password":
-          console.log("Incorrect Password!");
+          // currentPassword.setCustomValidity("Incorrect password");
           break;
       }
     }
@@ -33,7 +33,7 @@ currentEmail.addEventListener('change', function(event) {
           console.log("Valid!");
           break;
         case "email":
-          console.log("Incorrect Email!");
+          console.log("Invalid!");
           break;
       }
     }

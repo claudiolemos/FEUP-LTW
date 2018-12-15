@@ -7,7 +7,8 @@ INSERT INTO Users VALUES (
   "duartefaria97@gmail.com",
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", -- sha256 encryption of 12345
   "2018-08-03",
-  0
+  0,
+  "../images/profile/default.jpg"
 );
 
 INSERT INTO Users VALUES (
@@ -17,7 +18,8 @@ INSERT INTO Users VALUES (
   "claudio@gmail.com",
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", -- sha256 encryption of 12345
   "2018-09-25",
-  0
+  0,
+  "../images/profile/default.jpg"
 );
 
 INSERT INTO Users VALUES (
@@ -27,7 +29,8 @@ INSERT INTO Users VALUES (
   "ze@gmail.com",
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",  -- sha256 encryption of 12345
   "2018-10-03",
-  0
+  0,
+  "../images/profile/default.jpg"
 );
 
 -- Channels:

@@ -83,8 +83,22 @@
 
   function updateUserEmail($username,  $email){
     $db = Database::instance()->db();
-    $hash = hash('sha256', $password);
     $stmt = $db->prepare('UPDATE Users SET email = ? where username = ?');
     $stmt->execute(array($email, $username));
   }
+
+  function updateAvatar($username,  $avatar){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Users SET avatar = ? where username = ?');
+    $stmt->execute(array($avatar, $username));
+  }
+
+  function getAvatar($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT avatar FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetch()['avatar'];
+  }
+
+
 ?>
