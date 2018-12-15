@@ -111,7 +111,9 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                                 + "<span class='votes comment-votes'>"+'1'+"</span>" 
                                 + "<button class="+'downvote'+"></button>"
                                 + "</div>"
-                                + "<span id="+"comment-info"+">"+ user_profile + " - " + date +"</span>"
+                                + "<span id="+"comment-info"+">"+ user_profile + " - " + date + " - "
+                                + "<img id='user-delete-"+newID+"' class='comment-trashcan' src='/images/garbage.png'>"
+                                +  "</span>"
                                 + "<div class="+'comment-body'+">"+ comment + "</div>"
                                 + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
                                 + "<button type="+'submit'+" class="+'replyBtn'+" value="+ post_id +"-"+ newID +"-"+ parent_id +">"+ 'Reply' + "</button>"
