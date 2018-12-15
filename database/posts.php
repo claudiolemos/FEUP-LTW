@@ -259,4 +259,16 @@
     $stmt->execute(array($title, $link, time(), $user_id, $channel_id));
     return $db->lastInsertId();
   }
+
+
+  /**
+   * Removes a post (post stays in DB and website, text is changed to [DELETED])
+   * @param  int $post_id id of the post that is being removed
+   */
+  function deletePost($post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Posts SET title = "[DELETED]" WHERE id = ?');
+    $stmt->execute(array($post_id));
+  }
+
 ?>

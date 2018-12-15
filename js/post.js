@@ -221,4 +221,30 @@ $(document.body).on('click', '.comment-trashcan' ,function(e){
 });
 
 
+$(document.body).on('click', '.post-trashcan' ,function(e){
+
+    var postID = this.id.replace("post-delete-","");
+
+    
+    let request = new XMLHttpRequest();
+    request.open("post", "/../actions/api_delete_post.php", true); 
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    request.send(encodeForAjax({post_id: postID}));
+
+    request.onreadystatechange = function () {
+
+        if(request.readyState === 4 && request.status === 200) {
+            $(".title>a").replaceWith('<a href="/post.php/?id="'+postID+'>[DELETED]</a>');
+        }
+
+
+    };
+
+
+
+         
+});
+
+
 

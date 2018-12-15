@@ -14,7 +14,11 @@
         <img src="<?=getPostThumbnail($post['id'])?>">
       </div>
       <header>
-        <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a></p>
+        <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a>
+        <?php if($post['user_id'] == $uID) : ?>
+          <img id='post-delete-<?=$post['id']?>' class='post-trashcan' src='/images/garbage.png'">
+        <?php endif; ?>
+        </p>
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
