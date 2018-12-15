@@ -45,6 +45,7 @@
               <input type="text" name="username" placeholder="Username" required>
               <label><a>Password</a></label>
               <input type="password" name="password" placeholder="Password" required>
+              <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
               <button type="submit">Login</button>
               <button name="register" onclick="document.getElementById('login-pop-up').style.display='none', document.getElementById('register-pop-up').style.display='block'" type="button">Register</button>
             </div>
@@ -64,6 +65,7 @@
               <input type="password" name="password" placeholder="Password" required>
               <label><a>Confirm Password</a></label>
               <input type="password" name="confirm" placeholder="Password" required>
+              <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
               <button type="submit">Register</button>
             </div>
           </form>

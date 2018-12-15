@@ -4,6 +4,8 @@
 
   $name = strtolower(trim(strip_tags($_POST['name'])));
 
+  $name = htmlspecialchars($name);
+
   if(getChannel($name) != null)
     echo json_encode("invalid");
   else

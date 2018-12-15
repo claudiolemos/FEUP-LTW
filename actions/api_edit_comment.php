@@ -7,6 +7,8 @@
   $comment_id = $_POST['comment_id'];
   $comment = $_POST['comment'];
 
+  $comment = htmlspecialchars($comment);
+
   if(isset($username)){
     editComment($comment_id, $comment);
   }
