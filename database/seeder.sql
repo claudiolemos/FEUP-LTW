@@ -164,21 +164,17 @@ INSERT INTO Subscriptions VALUES (3,5); -- claudio is subscribed to news
 
 -- VoteOnPost:
 
-INSERT INTO VoteOnPost VALUES (1,1,1);  -- duarte upvoted post 1 by duarte
 INSERT INTO VoteOnPost VALUES (1,2,1);  -- duarte upvoted post 2 by claudio
 INSERT INTO VoteOnPost VALUES (1,3,-1); -- duarte downvoted post 3 by ze
 INSERT INTO VoteOnPost VALUES (2,1,-1); -- claudio downvoted post 1 by duarte
-INSERT INTO VoteOnPost VALUES (2,2,1);  -- claudio upvoted post 2 by claudio
 INSERT INTO VoteOnPost VALUES (2,3,-1); -- claudio downvoted post 3 by ze
 INSERT INTO VoteOnPost VALUES (3,1,1);  -- ze upvoted post 1 by duarte
 INSERT INTO VoteOnPost VALUES (3,2,1);  -- ze upvoted post 2 by claudio
-INSERT INTO VoteOnPost VALUES (3,3,1);  -- ze upvoted post 3 by ze
-INSERT INTO VoteOnPost VALUES (3,4,1);  -- ze upvoted post 4 by ze
 
 
 -- VoteOnComment:
 
-INSERT INTO VoteOnComment VALUES (2,1,1);  -- claudio upvoted comment 1 by claudio
-INSERT INTO VoteOnComment VALUES (3,2,1);  -- ze upvoted comment 2 by ze
-INSERT INTO VoteOnComment VALUES (1,3,1);  -- duarte upvoted comment 3 by duarte
-INSERT INTO VoteOnComment VALUES (3,4,1);  -- ze upvoted comment 4 by ze
+INSERT INTO VoteOnComment VALUES (3,1,1);  -- ze upvoted comment 1 by claudio
+INSERT INTO VoteOnComment VALUES (2,2,1);  -- claudio upvoted comment 2 by ze
+INSERT INTO VoteOnComment VALUES (3,3,1);  -- ze upvoted comment 3 by duarte
+INSERT INTO VoteOnComment VALUES (1,4,1);  -- duarte upvoted comment 4 by ze

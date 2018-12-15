@@ -2,6 +2,8 @@ DROP TRIGGER IF EXISTS InsertVoteOnPost;
 DROP TRIGGER IF EXISTS RemoveVoteOnPost;
 DROP TRIGGER IF EXISTS InsertVoteOnComment;
 DROP TRIGGER IF EXISTS RemoveVoteOnComment;
+DROP TRIGGER IF EXISTS VoteOwnPost;
+DROP TRIGGER IF EXISTS VoteOwnComment;
 
 DROP TABLE IF EXISTS Subscriptions;
 DROP TABLE IF EXISTS VoteOnPost;
@@ -107,4 +109,16 @@ AFTER DELETE ON VoteOnComment
 BEGIN
 	UPDATE Comments SET votes = votes - OLD.value WHERE Comments.id = OLD.comment_id;
 	UPDATE Users SET karma = karma - OLD.value WHERE Users.id = (SELECT user_id FROM Comments WHERE Comments.id = OLD.comment_id);
+END;
+
+CREATE TRIGGER VoteOwnPost
+AFTER INSERT ON Posts
+BEGIN
+	INSERT INTO VoteOnPost VALUES (NEW.user_id,NEW.id,1);
+END;
+
+CREATE TRIGGER VoteOwnComment
+AFTER INSERT ON Comments
+BEGIN
+	INSERT INTO VoteOnComment VALUES (NEW.user_id,NEW.id,1);
 END;
