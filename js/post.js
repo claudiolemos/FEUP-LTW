@@ -258,6 +258,8 @@ $(document.body).on('click', '.comment-edit' ,function(e){
     
         $('#comment-input-'+commentID).text(commentText);
 
+        $('#comment-input-'+commentID).css('width','70%');
+
 
 
         $('#replyDiv-'+commentID).append('<button class="edit-comment-btn" value="'+ commentID +'" >Edit Comment</button>');
@@ -337,11 +339,6 @@ $(document.body).on('click', '.post-trashcan' ,function(e){
 $(document.body).on('click', '.post-edit' ,function(e){
 
     var post_id = this.id.replace("post-edit-","");
-
-    
-
-        
-
 
 
     if ($('.content').length) { //this means it is a text post
