@@ -16,6 +16,7 @@
       <header>
         <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a>
         <?php if($post['user_id'] == $uID) : ?>
+          <img id='post-edit-<?=$post['id']?>' class='post-edit' src='/images/edit.png'">
           <img id='post-delete-<?=$post['id']?>' class='post-trashcan' src='/images/garbage.png'">
         <?php endif; ?>
         </p>

@@ -478,3 +478,11 @@ body > header #channels li:nth-child(5), #search-channels li:nth-child(5n){
   height: 16px;
   cursor:pointer;
 }
+
+.post-edit{
+  width: 16px;
+  height: 16px;
+  cursor:pointer;
+  margin-right: 10px;
+  margin-left: 5px;
+}

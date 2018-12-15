@@ -271,4 +271,16 @@
     $stmt->execute(array($post_id));
   }
 
+
+   /**
+   * edits a post 
+   * @param  int $post_id id of the post that is being edited
+   * @param  string $post_text new post text
+   */
+  function editPost($post_id, $post_text){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Posts SET title = ? WHERE id = ?');
+    $stmt->execute(array($post_text,$post_id));
+  }
+
 ?>

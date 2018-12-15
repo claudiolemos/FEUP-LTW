@@ -112,7 +112,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                                 + "<button class="+'downvote'+"></button>"
                                 + "</div>"
                                 + "<span id="+"comment-info"+">"+ user_profile + " - " + date + " - "
-                                + "<img id='user-delete-"+newID+"' class='comment-trashcan' src='/images/garbage.png'>"
+                                + "<img id='user-delete-"+newID+"' class='comment-trashcan' src='/images/garbage.png>"
                                 +  "</span>"
                                 + "<div class="+'comment-body'+">"+ comment + "</div>"
                                 + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
@@ -185,9 +185,10 @@ $(document.body).on('click', '.replyBtn' ,function(e){
         replyHtml = replyHtml.replace('textarea-id', "comment-input-" + this.value);
 
 
+
         $('#write-comment-div-'+commentID).append(replyHtml);
 
-        $('#replyDiv-'+this.value).append('<button class="post-comment-btn" value="'+ this.value +'" >Post Comment</button>');
+        $('#replyDiv-'+this.value).append('<button class="edit-comment-btn" value="'+ this.value +'" >Post Comment</button>');
 
 
         $('#replyDiv-'+this.value).show(300);                 
@@ -222,6 +223,89 @@ $(document.body).on('click', '.comment-trashcan' ,function(e){
          
 });
 
+$(document.body).on('click', '.comment-edit' ,function(e){
+
+    var commentID = this.id.replace("user-edit-","");
+
+
+    if ($('#replyDiv-' + commentID).length) {
+
+        if ($('#replyDiv-' + commentID).is(":visible")) {
+            $('#replyDiv-' + commentID).hide(300);
+            $('#user-comment-'+commentID+'>.comment-body').show(300);
+        } else {
+            $('#replyDiv-' + commentID).show(300);
+            $('#user-comment-'+commentID+'>.comment-body').hide(300);
+        }
+
+    }
+
+    else{
+        let commentText = $('#user-comment-'+commentID+'>.comment-body').text();
+
+
+        let replyHtml = commentInputHtml.replace("top-comment-div", "replyDiv-" + commentID);
+        replyHtml = replyHtml.replace('textarea-id', "comment-input-" + commentID);
+        replyHtml = replyHtml.replace('placeholder="Type your reply here"', 'placeholder=""');
+
+
+        $('#user-comment-'+commentID+'>.comment-body').hide(300);
+
+        $('#user-comment-'+commentID+'>.comment-body').after(replyHtml);
+
+
+    
+        $('#comment-input-'+commentID).text(commentText);
+
+
+
+        $('#replyDiv-'+commentID).append('<button class="edit-comment-btn" value="'+ commentID +'" >Edit Comment</button>');
+        $('#replyDiv-' + commentID).show(300);
+    }
+
+
+         
+});
+
+
+$(document.body).on('click', '.edit-comment-btn' ,function(e){
+
+    let comment_id = this.value;
+
+    let comment = $('#comment-input-'+comment_id).val();
+
+
+    if(comment == "" || comment == undefined){
+        alert("cannot post empty comments!");
+    }
+    else{
+
+        let request = new XMLHttpRequest();
+        request.open("post", "/../actions/api_edit_comment.php", true); 
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        request.send(encodeForAjax({comment: comment, comment_id: comment_id}));
+
+        request.onreadystatechange = function () {
+
+            if(request.readyState === 4 && request.status === 200) {
+
+                $('#replyDiv-'+comment_id).hide(300);
+                $('#replyDiv-'+comment_id).remove();
+
+                $('#user-comment-'+comment_id+'>.comment-body').text(comment);
+                $('#user-comment-'+comment_id+'>.comment-body').show(300);
+
+
+            }
+
+
+        };
+
+    }
+       
+});
+
 
 $(document.body).on('click', '.post-trashcan' ,function(e){
 
@@ -246,6 +330,95 @@ $(document.body).on('click', '.post-trashcan' ,function(e){
 
 
          
+});
+
+$(document.body).on('click', '.post-edit' ,function(e){
+
+    var post_id = this.id.replace("post-edit-","");
+
+
+    if ($('#post-edit-div-' + post_id).length) {
+
+        if ($('#post-edit-div-' + post_id).is(":visible")) {
+            $('#post-edit-div-' + post_id).hide(300);
+            $('.title>a').show(300);
+        } else {
+            $('#post-edit-div-' + post_id).show(300);
+            $('.title>a').hide(300);
+        }
+
+    }
+
+    else{
+        let postText = $('.title>a').text();
+
+
+        let replyHtml = commentInputHtml.replace("top-comment-div", "post-edit-div-" + post_id);
+        replyHtml = replyHtml.replace('textarea-id', "post-input-" + post_id);
+        replyHtml = replyHtml.replace('placeholder="Type your reply here"', 'placeholder=""');
+
+
+        $('.title>a').hide(300);
+
+
+        $('.title>a').after(replyHtml);
+
+
+    
+        $('#post-input-'+post_id).text(postText);
+
+
+
+        $('#post-edit-div-'+post_id).append('<button class="edit-post-btn" value="'+ post_id +'" >Edit Post</button>');
+        $('#post-edit-div-' + post_id).show(300);
+
+       
+    }
+
+
+         
+});
+
+
+
+$(document.body).on('click', '.edit-post-btn' ,function(e){
+
+    let post_id = this.value;
+
+    let post_text = $('#post-input-'+post_id).val();
+
+
+    if(post_text == "" || post_text == undefined){
+        alert("cannot post empty posts!");
+    }
+    else{
+
+        let request = new XMLHttpRequest();
+        request.open("post", "/../actions/api_edit_post.php", true); 
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        request.send(encodeForAjax({post_text: post_text, post_id: post_id}));
+
+        request.onreadystatechange = function () {
+
+            if(request.readyState === 4 && request.status === 200) {
+
+                $('#post-edit-div-'+post_id).hide(300);
+                $('#post-edit-div-'+post_id).remove();
+
+                
+                $('.title>a').text(post_text);
+                $('.title>a').show(300);
+                
+
+
+            }
+
+
+        };
+
+    }
+       
 });
 
 

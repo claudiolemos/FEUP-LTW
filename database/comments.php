@@ -125,7 +125,8 @@
                 echo "</div>";
                 echo "<span id=".'comment-info'.">". '<a href="/profile.php/?id='.getUserName($comment['user_id']).'">'.getUserName($comment['user_id']).'</a>' . " - " . gmdate("Y-m-d", $comment['date']);
                 if ($uID == $comment['user_id']) {
-                  echo " - <img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
+                  echo " - <img id=".'user-edit-'. $comment['id'] ." class=".'comment-edit'." src=".'/images/edit.png'.">";
+                  echo "<img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
                 }
                 echo "</span>";
                 echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
@@ -247,6 +248,17 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('UPDATE Comments SET content = "[DELETED]" WHERE id = ?');
     $stmt->execute(array($comment_id));
+  }
+
+  /**
+   * edits a comment 
+   * @param  int $comment_id id of the comment that is being edited
+   * @param  string $comment new comment
+   */
+  function editComment($comment_id, $comment){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Comments SET content = ? WHERE id = ?');
+    $stmt->execute(array($comment,$comment_id));
   }
 
 
