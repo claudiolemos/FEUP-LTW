@@ -18,7 +18,7 @@
     $user_id = "3"; //TODO: delete after merge, use getUserID instead
 
     //check for user mentions
-    //check if comment mentions a user. - regex: \/u\/[^\s]+   ex: /u/ze 
+    //check if comment mentions a user. - regex: \/u\/[^\s]+   ex: /u/ze
     $regex = '/\/u\/[^\s]+/';
     $test = $content;
     //preg_match($regex, $test, $matches);

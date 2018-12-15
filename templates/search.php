@@ -3,6 +3,12 @@
   include_once(__DIR__.'/../database/users.php');
 ?>
 
+<div id="search-big">
+  <form method="get" action="/search.php">
+    <input type="text" name="query" placeholder="Search..." required>
+    <input type="submit" value="Submit">
+  </form>
+</div>
 <div id="search-results">
   <h1>Search Results</h1>
   <section id="search-posts">

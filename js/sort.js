@@ -9,6 +9,12 @@ let sortSubscribed = false;
 for(var i = 0; i < sort.length; i++) {
   sort[i].addEventListener('click', function(event) {
     event.preventDefault();
+
+    for(var j = 0; j < sort.length; j++)
+      sort[j].style.backgroundColor = "transparent";
+
+    this.style.backgroundColor = "var(--red3)"
+
     currentSort = this.getAttribute("name");
     let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: currentSort, subscribed: sortSubscribed, username: username}) : createRequest("/../../actions/api_sort.php", {sort: currentSort, id: channelID});
     request.onreadystatechange=function(){updatePosts(request);}
@@ -19,7 +25,7 @@ if(sortSubscriptions != null){
   sortSubscriptions.addEventListener('click', function(event) {
     event.preventDefault();
     sortSubscribed = !sortSubscribed;
-    sortSubscriptions.style.backgroundColor = sortSubscribed? "var(--red2)" : "transparent";
+    sortSubscriptions.style.backgroundColor = sortSubscribed? "var(--blue3)" : "transparent";
 
     let request = createRequest("/../../actions/api_sort.php", {sort: currentSort, subscribed: sortSubscribed, username: username});
     request.onreadystatechange=function(){updatePosts(request);}

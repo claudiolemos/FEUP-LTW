@@ -2,7 +2,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="../../js/post.js"></script>
 
-<section id="posts">
+<section id="single-post">
 
   <article id="<?=$post['id']?>">
       <div class="voting">
