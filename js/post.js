@@ -408,7 +408,7 @@ $(document.body).on('click', '.post-edit' ,function(e){
                 +  '<input type="text" id="edit-title" name="title" placeholder="Title" required="" value="'+titleText+'">'
                 +  '<label><a>Link</a></label>'
                 +  '<input type="url" id="edit-link" name="link" placeholder="https://example.com" required="" value="'+link+'">'
-                +  '<input type="hidden" id="edit-link-post-id" value="'+post_id+'">'
+                +  '<input type="hidden" name="post_id" value="'+post_id+'">'
                 +  '<button id="edit-link-post-btn" type="submit">Edit post</button>'
                 +   '</div>'
                 +   '</form>'

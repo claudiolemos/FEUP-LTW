@@ -301,4 +301,16 @@
     $stmt->execute(array($title,$content,$post_id));
   }
 
+  /**
+   * edits a link post 
+   * @param  int $post_id id of the post that is being edited
+   * @param  string $title new post title
+   * @param  string $link new post link
+   */
+  function editLinkPost($post_id, $title, $link){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Posts SET title = ?, link = ? WHERE id = ?');
+    $stmt->execute(array($title,$link,$post_id));
+  }
+
 ?>
