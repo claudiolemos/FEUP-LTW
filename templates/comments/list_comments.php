@@ -12,7 +12,7 @@
         echo "<span class='votes comment-votes'>".$comment['votes']."</span>";
         echo "<button class=".getCommentVoteButtonClass($uID, $comment['id'], -1)."></button>";
       echo "</div>";
-      echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']);
+      echo "<span id=".'comment-info'.">". '<a href="/profile.php/?id='.getUserName($comment['user_id']).'">'.getUserName($comment['user_id']).'</a>' . " - " . gmdate("Y-m-d", $comment['date']);
       if ($uID == $comment['user_id']) {
         echo " - <img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
       }

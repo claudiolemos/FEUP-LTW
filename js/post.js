@@ -102,7 +102,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                             let newID = JSON.parse(this.responseText)["comment_id"];
                             let post_id = JSON.parse(this.responseText)["post_id"];
                             let parent_id = JSON.parse(this.responseText)["parent_id"];
-                            let user_id = JSON.parse(this.responseText)["user_id"];
+                            let user_profile = JSON.parse(this.responseText)["user_profile"];
                             let date = JSON.parse(this.responseText)["date"];
 
                             let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
@@ -111,7 +111,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                                 + "<span class='votes comment-votes'>"+'1'+"</span>" 
                                 + "<button class="+'downvote'+"></button>"
                                 + "</div>"
-                                + "<span id="+"comment-info"+">"+ user_id + " - " + date +"</span>"
+                                + "<span id="+"comment-info"+">"+ user_profile + " - " + date +"</span>"
                                 + "<div class="+'comment-body'+">"+ comment + "</div>"
                                 + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
                                 + "<button type="+'submit'+" class="+'replyBtn'+" value="+ post_id +"-"+ newID +"-"+ parent_id +">"+ 'Reply' + "</button>"
