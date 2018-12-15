@@ -22,11 +22,12 @@
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-        <span class="username"><?=getUserName($post['user_id'])?></span>
-        <span class="channel"><?=getChannelName($post['channel_id'])?></span>
+        <span class="username"><a href="<?='/profile.php/?id='.getUserName($post['user_id'])?>"> <?=getUserName($post['user_id'])?> </a></span>
+        <span class="channel"><a href="<?='/channel.php/?id='.getChannelName($post['channel_id'])?>"> <?=getChannelName($post['channel_id'])?> </a></span>
         <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>
+
 
 
   <div class="write-comment-div" id="write-top-level-comment-div">

@@ -30,7 +30,7 @@
 
     if($userID!=-1){//if user exists
 
-      $userHTML = '<a href="/profile.php/?id='.$username.'">#'.$username.'</a>'; 
+      $userHTML = '<a href="/profile.php/?id='.$username.'">@'.$username.'</a>'; 
 
       //replace username with link to users page in content
       $search = '@'.$username;
@@ -50,7 +50,7 @@
     $channelID = getChannelID($channelName);
 
     if($channelID!= -1){ //if channel exists
-      $channelHTML = '<a href="/channel.php/?id='.$channelID.'">@'.$channelName.'</a>'; 
+      $channelHTML = '<a href="/channel.php/?id='.$channelName.'">#'.$channelName.'</a>'; 
 
       //replace channelName with link to channel page in content
       $search = '#'.$channelName;
