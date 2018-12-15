@@ -14,8 +14,9 @@
       $uID = getUserID($_SESSION['username']);
 
     $parent_comments = getParentComments($_GET['id']);
+    $channel = getChannelFromPost($_GET['id']);
 
-    include('templates/channels/post_sidebar.php');
+    include('templates/channels/sidebar.php');
     include('templates/post.php');
     include('templates/common/footer.php');
   }

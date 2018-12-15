@@ -107,6 +107,18 @@ body > header #logo {
   background-color: #A1A1A1
 }
 
+.user-dropdown-content a:nth-child(1):hover {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.user-dropdown-content a:nth-child(2):hover {
+  border-radius: 0px;
+}
+
+.user-dropdown-content a:nth-child(3):hover {
+  border-radius: 0px 0px 10px 10px;
+}
+
 .user-dropdown:hover .user-dropdown-content {
     display: block;
 }
@@ -275,6 +287,11 @@ button:hover {
   margin: 0em 2em;
 }
 
+#single-post{
+  margin: 2em 2em 0em;
+}
+
+
 #posts article, #search-posts article, #channel-posts article {
   border-bottom-style:solid;
   border-bottom-color: var(--light2);
@@ -318,7 +335,7 @@ article .votes {
   background-color: var(--red2);
 }
 
-#posts article .thumbnail, #search-posts article .thumbnail, #channel-posts article .thumbnail{
+#posts article .thumbnail, #single-post article .thumbnail, #search-posts article .thumbnail, #channel-posts article .thumbnail{
   margin-left: 1em;
   width:5em;
   height:5em;
@@ -329,7 +346,7 @@ article .votes {
   height:5em;
 }
 
-#posts article .thumbnail > img, #search-posts article .thumbnail > img, #channel-posts article .thumbnail > img, #search-users .user-block .thumbnail > img {
+#posts article .thumbnail > img, #single-post article .thumbnail > img, #search-posts article .thumbnail > img, #channel-posts article .thumbnail > img, #search-users .user-block .thumbnail > img {
   object-fit: cover;
   width:100%;
   height:100%;
@@ -356,16 +373,16 @@ article .votes {
 
 
 
-#posts article > header, #posts article > footer, #search-posts article > header, #search-posts article > footer, #channel-posts article > header, #channel-posts article > footer  {
+#posts article > header, #posts article > footer, #single-post article > header, #single-post article > footer, #search-posts article > header, #search-posts article > footer, #channel-posts article > header, #channel-posts article > footer  {
   margin-left: 2em;
   margin-top: 0;
 }
 
-#posts article .username:after, #search-posts article .username:after, #channel-posts article .username:after {
+#posts article .username:after, #single-post article .username:after, #search-posts article .username:after, #channel-posts article .username:after {
   content: ' @';
 }
 
-#posts article .comments:after, #search-posts article .comments:after, #channel-posts article .comments:after {
+#posts article .comments:after, #single-post article .comments:after, #search-posts article .comments:after, #channel-posts article .comments:after {
   content: ' comments';
 }
 

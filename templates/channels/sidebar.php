@@ -1,7 +1,3 @@
-<?php
-  $channel = getChannel($_GET['id']);
-?>
-
 <div id="search">
   <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
