@@ -290,14 +290,15 @@
 
 
    /**
-   * edits a post 
+   * edits a text post 
    * @param  int $post_id id of the post that is being edited
-   * @param  string $post_text new post text
+   * @param  string $title new post title
+   * @param  string $content new post content
    */
-  function editPost($post_id, $post_text){
+  function editTextPost($post_id, $title, $content){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('UPDATE Posts SET title = ? WHERE id = ?');
-    $stmt->execute(array($post_text,$post_id));
+    $stmt = $db->prepare('UPDATE Posts SET title = ?, content = ? WHERE id = ?');
+    $stmt->execute(array($title,$content,$post_id));
   }
 
 ?>

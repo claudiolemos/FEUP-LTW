@@ -338,89 +338,94 @@ $(document.body).on('click', '.post-edit' ,function(e){
 
     var post_id = this.id.replace("post-edit-","");
 
-
-    if ($('#post-edit-div-' + post_id).length) {
-
-        if ($('#post-edit-div-' + post_id).is(":visible")) {
-            $('#post-edit-div-' + post_id).hide(300);
-            $('.title>a').show(300);
-        } else {
-            $('#post-edit-div-' + post_id).show(300);
-            $('.title>a').hide(300);
-        }
-
-    }
-
-    else{
-        let postText = $('.title>a').text();
-
-
-        let replyHtml = commentInputHtml.replace("top-comment-div", "post-edit-div-" + post_id);
-        replyHtml = replyHtml.replace('textarea-id', "post-input-" + post_id);
-        replyHtml = replyHtml.replace('placeholder="Type your reply here"', 'placeholder=""');
-
-
-        $('.title>a').hide(300);
-
-
-        $('.title>a').after(replyHtml);
-
-
     
-        $('#post-input-'+post_id).text(postText);
+
+        
 
 
 
-        $('#post-edit-div-'+post_id).append('<button class="edit-post-btn" value="'+ post_id +'" >Edit Post</button>');
-        $('#post-edit-div-' + post_id).show(300);
+    if ($('.content').length) { //this means it is a text post
+
+        let titleText = $(".title>a").text();
+        let contentText = $('.content').text();
+
+        if($("#edit-text-post-pop-up").length){
+            $("#edit-title").val(titleText);
+            $("#edit-content").val(contentText);
+
+            $("#edit-text-post-pop-up").css('display', 'block');
+
+
+        }
+        else{
+            let editTextPopUp = '<div id="edit-text-post-pop-up" class="pop-up" style="display: block;">'
+                + '<form method="post" class="pop-up-content animate" action="/../actions/api_edit_text_post.php">'
+                +  '<div class="close-button">'
+                +    '<span onclick="document.getElementById('+"'edit-text-post-pop-up'"+').style.display='+"'none'"+'" class="close">×</span>'
+                + '</div>'
+                + '<div class="container">'
+                +   '<label><a>Title</a></label>'
+                +   '<input type="text" id="edit-title" name="title" placeholder="Title" required="" value="'+titleText+'">'
+                +   '<label><a>Content</a></label>'
+                +   '<input type="textarea" id="edit-content" name="content" placeholder="Content" required="" value="'+contentText+'">'
+                +   '<input type="hidden" name="post_id" value="'+post_id+'">'
+                +   '<button id="edit-text-post-btn" type="submit">Edit post</button>'
+                + '</div>'
+                + '</form>'
+                +'</div>'
 
        
+
+            $('#post-delete-'+post_id).after(editTextPopUp);
+        }
+
+        
+        
     }
+
+    else{ //link post
+
+        let titleText = $(".title>a").text();
+        let link = $(".title>a").attr('href');
+
+        if($("#edit-link-post-pop-up").length){
+
+            $("#edit-title").val(titleText);
+            $("#edit-link").val(link);
+
+            $("#edit-link-post-pop-up").css('display', 'block');
+
+        }
+        else{
+
+            let editLinkPopUp = '<div id="edit-link-post-pop-up" class="pop-up" style="display: block;">'
+                + '<form method="post" class="pop-up-content animate" action="/../actions/api_edit_link_post.php">'
+                + '<div class="close-button">'
+                + '<span onclick="document.getElementById('+"'edit-link-post-pop-up'"+').style.display='+"'none'"+'" class="close">×</span>'
+                + '</div>'
+                + '<div class="container">'
+                + '<label><a>Title</a></label>'
+                +  '<input type="text" id="edit-title" name="title" placeholder="Title" required="" value="'+titleText+'">'
+                +  '<label><a>Link</a></label>'
+                +  '<input type="url" id="edit-link" name="link" placeholder="https://example.com" required="" value="'+link+'">'
+                +  '<input type="hidden" id="edit-link-post-id" value="'+post_id+'">'
+                +  '<button id="edit-link-post-btn" type="submit">Edit post</button>'
+                +   '</div>'
+                +   '</form>'
+                +   '</div>';
+
+            $('#post-delete-'+post_id).after(editLinkPopUp);
+
+        }
+        
+        
+    }
+
+
+  
 
 
          
-});
-
-
-
-$(document.body).on('click', '.edit-post-btn' ,function(e){
-
-    let post_id = this.value;
-
-    let post_text = $('#post-input-'+post_id).val();
-
-
-    if(post_text == "" || post_text == undefined){
-        alert("cannot post empty posts!");
-    }
-    else{
-
-        let request = new XMLHttpRequest();
-        request.open("post", "/../actions/api_edit_post.php", true); 
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        request.send(encodeForAjax({post_text: post_text, post_id: post_id}));
-
-        request.onreadystatechange = function () {
-
-            if(request.readyState === 4 && request.status === 200) {
-
-                $('#post-edit-div-'+post_id).hide(300);
-                $('#post-edit-div-'+post_id).remove();
-
-                
-                $('.title>a').text(post_text);
-                $('.title>a').show(300);
-                
-
-
-            }
-
-
-        };
-
-    }
-       
 });
 
 
