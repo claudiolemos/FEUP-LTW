@@ -1,5 +1,5 @@
-let commentUpvote = document.querySelectorAll('#posts #comments .user-comment .upvote, #posts #comments .user-comment .upvoted');
-let commentDownvote = document.querySelectorAll('#posts #comments .user-comment .downvote, #posts #comments .user-comment .downvoted');
+let commentUpvote = document.querySelectorAll('#single-post #comments .user-comment .upvote, #single-post #comments .user-comment .upvoted');
+let commentDownvote = document.querySelectorAll('#single-post #comments .user-comment .downvote, #single-post #comments .user-comment .downvoted');
 
 if(username != null){
   for(var i = 0; i < commentUpvote.length; i++) {
@@ -68,9 +68,9 @@ if(username != null){
 }
 else{
   for(var i = 0; i < commentUpvote.length; i++)
-    commentUpvote[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
+    commentUpvote[i].onclick = function() { document.getElementById('login-pop-up').style.display='block';};
 
 
   for(var i = 0; i < commentDownvote.length; i++)
-    commentDownvote[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
+    commentDownvote[i].onclick = function() { document.getElementById('login-pop-up').style.display='block';};
 }

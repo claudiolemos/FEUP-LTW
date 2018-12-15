@@ -46,11 +46,9 @@
               <label><a>Password</a></label>
               <input type="password" name="password" placeholder="Password" required>
               <button type="submit">Login</button>
+              <button name="register" onclick="document.getElementById('login-pop-up').style.display='none', document.getElementById('register-pop-up').style.display='block'" type="button">Register</button>
             </div>
           </form>
-        </div>
-        <div class="register">
-          <button onclick="document.getElementById('register-pop-up').style.display='block'" style="width:auto;">Register</button>
         </div>
         <div id="register-pop-up" class="pop-up">
           <form method="post" class="pop-up-content animate" action="actions/register.php">

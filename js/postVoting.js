@@ -1,5 +1,5 @@
-let postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted, #search-posts article .upvote, #search-posts article .upvoted, #channel-posts article .upvote, #channel-posts article .upvoted');
-let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted, #search-posts article .downvote, #search-posts article .downvoted, #channel-posts article .downvote, #channel-posts article .downvoted');
+let postUpvote = document.querySelectorAll('#posts article .upvote, #posts article .upvoted, #single-post article .upvote, #single-post article .upvoted, #search-posts article .upvote, #search-posts article .upvoted, #channel-posts article .upvote, #channel-posts article .upvoted');
+let postDownvote = document.querySelectorAll('#posts article .downvote, #posts article .downvoted, #single-post article .downvote, #single-post article .downvoted, #search-posts article .downvote, #search-posts article .downvoted, #channel-posts article .downvote, #channel-posts article .downvoted');
 let username = document.querySelector('.dropdown-button') == null? null : document.querySelector('.dropdown-button').innerHTML;
 
 if(username != null)
@@ -73,9 +73,9 @@ function addVotingListeners(upvoteButtons, downvoteButtons) {
 
 function addVotingOnClick(upvoteButtons, downvoteButtons) {
   for(var i = 0; i < upvoteButtons.length; i++)
-    upvoteButtons[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
+    upvoteButtons[i].onclick = function() { document.getElementById('login-pop-up').style.display='block';};
 
 
   for(var i = 0; i < downvoteButtons.length; i++)
-    downvoteButtons[i].onclick = function() { document.getElementById('register-pop-up').style.display='block';};
+    downvoteButtons[i].onclick = function() { document.getElementById('login-pop-up').style.display='block';};
 }

@@ -7,6 +7,7 @@
   include('templates/common/header.php');
 
   if(getChannelID($_GET['id']) != -1){
+    $channel = getChannel($_GET['id']);
     include('templates/channels/sidebar.php');
     include('templates/channels/posts.php');
     include('templates/common/footer.php');
