@@ -169,6 +169,9 @@
       $stmt = $db->prepare('INSERT INTO Comments VALUES (NULL,?,?,?,?,?,0)');
 
 
+      $content = htmlspecialchars($content);
+
+
       if($parent_id == undefined)
         $parent_id = NULL;
 

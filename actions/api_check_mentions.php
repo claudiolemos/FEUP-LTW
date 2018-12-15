@@ -6,6 +6,8 @@
 
   $content = $_POST['content'];
 
+  $content = htmlspecialchars($content);
+
 
   //check for user mentions
   //check if comment mentions a user. - regex: \/u\/[^\s]+   ex: /u/ze 

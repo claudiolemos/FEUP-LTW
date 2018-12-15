@@ -5,7 +5,9 @@
   include_once(__DIR__."/../database/channels.php");
 
   $title = $_POST['title'];
+  $title = htmlspecialchars($title);
   $content = $_POST['content'];
+  $content = htmlspecialchars($content);
   $user_id = getUserID($_POST['username']);
   $channel_id = getChannelID($_POST['channel']);
 
