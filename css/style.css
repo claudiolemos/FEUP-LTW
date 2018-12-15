@@ -183,6 +183,10 @@ div .container > button {
     width: 100%;
 }
 
+div .container > button[name=register] {
+    background-color: var(--blue2);
+}
+
 button:hover {
     opacity: 0.8;
 }
@@ -252,7 +256,8 @@ button:hover {
 
 #search {
   align-self: center;
-  margin-right: 2em;
+  margin: 2em;
+  margin-left: 0em;
 }
 
 #search form, #search-big form{
