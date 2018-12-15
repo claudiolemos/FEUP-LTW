@@ -12,7 +12,7 @@
 <aside id="sidebar">
   <?php if(isset($_SESSION['username'])){ ?>
     <div id="subscription-list">
-      <h3>My Subscriptions</h3>
+      <span class="subscriptions-title">My Subscriptions</span>
       <?php if($subscribedChannels != null){ ?>
         <ul>
           <?php foreach($subscribedChannels as $channel) { ?>
@@ -20,7 +20,7 @@
           <?php } ?>
         </ul>
       <?php } else { ?>
-        <span>You haven't subscribed to a channel</span>
+        <span class="no-subscriptions">You haven't subscribed to a channel</span>
       <?php } ?>
     </div>
     <div class="create-channel">

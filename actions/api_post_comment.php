@@ -13,7 +13,6 @@
 
   if(isset($username)){
     $user_id = getUserID($username);
-   
 
     $newComment = addComment($content, $user_id, $post_id, $date, $parent_id, $username);
     echo json_encode($newComment);

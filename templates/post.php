@@ -2,7 +2,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="../../js/post.js"></script>
 
-<section id="posts">
+<section id="single-post">
 
   <article id="<?=$post['id']?>">
       <div class="voting">
@@ -35,8 +35,8 @@
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-        <span class="username"><a href="<?='/profile.php/?id='.getUserName($post['user_id'])?>"> <?=getUserName($post['user_id'])?> </a></span>
-        <span class="channel"><a href="<?='/channel.php/?id='.getChannelName($post['channel_id'])?>"> <?=getChannelName($post['channel_id'])?> </a></span>
+        <span class="username"><a href="/profile.php/?id=<?=getUserName($post['user_id'])?>"><?=getUserName($post['user_id'])?></a></span>
+        <span class="channel"><a href="/channel.php/?id=<?=getChannelName($post['channel_id'])?>"><?=getChannelName($post['channel_id'])?></a></span>
         <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>

@@ -88,11 +88,11 @@ body > header #logo {
 .user-dropdown-content {
     display: none;
     position: absolute;
-    background-color: #F0F0F0;
-    min-width: 160px;
+    background-color: var(--light2);
     border-radius: 10px;
-    box-shadow: 0px 8px 16px 0px;
+    box-shadow: 0px 0px  5px 0px;
     z-index: 1;
+    text-align: center;
 }
 
 .user-dropdown-content a {
@@ -243,7 +243,7 @@ button:hover {
   margin-right: 2em;
 }
 
-#search form{
+#search form, #search-big form{
   display: flex;
 }
 
@@ -251,7 +251,17 @@ button:hover {
   flex-grow: 20;
 }
 
-#search form > input{
+#search-big{
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 2em;
+}
+
+#search-big form input[name=query]{
+  flex-grow: 1;
+}
+
+#search form > input, #search-big form > input{
   background-color: var(--light2);
   border-color: var(--light1);
   border-radius: 15px;
@@ -364,6 +374,14 @@ article .votes {
   display: flex;
 }
 
+#sort li:hover{
+  border-color: var(--red3);
+}
+
+#sort li[name=subscribed]:hover{
+  border-color: var(--blue3);
+}
+
 #sort li a{
   text-decoration: none;
   color: black;
@@ -424,6 +442,14 @@ body > header #channels li, #search-channels li {
   margin-right: 1em;
 }
 
+body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):hover{
+  opacity: 0.8;
+}
+
+#search-posts{
+  margin-right: 2em;
+}
+
 #search-channels li a{
   text-decoration: none;
   color: white;
@@ -431,11 +457,21 @@ body > header #channels li, #search-channels li {
 
 #sidebar{
   background-color: var(--light2);
-  padding: 0em 1em;
+  padding: 1em;
   text-align: justify;
   margin-right: 2em;
   margin-bottom: 2em;
   border-radius: 15px;
+}
+
+#sidebar button{
+  background-color: var(--red2);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }
 
 

@@ -12,7 +12,6 @@
   $searchChannels = searchChannels($_GET['query']);
 
   include('templates/common/header.php');
-  include('templates/common/sidebar.php');
   include('templates/search.php');
   include('templates/common/footer.php');
 ?>

@@ -12,7 +12,7 @@
 body {
   display: grid;
   grid-template-columns: [start] 4fr [middle] 1.25fr [end];
-  grid-template-rows: [start] 7em [nav sort search-results search error] auto [posts sidebar] auto [footer] auto [end];
+  grid-template-rows: [start] 7em [nav sort search-big search error] auto [posts search-results] auto [sidebar] auto [footer] auto [end];
 }
 
 /* main layout */
@@ -33,7 +33,7 @@ body > header {
 }
 
 #sidebar {
-  grid-row: sidebar / footer;
+  grid-row-end: sidebar
   grid-column: middle / end;
 }
 
@@ -44,7 +44,12 @@ body > header {
 
 #search-results {
   grid-row: search-results / footer;
-  grid-column: start / middle;
+  grid-column: start / end;
+}
+
+#search-big {
+  grid-row: search-big / search-results;
+  grid-column: start / end;
 }
 
 #comments{
