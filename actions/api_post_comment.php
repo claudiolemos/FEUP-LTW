@@ -11,8 +11,6 @@
   $parent_id = $_POST['parent_id'];
   $date = time(); 
 
-
-
   if(isset($username)){
     $user_id = getUserID($username);
    

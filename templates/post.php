@@ -14,12 +14,24 @@
         <img src="<?=getPostThumbnail($post['id'])?>">
       </div>
       <header>
-        <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a>
+        <?php if($post['link'] != null) : ?>
+          <p class="title"><a href="<?=$post['link']?>"><?=$post['title']?></a>
+        <? else: ?>
+          <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a>
+        <? endif; ?>
+        
         <?php if($post['user_id'] == $uID) : ?>
           <img id='post-edit-<?=$post['id']?>' class='post-edit' src='/images/edit.png'">
           <img id='post-delete-<?=$post['id']?>' class='post-trashcan' src='/images/garbage.png'">
         <?php endif; ?>
         </p>
+
+
+        <?php if($post['content'] != null) : ?>
+          <p class ="content"><?=$post['content']?></p>
+        <?php endif; ?>
+
+
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>

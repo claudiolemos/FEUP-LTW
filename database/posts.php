@@ -269,6 +269,23 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('UPDATE Posts SET title = "[DELETED]" WHERE id = ?');
     $stmt->execute(array($post_id));
+
+    $post = getPost($post_id);
+
+    if($post['content'] == null){ //it's a link post
+      $post_link = '/post.php/?id=' . $post_id;
+      $stmt = $db->prepare('UPDATE Posts SET link = ? WHERE id = ?');
+      $stmt->execute(array($post_link, $post_id));
+    }
+    else{//it's a text post
+      
+      $stmt = $db->prepare('UPDATE Posts SET content = "[DELETED]" WHERE id = ?');
+      $stmt->execute(array($post_id));
+
+    }
+
+
+
   }
 
 

@@ -112,7 +112,8 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                                 + "<button class="+'downvote'+"></button>"
                                 + "</div>"
                                 + "<span id="+"comment-info"+">"+ user_profile + " - " + date + " - "
-                                + "<img id='user-delete-"+newID+"' class='comment-trashcan' src='/images/garbage.png>"
+                                + "<img id='user-edit-"+newID+"' class='comment-edit' src='/images/edit.png'>"
+                                + "<img id='user-delete-"+newID+"' class='comment-trashcan' src='/images/garbage.png'>"
                                 +  "</span>"
                                 + "<div class="+'comment-body'+">"+ comment + "</div>"
                                 + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
@@ -188,7 +189,7 @@ $(document.body).on('click', '.replyBtn' ,function(e){
 
         $('#write-comment-div-'+commentID).append(replyHtml);
 
-        $('#replyDiv-'+this.value).append('<button class="edit-comment-btn" value="'+ this.value +'" >Post Comment</button>');
+        $('#replyDiv-'+this.value).append('<button class="post-comment-btn" value="'+ this.value +'" >Post Comment</button>');
 
 
         $('#replyDiv-'+this.value).show(300);                 
@@ -321,7 +322,8 @@ $(document.body).on('click', '.post-trashcan' ,function(e){
     request.onreadystatechange = function () {
 
         if(request.readyState === 4 && request.status === 200) {
-            $(".title>a").replaceWith('<a href="/post.php/?id="'+postID+'>[DELETED]</a>');
+            $(".title>a").replaceWith('<a href="/post.php/?id='+postID+'">[DELETED]</a>');
+            $(".content").text("[DELETED]");
         }
 
 
