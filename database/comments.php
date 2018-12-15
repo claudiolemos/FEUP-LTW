@@ -123,9 +123,10 @@
                   echo "<span class='votes comment-votes'>".$comment['votes']."</span>";
                   echo "<button class=".getCommentVoteButtonClass($uID, $comment['id'], -1)."></button>";
                 echo "</div>";
-                echo "<span id=".'comment-info'.">". getUserName($comment['user_id']) . " - " . gmdate("Y-m-d", $comment['date']);
+                echo "<span id=".'comment-info'.">". '<a href="/profile.php/?id='.getUserName($comment['user_id']).'">'.getUserName($comment['user_id']).'</a>' . " - " . gmdate("Y-m-d", $comment['date']);
                 if ($uID == $comment['user_id']) {
-                  echo " - <img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
+                  echo " - <img id=".'user-edit-'. $comment['id'] ." class=".'comment-edit'." src=".'/images/edit.png'.">";
+                  echo "<img id=".'user-delete-'. $comment['id'] ." class=".'comment-trashcan'." src=".'/images/garbage.png'.">";
                 }
                 echo "</span>";
                 echo "<div class=".'comment-body'.">". $comment['content'] . "</div>";
@@ -160,9 +161,10 @@
    * @param  int  $post_id id of the post
    * @param  date  $date comment date
    * @param  int|undefined $parent_id id of the parent of this comment. undefined if top-level comment.
+   * @param  int  $username user's username 
    * @return array post_id, id of new comment and parent id
    */
-    function addComment($content, $user_id, $post_id, $date, $parent_id){
+    function addComment($content, $user_id, $post_id, $date, $parent_id, $username){
       $db = Database::instance()->db();
       $stmt = $db->prepare('INSERT INTO Comments VALUES (NULL,?,?,?,?,?,0)');
 
@@ -173,7 +175,10 @@
 
       $stmt->execute(array($content, $user_id, $post_id, $date, $parent_id));
 
-      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_id" => $user_id, "date" => gmdate("Y-m-d",$date));
+
+      $userProfile = '<a href="/profile.php/?id='.$username.'">'.$username.'</a>';
+
+      $postID_commentID_parentID = array("post_id" => $post_id, "comment_id" => $db->lastInsertId(), "parent_id" => $parent_id, "user_profile" => $userProfile, "date" => gmdate("Y-m-d",$date));
 
       return $postID_commentID_parentID;
 
@@ -243,6 +248,17 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('UPDATE Comments SET content = "[DELETED]" WHERE id = ?');
     $stmt->execute(array($comment_id));
+  }
+
+  /**
+   * edits a comment 
+   * @param  int $comment_id id of the comment that is being edited
+   * @param  string $comment new comment
+   */
+  function editComment($comment_id, $comment){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Comments SET content = ? WHERE id = ?');
+    $stmt->execute(array($comment,$comment_id));
   }
 
 

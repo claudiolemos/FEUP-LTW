@@ -9,22 +9,12 @@
   $post_id = $_POST['post_id'];
   $content = $_POST['content'];
   $parent_id = $_POST['parent_id'];
-  $date = time(); //TODO FORMAT
-
-
+  $date = time(); 
 
   if(isset($username)){
-    //$user_id = getUserID($username);
-    $user_id = "3"; //TODO: delete after merge, use getUserID instead
+    $user_id = getUserID($username);
 
-    //check for user mentions
-    //check if comment mentions a user. - regex: \/u\/[^\s]+   ex: /u/ze
-    $regex = '/\/u\/[^\s]+/';
-    $test = $content;
-    //preg_match($regex, $test, $matches);
-    //var_dump($matches);
-
-    $newComment = addComment($content, $user_id, $post_id, $date, $parent_id);
+    $newComment = addComment($content, $user_id, $post_id, $date, $parent_id, $username);
     echo json_encode($newComment);
   }
 

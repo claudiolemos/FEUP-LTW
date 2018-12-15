@@ -259,4 +259,58 @@
     $stmt->execute(array($title, $link, time(), $user_id, $channel_id));
     return $db->lastInsertId();
   }
+
+
+  /**
+   * Removes a post (post stays in DB and website, text is changed to [DELETED])
+   * @param  int $post_id id of the post that is being removed
+   */
+  function deletePost($post_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Posts SET title = "[DELETED]" WHERE id = ?');
+    $stmt->execute(array($post_id));
+
+    $post = getPost($post_id);
+
+    if($post['content'] == null){ //it's a link post
+      $post_link = '/post.php/?id=' . $post_id;
+      $stmt = $db->prepare('UPDATE Posts SET link = ? WHERE id = ?');
+      $stmt->execute(array($post_link, $post_id));
+    }
+    else{//it's a text post
+      
+      $stmt = $db->prepare('UPDATE Posts SET content = "[DELETED]" WHERE id = ?');
+      $stmt->execute(array($post_id));
+
+    }
+
+
+
+  }
+
+
+   /**
+   * edits a text post 
+   * @param  int $post_id id of the post that is being edited
+   * @param  string $title new post title
+   * @param  string $content new post content
+   */
+  function editTextPost($post_id, $title, $content){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Posts SET title = ?, content = ? WHERE id = ?');
+    $stmt->execute(array($title,$content,$post_id));
+  }
+
+  /**
+   * edits a link post 
+   * @param  int $post_id id of the post that is being edited
+   * @param  string $title new post title
+   * @param  string $link new post link
+   */
+  function editLinkPost($post_id, $title, $link){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Posts SET title = ?, link = ? WHERE id = ?');
+    $stmt->execute(array($title,$link,$post_id));
+  }
+
 ?>

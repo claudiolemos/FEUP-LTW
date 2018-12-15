@@ -102,7 +102,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                             let newID = JSON.parse(this.responseText)["comment_id"];
                             let post_id = JSON.parse(this.responseText)["post_id"];
                             let parent_id = JSON.parse(this.responseText)["parent_id"];
-                            let user_id = JSON.parse(this.responseText)["user_id"];
+                            let user_profile = JSON.parse(this.responseText)["user_profile"];
                             let date = JSON.parse(this.responseText)["date"];
 
                             let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
@@ -111,7 +111,10 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                                 + "<span class='votes comment-votes'>"+'1'+"</span>" 
                                 + "<button class="+'downvote'+"></button>"
                                 + "</div>"
-                                + "<span id="+"comment-info"+">"+ user_id + " - " + date +"</span>"
+                                + "<span id="+"comment-info"+">"+ user_profile + " - " + date + " - "
+                                + "<img id='user-edit-"+newID+"' class='comment-edit' src='/images/edit.png'>"
+                                + "<img id='user-delete-"+newID+"' class='comment-trashcan' src='/images/garbage.png'>"
+                                +  "</span>"
                                 + "<div class="+'comment-body'+">"+ comment + "</div>"
                                 + '<div class="write-comment-div" id="write-comment-div-'+ newID +'">'
                                 + "<button type="+'submit'+" class="+'replyBtn'+" value="+ post_id +"-"+ newID +"-"+ parent_id +">"+ 'Reply' + "</button>"
@@ -183,6 +186,7 @@ $(document.body).on('click', '.replyBtn' ,function(e){
         replyHtml = replyHtml.replace('textarea-id', "comment-input-" + this.value);
 
 
+
         $('#write-comment-div-'+commentID).append(replyHtml);
 
         $('#replyDiv-'+this.value).append('<button class="post-comment-btn" value="'+ this.value +'" >Post Comment</button>');
@@ -215,6 +219,207 @@ $(document.body).on('click', '.comment-trashcan' ,function(e){
 
     };
 
+
+
+         
+});
+
+$(document.body).on('click', '.comment-edit' ,function(e){
+
+    var commentID = this.id.replace("user-edit-","");
+
+
+    if ($('#replyDiv-' + commentID).length) {
+
+        if ($('#replyDiv-' + commentID).is(":visible")) {
+            $('#replyDiv-' + commentID).hide(300);
+            $('#user-comment-'+commentID+'>.comment-body').show(300);
+        } else {
+            $('#replyDiv-' + commentID).show(300);
+            $('#user-comment-'+commentID+'>.comment-body').hide(300);
+        }
+
+    }
+
+    else{
+        let commentText = $('#user-comment-'+commentID+'>.comment-body').text();
+
+
+        let replyHtml = commentInputHtml.replace("top-comment-div", "replyDiv-" + commentID);
+        replyHtml = replyHtml.replace('textarea-id', "comment-input-" + commentID);
+        replyHtml = replyHtml.replace('placeholder="Type your reply here"', 'placeholder=""');
+
+
+        $('#user-comment-'+commentID+'>.comment-body').hide(300);
+
+        $('#user-comment-'+commentID+'>.comment-body').after(replyHtml);
+
+
+    
+        $('#comment-input-'+commentID).text(commentText);
+
+        $('#comment-input-'+commentID).css('width','70%');
+
+
+
+        $('#replyDiv-'+commentID).append('<button class="edit-comment-btn" value="'+ commentID +'" >Edit Comment</button>');
+        $('#replyDiv-' + commentID).show(300);
+    }
+
+
+         
+});
+
+
+$(document.body).on('click', '.edit-comment-btn' ,function(e){
+
+    let comment_id = this.value;
+
+    let comment = $('#comment-input-'+comment_id).val();
+
+
+    if(comment == "" || comment == undefined){
+        alert("cannot post empty comments!");
+    }
+    else{
+
+        let request = new XMLHttpRequest();
+        request.open("post", "/../actions/api_edit_comment.php", true); 
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        request.send(encodeForAjax({comment: comment, comment_id: comment_id}));
+
+        request.onreadystatechange = function () {
+
+            if(request.readyState === 4 && request.status === 200) {
+
+                $('#replyDiv-'+comment_id).hide(300);
+                $('#replyDiv-'+comment_id).remove();
+
+                $('#user-comment-'+comment_id+'>.comment-body').text(comment);
+                $('#user-comment-'+comment_id+'>.comment-body').show(300);
+
+
+            }
+
+
+        };
+
+    }
+       
+});
+
+
+$(document.body).on('click', '.post-trashcan' ,function(e){
+
+    var postID = this.id.replace("post-delete-","");
+
+    
+    let request = new XMLHttpRequest();
+    request.open("post", "/../actions/api_delete_post.php", true); 
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    request.send(encodeForAjax({post_id: postID}));
+
+    request.onreadystatechange = function () {
+
+        if(request.readyState === 4 && request.status === 200) {
+            $(".title>a").replaceWith('<a href="/post.php/?id='+postID+'">[DELETED]</a>');
+            $(".content").text("[DELETED]");
+        }
+
+
+    };
+
+
+
+         
+});
+
+$(document.body).on('click', '.post-edit' ,function(e){
+
+    var post_id = this.id.replace("post-edit-","");
+
+
+    if ($('.content').length) { //this means it is a text post
+
+        let titleText = $(".title>a").text();
+        let contentText = $('.content').text();
+
+        if($("#edit-text-post-pop-up").length){
+            $("#edit-title").val(titleText);
+            $("#edit-content").val(contentText);
+
+            $("#edit-text-post-pop-up").css('display', 'block');
+
+
+        }
+        else{
+            let editTextPopUp = '<div id="edit-text-post-pop-up" class="pop-up" style="display: block;">'
+                + '<form method="post" class="pop-up-content animate" action="/../actions/api_edit_text_post.php">'
+                +  '<div class="close-button">'
+                +    '<span onclick="document.getElementById('+"'edit-text-post-pop-up'"+').style.display='+"'none'"+'" class="close">×</span>'
+                + '</div>'
+                + '<div class="container">'
+                +   '<label><a>Title</a></label>'
+                +   '<input type="text" id="edit-title" name="title" placeholder="Title" required="" value="'+titleText+'">'
+                +   '<label><a>Content</a></label>'
+                +   '<input type="textarea" id="edit-content" name="content" placeholder="Content" required="" value="'+contentText+'">'
+                +   '<input type="hidden" name="post_id" value="'+post_id+'">'
+                +   '<button id="edit-text-post-btn" type="submit">Edit post</button>'
+                + '</div>'
+                + '</form>'
+                +'</div>'
+
+       
+
+            $('#post-delete-'+post_id).after(editTextPopUp);
+        }
+
+        
+        
+    }
+
+    else{ //link post
+
+        let titleText = $(".title>a").text();
+        let link = $(".title>a").attr('href');
+
+        if($("#edit-link-post-pop-up").length){
+
+            $("#edit-title").val(titleText);
+            $("#edit-link").val(link);
+
+            $("#edit-link-post-pop-up").css('display', 'block');
+
+        }
+        else{
+
+            let editLinkPopUp = '<div id="edit-link-post-pop-up" class="pop-up" style="display: block;">'
+                + '<form method="post" class="pop-up-content animate" action="/../actions/api_edit_link_post.php">'
+                + '<div class="close-button">'
+                + '<span onclick="document.getElementById('+"'edit-link-post-pop-up'"+').style.display='+"'none'"+'" class="close">×</span>'
+                + '</div>'
+                + '<div class="container">'
+                + '<label><a>Title</a></label>'
+                +  '<input type="text" id="edit-title" name="title" placeholder="Title" required="" value="'+titleText+'">'
+                +  '<label><a>Link</a></label>'
+                +  '<input type="url" id="edit-link" name="link" placeholder="https://example.com" required="" value="'+link+'">'
+                +  '<input type="hidden" name="post_id" value="'+post_id+'">'
+                +  '<button id="edit-link-post-btn" type="submit">Edit post</button>'
+                +   '</div>'
+                +   '</form>'
+                +   '</div>';
+
+            $('#post-delete-'+post_id).after(editLinkPopUp);
+
+        }
+        
+        
+    }
+
+
+  
 
 
          
