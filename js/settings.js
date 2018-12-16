@@ -4,41 +4,44 @@ let confPassword = document.querySelector('#update_settings input[name=conf-new-
 let currentEmail = document.querySelector('#update_settings input[name=curr-email]');
 
 
+if(currentPassword != null){
+  currentPassword.addEventListener('change', function(event) {
+    let request = createRequest("actions/api_settings.php", {type: "password", value: currentPassword.value});
+    console.log(currentPassword.value);
 
-currentPassword.addEventListener('change', function(event) {
-  let request = createRequest("actions/api_settings.php", {type: "password", value: currentPassword.value});
-  console.log(currentPassword.value);
-
-  request.onreadystatechange=function(){
-    if (request.readyState==4 && request.status==200){
-      switch (JSON.parse(request.responseText)) {
-        case "valid":
-          console.log("Valid!");
-          break;
-        case "password":
-          // currentPassword.setCustomValidity("Incorrect password");
-          break;
+    request.onreadystatechange=function(){
+      if (request.readyState==4 && request.status==200){
+        switch (JSON.parse(request.responseText)) {
+          case "valid":
+            console.log("Valid!");
+            break;
+          case "password":
+            // currentPassword.setCustomValidity("Incorrect password");
+            break;
+        }
       }
     }
-  }
-});
+  });
+}
 
-currentEmail.addEventListener('change', function(event) {
-  let request = createRequest("actions/api_settings.php", {type: "email", value: currentEmail.value});
+if(currentEmail != null){
+  currentEmail.addEventListener('change', function(event) {
+    let request = createRequest("actions/api_settings.php", {type: "email", value: currentEmail.value});
 
-  request.onreadystatechange=function(){
-    if (request.readyState==4 && request.status==200){
-      switch (JSON.parse(request.responseText)) {
-        case "valid":
-          console.log("Valid!");
-          break;
-        case "email":
-          console.log("Invalid!");
-          break;
+    request.onreadystatechange=function(){
+      if (request.readyState==4 && request.status==200){
+        switch (JSON.parse(request.responseText)) {
+          case "valid":
+            console.log("Valid!");
+            break;
+          case "email":
+            console.log("Invalid!");
+            break;
+        }
       }
     }
-  }
-});
+  });
+}
 
 if(newPassword != null){
   newPassword.addEventListener('change', function() {
