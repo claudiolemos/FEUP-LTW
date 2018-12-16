@@ -6,5 +6,5 @@
   if($_POST['subscribed'] == "true")
     echo json_encode(getSubscribedPosts($_POST['sort'], getUserID($_SESSION['username'])));
   else
-    echo json_encode(getPosts($_POST['sort'], $_POST['id']));
+    echo json_encode(getPosts($_POST['sort'], $_POST['id'],0));
 ?>

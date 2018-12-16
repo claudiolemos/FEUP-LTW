@@ -112,62 +112,81 @@
    * Returns a list of posts based on a type of sorting
    * @param  string $sort type of sort
    * @param  string $channel if not null, the channel from where to get posts
+   * @param  int $offset current increment
    * @return array post id, title, content, link, date, votes, username and channel
    */
-  function getPosts($sort, $channel = null){
+  function getPosts($sort, $channel = null, $offset){
     $db = Database::instance()->db();
 
     if($channel == null){
       switch ($sort) {
         case "new":
-            $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+            $stmt = $db->prepare('SELECT t.*
+                            FROM(
+                              SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
-                                  ORDER BY date DESC');
+                                  LIMIT 5 OFFSET ? ) t
+                                  ORDER BY date DESC ');
             break;
         case "top":
-            $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+            $stmt = $db->prepare('SELECT t.*
+                            FROM(
+                          SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
-                                  ORDER BY votes DESC, date ASC');
+                                  LIMIT 5 OFFSET ? ) t
+                                  ORDER BY votes DESC, date ASC ');
             break;
         case "controversial":
-            $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
+            $stmt = $db->prepare('SELECT t.*
+                            FROM(
+                        SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
                                   FROM Posts p1, Users, Channels, (
     	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
                                   )
                                   WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post
-                                  ORDER BY comments DESC, votes DESC');
+                                  LIMIT 5 OFFSET ?) t
+                                  ORDER BY comments DESC, votes DESC ');
             break;
       }
 
-      $stmt->execute();
+      $stmt->execute(array($offset));
     }
     else{
       switch ($sort) {
         case "new":
-            $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+            $stmt = $db->prepare('SELECT t.*
+                            FROM(
+              SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ?
-                                  ORDER BY date DESC');
+                                  LIMIT 5 OFFSET ?) t
+                                  ORDER BY date DESC ');
             break;
         case "top":
-            $stmt = $db->prepare('SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
+            $stmt = $db->prepare('SELECT t.*
+                            FROM(
+              SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ?
-                                  ORDER BY votes DESC, date ASC');
+                                  LIMIT 5 OFFSET ? ) t
+                                  ORDER BY votes DESC, date ASC ');
             break;
         case "controversial":
-            $stmt = $db->prepare('SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
+            $stmt = $db->prepare('SELECT t.*
+                            FROM(
+              SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
                                   FROM Posts p1, Users, Channels, (
     	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
                                   )
                                   WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post AND Channels.name = ?
-                                  ORDER BY comments DESC, votes DESC');
+                                  LIMIT 5 OFFSET ? ) t
+                                  ORDER BY comments DESC, votes DESC ');
             break;
       }
 
-      $stmt->execute(array($channel));
+      $stmt->execute(array($channel, $offset));
     }
 
     return $stmt->fetchAll();

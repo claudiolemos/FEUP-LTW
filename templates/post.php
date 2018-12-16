@@ -1,6 +1,4 @@
-<!--Depois de dar merge isto deve ir para o init-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="../../js/post.js"></script>
+
 
 <section id="single-post">
 
