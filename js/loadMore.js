@@ -50,8 +50,8 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
                 + '</header>'
                 + '<footer>'
                 + '<span class="date">'+date+'</span>'
-                + '<span class="username"><a href="/profile.php/?id='+username+'">'+username+'</a></span>'
-                + '<span class="channel"><a href="/channel.php/?id='+channel+'">'+channel+'</a></span>'
+                + '<span class="username"><a href="/profile.php/?id='+username+'">@'+username+'</a></span>'
+                + '<span class="channel"><a href="/channel.php/?id='+channel+'"> #'+channel+' </a></span>'
                 + '<span class="comments">'+numComments+'</span>'
                 + '</footer>'
                 + '</article>';
@@ -64,7 +64,7 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
                 updateVotingButtons();
             }
 
-            
+
 
 
 

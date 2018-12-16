@@ -148,7 +148,7 @@ body > header #logo img:hover {
 }
 
 /* Full-width input fields */
-.container input[type=text], .container input[type=password], .container input[type=email], .container input[type=url]{
+.container input[type=text], .container input[type=password], .container input[type=email], .container input[type=url], #settings-update input{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -205,7 +205,7 @@ div .register > button {
     position: relative;
 }
 
-div .container > button, #user-profile-sidebar input[type=submit], .load-more-posts-btn{
+div .container > button, #user-profile-sidebar input[type=submit], .load-more-posts-btn, #settings-sidebar input[type=submit], #settings-update button[type=submit]{
     background-color: var(--red2);
     color: white;
     padding: 14px 20px;

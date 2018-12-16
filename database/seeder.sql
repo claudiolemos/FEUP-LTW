@@ -7,7 +7,7 @@ INSERT INTO Users VALUES (
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", -- sha256 encryption of 12345
   1533300418,
   0,
-  "/images/profile/claudio.jpg"
+  "/images/profile/duarte.png"
 );
 
 INSERT INTO Users VALUES (
@@ -17,7 +17,7 @@ INSERT INTO Users VALUES (
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", -- sha256 encryption of 12345
   1537889458,
   0,
-  "/images/profile/duarte.jpg"
+  "/images/profile/claudio.jpg"
 );
 
 INSERT INTO Users VALUES (
