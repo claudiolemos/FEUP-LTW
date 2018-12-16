@@ -1,14 +1,26 @@
 <?php
   /**
    * Gets the karma of one user
-   * @param  int $id id of the user
+   * @param  string $username username of the user
    * @return int|null user's karma or null if the user doesn't exist
    */
-  function getUserKarma($id){
+  function getUserKarma($username){
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT karma FROM Users WHERE id = ?');
-    $stmt->execute(array($id));
+    $stmt = $db->prepare('SELECT karma FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
     return $stmt->fetch()['karma'];
+  }
+
+  /**
+   * Gets the karma of one user
+   * @param  string $username username of the user
+   * @return string|null user's karma or null if the user doesn't exist
+   */
+  function getUserCakeDay($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT cake_day FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetch()['cake_day'];
   }
 
   /**
@@ -53,6 +65,18 @@
   }
 
   /**
+   * Checks if email belongs to user
+   * @param  string $username user's username
+   * @param  string $email user's email
+   * @return boolean true if email is the same or false if it's not
+   */
+  function userEmail($username, $email){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT email FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+    return ($stmt->fetch()['email'] == $email);
+  }
+
    * Checks if a email exists
    * @param  string $email user's email
    * @return boolean true if email exists or false if it doesn't
@@ -63,10 +87,33 @@
     $stmt->execute(array($email));
 
     if($stmt->fetch() != null)
-      return true;
-    else
-      return false;
+
+  function updateUserPassword($username, $password){
+    $db = Database::instance()->db();
+    $hash = hash('sha256', $password);
+    $stmt = $db->prepare('UPDATE Users SET password = ? where username = ?');
+    $stmt->execute(array($hash, $username));
   }
+
+  function updateUserEmail($username,  $email){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Users SET email = ? where username = ?');
+    $stmt->execute(array($email, $username));
+  }
+
+  function updateAvatar($username,  $avatar){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('UPDATE Users SET avatar = ? where username = ?');
+    $stmt->execute(array($avatar, $username));
+  }
+
+  function getAvatar($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT avatar FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetch()['avatar'];
+  }
+
   /**
    * Gets the ID of an user
    * @param  string $username user's username
@@ -117,4 +164,5 @@
     $stmt->execute(array("%$query%"));
     return $stmt->fetchAll();
   }
+
 ?>

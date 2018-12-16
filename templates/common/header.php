@@ -66,6 +66,7 @@
               <label><a>Confirm Password</a></label>
               <input type="password" name="confirm" placeholder="Password" required>
               <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
               <button type="submit">Register</button>
             </div>
           </form>

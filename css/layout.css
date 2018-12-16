@@ -37,6 +37,7 @@ body > header {
   grid-column: middle / end;
 }
 
+
 #posts, #search-posts, #channel-posts {
   grid-row: posts / footer;
   grid-column: start / middle;
@@ -155,4 +156,33 @@ body > header #channels, body > header #channel {
   width: 10px;
   height: 82px;
   padding-right: 20px;
+}
+
+#comments article {
+  display: grid;
+  grid-template-columns: [voting] 2em [image] 6em [start] auto [end];
+  grid-template-rows: [start] auto [preview] auto [end];
+  margin: 0.5em 0.5em 2em;
+}
+
+#comments article .voting {
+  grid-column: voting / image;
+  grid-row: start / end;
+  display: grid;
+}
+
+#comments article > img {
+  grid-column: image / start;
+  grid-row: start / end;
+}
+
+#comments article > header .preview {
+  grid-column: start / end;
+  grid-row: start / end;
+  /* background-color: blue; */
+}
+
+#comments article > footer {
+  grid-column: start / end;
+  grid-row: preview / end;
 }

@@ -49,6 +49,22 @@
     return $indent_level;
   }
 
+
+  function getAllUserComments($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Comments.id, Comments.content, Comments.parent_id, Comments.post_id, Comments.date, Comments.user_id, Comments.votes, u1.username, Posts.title as post, Posts.user_id as userID, u2.username as user2, Channels.name as channel
+                          FROM Comments, Users u1 ,Users u2, Posts, Channels
+                          WHERE Comments.user_id = u1.id
+                          AND Comments.post_id = Posts.id
+                          AND Posts.channel_id = Channels.id
+                          AND u1.username = ?
+                          AND Posts.user_id = u2.id
+                          ORDER BY Comments.date DESC');
+    $stmt->execute(array($username));
+    return $stmt->fetchAll();
+  }
+
+
   /**
    * Gets all comments on a post
    * @param  int $post_id id of the post
@@ -263,6 +279,4 @@
     $stmt = $db->prepare('UPDATE Comments SET content = ? WHERE id = ?');
     $stmt->execute(array($comment,$comment_id));
   }
-
-
 ?>

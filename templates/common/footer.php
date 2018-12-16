@@ -9,7 +9,7 @@
 <script src="../js/sort.js" defer></script>
 <script src="../js/register.js" defer></script>
 <script src="../js/login.js" defer></script>
+<script src="js/settings.js" defer></script>
 <script src="../js/subscribe.js" defer></script>
 <script src="../js/createChannel.js" defer></script>
-
 </html>
