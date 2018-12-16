@@ -9,6 +9,8 @@
   width: 90%;
   padding: 10px;
   border-left-width: 5px !important;
+  border-radius: 10px;
+  border-left-color: var(--red3);
 }
 
 .comment-info{

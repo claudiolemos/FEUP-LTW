@@ -2,6 +2,10 @@
   #logo h1{
     display: none;
   }
+
+  #sort li a{
+    display: none;
+  }
 }
 
 @media (max-width: 30em) {

@@ -11,8 +11,10 @@
     </button>
   </form>
 </div>
+
 <div id="search-results">
   <h1>Search Results</h1>
+
   <section id="search-posts">
     <h2>Posts</h2>
     <?php if($searchPosts != null) { ?>

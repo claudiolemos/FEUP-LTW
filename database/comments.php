@@ -177,7 +177,7 @@
    * @param  int  $post_id id of the post
    * @param  date  $date comment date
    * @param  int|undefined $parent_id id of the parent of this comment. undefined if top-level comment.
-   * @param  int  $username user's username 
+   * @param  int  $username user's username
    * @return array post_id, id of new comment and parent id
    */
     function addComment($content, $user_id, $post_id, $date, $parent_id, $username){
@@ -270,7 +270,7 @@
   }
 
   /**
-   * edits a comment 
+   * edits a comment
    * @param  int $comment_id id of the comment that is being edited
    * @param  string $comment new comment
    */
@@ -278,5 +278,20 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('UPDATE Comments SET content = ? WHERE id = ?');
     $stmt->execute(array($comment,$comment_id));
+  }
+
+  /**
+   * Searches the comments
+   * @param  string $query what the user is searching for
+   * @return array  comments that match the query
+   */
+  function searchComments($query){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT Comments.id, Comments.content, Comments.post_id, Comments.date, Comments.votes, Posts.title as title, u1.username as user1, u2.username as user2, Channels.name as channel
+                          FROM Comments, Users u1 ,Users u2, Posts, Channels
+                          WHERE Comments.user_id = u1.id AND Comments.post_id = Posts.id AND Posts.channel_id = Channels.id AND Posts.user_id = u2.id AND (Comments.content LIKE ? OR Posts.title LIKE ? OR  u1.username LIKE ? OR Channels.name LIKE ?)
+                          ORDER BY Comments.date DESC');
+    $stmt->execute(array("%$query%", "%$query%", "%$query%", "%$query%"));
+    return $stmt->fetchAll();
   }
 ?>

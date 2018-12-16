@@ -4,8 +4,8 @@
 
 
   $username = strtolower(trim(strip_tags($_SESSION['username'])));
-  $new_email = strtolower(trim(strip_tags($_GET['new-email'])));
-  $curr_email = strtolower(trim(strip_tags($_GET['curr-email'])));
+  $new_email = strtolower(trim(strip_tags($_POST['new-email'])));
+  $curr_email = strtolower(trim(strip_tags($_POST['curr-email'])));
 
   if($new_email != null && $curr_email != null)
     if(userEmail($username, $curr_email))
