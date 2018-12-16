@@ -11,66 +11,39 @@
 ?>
 
 <?php if(userExists($_GET['id'])) {?>
-<form id="sidebar">
-  <h1><?php echo($_GET['id'])?></h1>
-  <h3>Karma: <?php echo($karma)?> </h3>
-  <h3>Cake day: <?php echo($cakeday)?> </h3>
-  <section id="images">
-    <article class="image">
-        <img src="<?=$avatar?>" width="200" height="200">
-    </article>
-  </section>
-  <?php if(isset($_SESSION['username']) && $_SESSION['username'] == $_GET['id']) { ?>
-  <div class="post">
-    <button class="new_post"><a href="index.php">New Post</a></button>
+<form id="user-profile-sidebar">
+  <div id="avatar">
+    <img style="border-radius:50%;" src="<?=$avatar?>">
   </div>
-<?php }?>
+  <p class="username"><?php echo($_GET['id'])?></p>
+  <p class="karma">Karma: <?php echo($karma)?> points</p>
+  <p class="cake-day">Cake day: <?php echo($cakeday)?> </p>
 </form>
-<section id="posts">
-  <?php foreach($posts as $post) { ?>
-    <article class="link">
-      <div class="voting">
-        <button class="upvote"></button>
-        <span class="votes"><?=$post['votes']?></span>
-        <button class="downvote"></button>
-      </div>
-      <div class="thumbnail">
-        <img src="/images/text_post.png" alt="Reddito logo">
-      </div>
-      <header>
-        <p class="title"><?=$post['title']?></p>
-      </header>
-      <footer>
-        <span class="date"><?=$post['date']?></span>
-        <span class="username"><?=$post['username']?></span>
-        <span class="channel"><?=$post['channel']?></span>
-        <span class="comments">2</span>
-      </footer>
-    </article>
-    <?php } ?>
-</section>
-<section id="comments">
-  <?php foreach($comments as $comment) { ?>
-    <article class="link">
-      <div class="voting">
-        <button class="upvote"></button>
-        <span class="votes"><?=$comment['votes']?></span>
-        <button class="downvote"></button>
-      </div>
-      <div class="thumbnail">
-        <img src="images/text_post.png" alt="Reddito logo">
-      </div>
-      <header>
-        <p class="preview"><?=$_GET['id']?> commented on <?=$comment['post']?> - <?=$comment['channel']?>, posted by <a href="profile.php?id=<?=$comment['user2']?>"> <?=$comment['user2']?></a></p>
-      </header>
-      <footer>
-        <span class="date"><?=$comment['date']?></span>
-        <span class="username"><?=$comment['username']?></span>
-        <span class="post"><?=$comment['post']?></span>
-      </footer>
-    </article>
-    <?php } ?>
-</section>
+<div id="user-history">
+  <section id="posts">
+    <?php foreach($posts as $post) { ?>
+      <article id="<?=$post['id']?>">
+        <div class="voting">
+          <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], 1)?>"></button>
+          <span class="votes"><?=$post['votes']?></span>
+          <button class="<?=getVoteButtonClass(getUserID($_SESSION['username']), $post['id'], -1)?>"></button>
+        </div>
+        <div class="thumbnail">
+          <img src="<?=getPostThumbnail($post['id'])?>">
+        </div>
+        <header>
+          <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a></p>
+        </header>
+        <footer>
+          <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
+          <span class="username"><a href="/profile.php/?id=<?=$post['username']?>">@<?=$post['username']?></a></span>
+          <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>">#<?=$post['channel']?></a></span>
+          <span class="comments"><?=getNoComments($post['id'])?></span>
+        </footer>
+      </article>
+      <?php } ?>
+  </section>
+</div>
 <?php } else {?>
   <h1>User doesn't exist!</h1>
 <?php } ?>

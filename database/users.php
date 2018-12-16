@@ -45,7 +45,7 @@
     $db = Database::instance()->db();
     $hash = hash('sha256', $password);
     $stmt = $db->prepare('INSERT INTO Users VALUES (NULL, ?, ?, ?, ?, 0, ?)');
-    $stmt->execute(array($username, $email, $hash, time(), "../images/profile/default.svg"));
+    $stmt->execute(array($username, $email, $hash, time(), "/images/profile/default.svg"));
   }
 
   /**

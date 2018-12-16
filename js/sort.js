@@ -6,6 +6,10 @@ let channelID = document.querySelector('#channel-id .name') == null? null : docu
 let currentSort = "new";
 let sortSubscribed = false;
 
+if(sort[0] != null){
+  sort[0].style.backgroundColor = "var(--red2)";
+}
+
 for(var i = 0; i < sort.length; i++) {
   sort[i].addEventListener('click', function(event) {
     event.preventDefault();
@@ -13,7 +17,7 @@ for(var i = 0; i < sort.length; i++) {
     for(var j = 0; j < sort.length; j++)
       sort[j].style.backgroundColor = "transparent";
 
-    this.style.backgroundColor = "var(--red3)"
+    this.style.backgroundColor = "var(--red2)"
 
     currentSort = this.getAttribute("name");
     let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: currentSort, subscribed: sortSubscribed, username: username}) : createRequest("/../../actions/api_sort.php", {sort: currentSort, id: channelID});
@@ -25,7 +29,7 @@ if(sortSubscriptions != null){
   sortSubscriptions.addEventListener('click', function(event) {
     event.preventDefault();
     sortSubscribed = !sortSubscribed;
-    sortSubscriptions.style.backgroundColor = sortSubscribed? "var(--blue3)" : "transparent";
+    sortSubscriptions.style.backgroundColor = sortSubscribed? "var(--blue2)" : "transparent";
 
     let request = createRequest("/../../actions/api_sort.php", {sort: currentSort, subscribed: sortSubscribed, username: username});
     request.onreadystatechange=function(){updatePosts(request);}
@@ -65,8 +69,8 @@ function createArticle(post){
                             </header>
                             <footer>
                               <span class="date">${response['date']}</span>
-                              <span class="username"><a href="/profile.php/?id=${response['username']}"> ${response['username']}</a></span>
-                              <span class="channel"><a href="/channel.php/?id=${response['channel']}"> ${response['channel']}</a></span>
+                              <span class="username"><a href="/profile.php/?id=${response['username']}"> @${response['username']}</a></span>
+                              <span class="channel"><a href="/channel.php/?id=${response['channel']}"> #${response['channel']}</a></span>
                               <span class="comments"> ${response['comments']}</span>
                             </footer>`;
 

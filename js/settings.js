@@ -1,7 +1,7 @@
-let currentPassword = document.querySelector('#update_settings input[name=curr-pwd]');
-let newPassword = document.querySelector('#update_settings input[name=new-pwd]');
-let confPassword = document.querySelector('#update_settings input[name=conf-new-pwd]');
-let currentEmail = document.querySelector('#update_settings input[name=curr-email]');
+let currentPassword = document.querySelector('#settings-update input[name=curr-pwd]');
+let newPassword = document.querySelector('#settings-update input[name=new-pwd]');
+let confPassword = document.querySelector('#settings-update input[name=conf-new-pwd]');
+let currentEmail = document.querySelector('#settings-update input[name=curr-email]');
 
 
 if(currentPassword != null){

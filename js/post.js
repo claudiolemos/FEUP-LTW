@@ -35,11 +35,11 @@ $(document.body).on('click', '.write-comment' ,function(e){
 
     	$('#replyDiv-' + this.value).append('<button class="post-comment-btn" value="'+ this.value +'" >Post Comment</button>');
 
-    	$('#replyDiv-' + this.value).show(300);   
+    	$('#replyDiv-' + this.value).show(300);
 
     }
 
-    
+
 
 
 });
@@ -74,7 +74,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
         let parent_id = post_comment_parent[1]; //level comment, so parent_id is null
 
         let checkmentions = new XMLHttpRequest();
-        checkmentions.open("post", "/../actions/api_check_mentions.php", true); 
+        checkmentions.open("post", "/../actions/api_check_mentions.php", true);
         checkmentions.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         checkmentions.send(encodeForAjax({content: comment}));
@@ -85,12 +85,12 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                 comment = JSON.parse(this.responseText);
 
                 let request = new XMLHttpRequest();
-                request.open("post", "/../actions/api_post_comment.php", true); 
+                request.open("post", "/../actions/api_post_comment.php", true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-        
+
                 request.send(encodeForAjax({post_id: post_id, content: comment, parent_id: parent_id}));
-       
+
 
                 request.onreadystatechange = function () {
                     if(request.readyState === 4 && request.status === 200) {
@@ -108,7 +108,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                             let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
                                 + "<div class='voting comment-voting'>"
                                 + "<button class='upvoted'></button>"
-                                + "<span class='votes comment-votes'>"+'1'+"</span>" 
+                                + "<span class='votes comment-votes'>"+'1'+"</span>"
                                 + "<button class="+'downvote'+"></button>"
                                 + "</div>"
                                 + "<span id="+"comment-info"+">"+ user_profile + " - " + date + " - "
@@ -130,22 +130,22 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                                 $('#write-comment-div-' + parent_id).after(newComment);
                             }
 
-                
 
-                            $('#user-comment-' + newID).show(300); 
+
+                            $('#user-comment-' + newID).show(300);
 
                         }
                         else{
                             alert("log in to post comments!");
-                        } 
+                        }
 
 
                         comment ="";
 
                     }
                 };
-                
-                        
+
+
             }
 
 
@@ -192,9 +192,9 @@ $(document.body).on('click', '.replyBtn' ,function(e){
         $('#replyDiv-'+this.value).append('<button class="post-comment-btn" value="'+ this.value +'" >Post Comment</button>');
 
 
-        $('#replyDiv-'+this.value).show(300);                 
-        
-    }        
+        $('#replyDiv-'+this.value).show(300);
+
+    }
 });
 
 
@@ -203,9 +203,9 @@ $(document.body).on('click', '.comment-trashcan' ,function(e){
 
     var commentID = this.id.replace("user-delete-","");
 
-    
+
     let request = new XMLHttpRequest();
-    request.open("post", "/../actions/api_delete_comment.php", true); 
+    request.open("post", "/../actions/api_delete_comment.php", true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     request.send(encodeForAjax({comment_id: commentID}));
@@ -213,7 +213,7 @@ $(document.body).on('click', '.comment-trashcan' ,function(e){
     request.onreadystatechange = function () {
 
         if(request.readyState === 4 && request.status === 200) {
-            $('#user-comment-'+commentID+'>.comment-body').replaceWith("<div class="+'comment-body'+">[DELETED]</div>");  
+            $('#user-comment-'+commentID+'>.comment-body').replaceWith("<div class="+'comment-body'+">[DELETED]</div>");
         }
 
 
@@ -221,7 +221,7 @@ $(document.body).on('click', '.comment-trashcan' ,function(e){
 
 
 
-         
+
 });
 
 $(document.body).on('click', '.comment-edit' ,function(e){
@@ -255,7 +255,7 @@ $(document.body).on('click', '.comment-edit' ,function(e){
         $('#user-comment-'+commentID+'>.comment-body').after(replyHtml);
 
 
-    
+
         $('#comment-input-'+commentID).text(commentText);
 
         $('#comment-input-'+commentID).css('width','70%');
@@ -267,7 +267,7 @@ $(document.body).on('click', '.comment-edit' ,function(e){
     }
 
 
-         
+
 });
 
 
@@ -284,7 +284,7 @@ $(document.body).on('click', '.edit-comment-btn' ,function(e){
     else{
 
         let request = new XMLHttpRequest();
-        request.open("post", "/../actions/api_edit_comment.php", true); 
+        request.open("post", "/../actions/api_edit_comment.php", true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         request.send(encodeForAjax({comment: comment, comment_id: comment_id}));
@@ -306,7 +306,7 @@ $(document.body).on('click', '.edit-comment-btn' ,function(e){
         };
 
     }
-       
+
 });
 
 
@@ -314,9 +314,9 @@ $(document.body).on('click', '.post-trashcan' ,function(e){
 
     var postID = this.id.replace("post-delete-","");
 
-    
+
     let request = new XMLHttpRequest();
-    request.open("post", "/../actions/api_delete_post.php", true); 
+    request.open("post", "/../actions/api_delete_post.php", true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     request.send(encodeForAjax({post_id: postID}));
@@ -333,7 +333,7 @@ $(document.body).on('click', '.post-trashcan' ,function(e){
 
 
 
-         
+
 });
 
 $(document.body).on('click', '.post-edit' ,function(e){
@@ -364,20 +364,20 @@ $(document.body).on('click', '.post-edit' ,function(e){
                 +   '<label><a>Title</a></label>'
                 +   '<input type="text" id="edit-title" name="title" placeholder="Title" required="" value="'+titleText+'">'
                 +   '<label><a>Content</a></label>'
-                +   '<input type="textarea" id="edit-content" name="content" placeholder="Content" required="" value="'+contentText+'">'
+                +   '<textarea name="content" required value"teste">'+contentText+'</textarea>'
                 +   '<input type="hidden" name="post_id" value="'+post_id+'">'
                 +   '<button id="edit-text-post-btn" type="submit">Edit post</button>'
                 + '</div>'
                 + '</form>'
                 +'</div>'
 
-       
+
 
             $('#post-delete-'+post_id).after(editTextPopUp);
         }
 
-        
-        
+
+
     }
 
     else{ //link post
@@ -414,16 +414,13 @@ $(document.body).on('click', '.post-edit' ,function(e){
             $('#post-delete-'+post_id).after(editLinkPopUp);
 
         }
-        
-        
+
+
     }
 
 
-  
 
 
-         
+
+
 });
-
-
-

@@ -1,0 +1,15 @@
+@media (max-width: 60em) {
+  #logo h1{
+    display: none;
+  }
+
+  #sort li a{
+    display: none;
+  }
+}
+
+@media (max-width: 30em) {
+  #channels{
+    display: none;
+  }
+}

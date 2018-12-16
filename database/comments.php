@@ -161,7 +161,7 @@
    * @param  int  $post_id id of the post
    * @param  date  $date comment date
    * @param  int|undefined $parent_id id of the parent of this comment. undefined if top-level comment.
-   * @param  int  $username user's username 
+   * @param  int  $username user's username
    * @return array post_id, id of new comment and parent id
    */
     function addComment($content, $user_id, $post_id, $date, $parent_id, $username){
@@ -252,7 +252,7 @@
   }
 
   /**
-   * edits a comment 
+   * edits a comment
    * @param  int $comment_id id of the comment that is being edited
    * @param  string $comment new comment
    */
@@ -261,6 +261,5 @@
     $stmt = $db->prepare('UPDATE Comments SET content = ? WHERE id = ?');
     $stmt->execute(array($comment,$comment_id));
   }
-
 
 ?>

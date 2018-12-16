@@ -4,7 +4,7 @@
 
 
   $id = $_SESSION['username'];
-  $image = "images/profile/default.jpg";
+  $image = "images/profile/default.svg";
   updateAvatar($_SESSION['username'], $image);
 
   header("Location:".$_SERVER['HTTP_REFERER']."");

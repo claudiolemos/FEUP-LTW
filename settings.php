@@ -5,3 +5,5 @@
   include ('templates/settings.php');
   include ('templates/common/footer.php');
 ?>
+
+<script src="js/settings.js" defer></script>
