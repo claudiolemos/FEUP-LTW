@@ -11,8 +11,8 @@
 
 body {
   display: grid;
-  grid-template-columns: [start] 4fr [middle] 1fr [end];
-  grid-template-rows: [start] auto [nav sort search] auto [posts sidebar] auto [comments] auto [footer] auto [end];
+  grid-template-columns: [start] 4fr [middle] 1.25fr [end];
+  grid-template-rows: [start] 7em [nav sort search-big search error single-post] auto [posts search-results] auto [sidebar] auto [footer] auto [end];
 }
 
 /* main layout */
@@ -33,18 +33,41 @@ body > header {
 }
 
 #sidebar {
-  grid-row: sidebar / footer;
+  grid-row: posts / sidebar
   grid-column: middle / end;
 }
 
-#posts {
-  grid-row: posts / comments;
+
+#posts, #search-posts, #channel-posts {
+  grid-row: posts / footer;
   grid-column: start / middle;
 }
 
-#comments {
-  grid-row: comments / footer;
+#single-post {
+  grid-row: single-post / footer;
   grid-column: start / middle;
+}
+
+#search-results {
+  grid-row: search-results / footer;
+  grid-column: start / end;
+}
+
+#search-big {
+  grid-row: search-big / search-results;
+  grid-column: start / end;
+}
+
+#comments{
+  position:relative;
+  left:10px;
+  top:10px;
+  width: 100%;
+}
+
+#error-block{
+  grid-row: error / end;
+  grid-column: start / end;
 }
 
 body > footer {
@@ -55,8 +78,18 @@ body > footer {
 /* header layout */
 
 body > header {
-  display: grid;
-  grid-template-columns: [logo] 1fr [channels] 3fr [signup] 1fr [end];
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+body > header #logo {
+  display: flex;
+  justify-content: space-around;
+}
+
+body > header #channels, body > header #channel {
+  flex-grow: 0.5;
 }
 
 #channels ul {
@@ -77,47 +110,52 @@ body > header {
 }
 
 #sort li {
-  display: block;
-  flex: 1;
+  list-style: none;
 }
 
 /* post blocks layout */
 
-#posts article {
+#posts article, #single-post article, #search-posts article, #channel-posts article {
   display: grid;
-  grid-template-columns: [voting] 2em [image] 6em [start] auto [end];
-  grid-template-rows: [start] auto [preview] auto [info] auto [end];
-  margin: 0.5em 0.5em 2em;
+  grid-template-columns: [voting] 2em [image] 5em [start] auto [end];
+  grid-template-rows: [start] auto [info] auto [end];
+  margin-bottom: 1em;
 }
 
-#posts article .voting {
+#posts article .voting, #single-post article .voting, #search-posts article .voting, #channel-posts article .voting {
   grid-column: voting / image;
   grid-row: start / end;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 
-#posts article > img {
+#posts article .thumbnail, #single-post article .thumbnail, #search-posts article .thumbnail, #channel-posts article .thumbnail {
   grid-column: image / start;
   grid-row: start / end;
 }
 
-#posts article > header .title {
+#posts article > header .title, #single-post article > header .title, #search-posts article > header .title, #channel-posts article > header .title {
   grid-column: start / end;
-  grid-row: start / preview;
-  /* background-color: red; */
+  grid-row: start / info;
   margin: 0;
   font-size: 1.5em;
 }
 
-#posts article > header .preview {
-  grid-column: start / end;
-  grid-row: preview / info;
-  /* background-color: blue; */
-}
-
-#posts article > footer {
+#posts article > footer, #single-post article > footer, #search-posts article > footer, #channel-posts article > footer {
   grid-column: start / end;
   grid-row: info / end;
+}
+
+
+/* comment layout */
+
+
+.comment-voting {
+  position: relative;
+  float: left;
+  width: 10px;
+  height: 82px;
+  padding-right: 20px;
 }
 
 #comments article {

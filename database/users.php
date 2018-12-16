@@ -41,6 +41,13 @@
       return false;
   }
 
+  function addUser($username, $password, $email){
+    $db = Database::instance()->db();
+    $hash = hash('sha256', $password);
+    $stmt = $db->prepare('INSERT INTO Users VALUES (NULL, ?, ?, ?, ?, 0)');
+    $stmt->execute(array($username, $email, $hash, time()));
+  }
+
   /**
    * Checks if a user exists
    * @param  string $username user's username
@@ -58,21 +65,28 @@
   }
 
   /**
-   * Checks user's email
+   * Checks if email belongs to user
    * @param  string $username user's username
    * @param  string $email user's email
-   * @return boolean true if email is the same or false if it doesn't
+   * @return boolean true if email is the same or false if it's not
    */
   function userEmail($username, $email){
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT email FROM Users WHERE username = ?');
     $stmt->execute(array($username));
-
-    if($stmt->fetch()['email'] == $email)
-      return true;
-    else
-      return false;
+    return ($stmt->fetch()['email'] == $email);
   }
+
+   * Checks if a email exists
+   * @param  string $email user's email
+   * @return boolean true if email exists or false if it doesn't
+   */
+  function emailExists($email){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT email FROM Users WHERE email = ?');
+    $stmt->execute(array($email));
+
+    if($stmt->fetch() != null)
 
   function updateUserPassword($username, $password){
     $db = Database::instance()->db();
@@ -100,5 +114,55 @@
     return $stmt->fetch()['avatar'];
   }
 
+  /**
+   * Gets the ID of an user
+   * @param  string $username user's username
+   * @return int usernames ID.
+   */
+  function getUserID($username){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT id FROM Users WHERE username = ?');
+    $stmt->execute(array($username));
+
+    
+    $user_id = $stmt->fetch()['id'];
+    if($user_id != null)
+      return $user_id;
+    else
+      return -1;
+
+
+
+  }
+
+  /**
+   * Gets the username of an user
+   * @param  int $id user's id
+   * @return string user's username.
+   */
+  function getUserName($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT username FROM Users WHERE id = ?');
+    $stmt->execute(array($id));
+
+    return $stmt->fetch()['username'];
+
+
+  }
+
+
+  /**
+   * Searches the users
+   * @param  string $query what the user is searching for
+   * @return array  users that match the query
+   */
+  function searchUsers($query){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT username
+                          FROM Users
+                          WHERE username LIKE ?');
+    $stmt->execute(array("%$query%"));
+    return $stmt->fetchAll();
+  }
 
 ?>
