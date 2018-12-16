@@ -6,7 +6,7 @@
 
   $content = $_POST['content'];
 
-  $content = htmlspecialchars($content);
+  
 
 
   //check for user mentions
