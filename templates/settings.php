@@ -8,7 +8,7 @@
 <?php if(isset($_SESSION['username']) && $_GET['id'] == $_SESSION['username']) {
   $avatar = getAvatar($_SESSION['username']);?>
   <div id="sidebar">
-      <form action="/actions/upload.php" method="post" enctype="multipart/form-data">
+      <form action="actions/upload.php" method="post" enctype="multipart/form-data">
         <h1>Avatar</h1>
         <input type="file" name="image">
         <input type="submit" value="Upload">
