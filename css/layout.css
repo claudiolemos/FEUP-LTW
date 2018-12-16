@@ -43,6 +43,13 @@ body > header {
   grid-column: start / middle;
 }
 
+#channel-empty-block {
+  grid-row: sort / footer;
+  grid-column: start / middle;
+}
+
+
+
 #single-post {
   grid-row: single-post / footer;
   grid-column: start / middle;

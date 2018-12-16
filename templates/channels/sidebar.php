@@ -9,9 +9,16 @@
 <aside id="sidebar">
   <div id="channel-id">
       <div class="name"><?=$channel['name']?></div>
-      <div class="description"><?=$channel['description']?></div>
-      <div class="subscribers"><?=getChannelSubscribers($channel['id'])?></div>
-      <div class="creation"><?=time_elapsed($channel['creation_day'])?></div>
+      <p class="description"><?=$channel['description']?></p>
+      <div class="subscribers">
+        <?php if(($no_subscribers = getChannelSubscribers($channel['id'])) == 0){ ?>
+          Nobody has subscribed yet! Be the first one.
+        <?php } else{?>
+          <?=$no_subscribers?>
+          <?=$no_subscribers == 1? "subscriber" : "subscribers"?>
+        <?php } ?>
+      </div>
+      <div class="creation">A community for <?=time_elapsed($channel['creation_day'])?></div>
   </div>
   <?php if(isset($_SESSION['username'])){ ?>
     <div class="subscription">
@@ -29,7 +36,7 @@
           <label><a>Title</a></label>
           <input type="text" name="title" placeholder="Title" required>
           <label><a>Content</a></label>
-          <input type="textarea" name="content" placeholder="Content" required>
+          <textarea name="content" rows="15" placeholder="Content" required></textarea>
           <input type="hidden" name="username" value="<?=$_SESSION['username']?>">
           <input type="hidden" name="channel" value="<?=$channel['name']?>">
           <button type="submit">Submit post</button>

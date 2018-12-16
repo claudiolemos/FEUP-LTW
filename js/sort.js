@@ -6,6 +6,10 @@ let channelID = document.querySelector('#channel-id .name') == null? null : docu
 let currentSort = "new";
 let sortSubscribed = false;
 
+if(sort[0] != null){
+  sort[0].style.backgroundColor = "var(--red2)";
+}
+
 for(var i = 0; i < sort.length; i++) {
   sort[i].addEventListener('click', function(event) {
     event.preventDefault();

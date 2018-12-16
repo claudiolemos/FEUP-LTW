@@ -148,13 +148,25 @@ body > header #logo img:hover {
 }
 
 /* Full-width input fields */
-.container input[type=text], .container input[type=password], .container input[type=email] {
+.container input[type=text], .container input[type=password], .container input[type=email], .container input[type=url] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+
+.container textarea{
+  resize:none;
+  /* max-height: 15em; */
+  overflow: auto;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display:block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 .container input{
@@ -514,8 +526,12 @@ body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):
 }
 
 #channel-id .name{
-  font-weight: 500;
+  font-weight: 600;
   font-size: 2em;
+}
+
+#channel-id .name:before{
+  content: '#';
 }
 
 #search-posts{
@@ -525,6 +541,11 @@ body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):
 #search-channels li a{
   text-decoration: none;
   color: white;
+}
+
+#channel-id .description{
+  word-break: break-all;
+  text-align: center;
 }
 
 #sidebar{
@@ -547,7 +568,7 @@ body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):
 }
 
 #subscription-list .subscriptions-title{
-  font-weight: bolder;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -598,7 +619,7 @@ body > header #channels li:nth-child(5), #search-channels li:nth-child(5n+5), #s
   margin-left: 2em;
 }
 
-#error-block{
+#error-block, #channel-empty-block{
   display: flex;
   flex-direction: column;
   align-items: center;

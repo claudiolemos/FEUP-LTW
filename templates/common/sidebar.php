@@ -37,7 +37,7 @@
           <label><a>Name</a></label>
           <input type="text" name="name" placeholder="Name" required>
           <label><a>Description</a></label>
-          <input type="textarea" name="description" placeholder="Description" required>
+          <textarea name="description" rows="5" placeholder="Description" required></textarea>
           <button type="submit">Create channel</button>
         </div>
       </form>
