@@ -29,7 +29,7 @@
           <label><a>Content</a></label>
           <input type="textarea" name="content" placeholder="Content" required>
           <input type="hidden" name="username" value="<?=$_SESSION['username']?>">
-          <input type="hidden" name="channel" value="<?=$_GET['id']?>">
+          <input type="hidden" name="channel" value="<?=$channel['name']?>">
           <button type="submit">Submit post</button>
         </div>
       </form>
@@ -48,7 +48,7 @@
           <label><a>Link</a></label>
           <input type="url" name="link" placeholder="https://example.com" required>
           <input type="hidden" name="username" value="<?=$_SESSION['username']?>">
-          <input type="hidden" name="channel" value="<?=$_GET['id']?>">
+          <input type="hidden" name="channel" value="<?=$channel['name']?>">
           <button type="submit">Submit post</button>
         </div>
       </form>

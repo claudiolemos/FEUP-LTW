@@ -47,6 +47,7 @@ body > header a {
 body > header #logo {
   font-family: 'Comfortaa';
   margin: auto;
+  margin-left: 1em;
 }
 
 #signup form > input{

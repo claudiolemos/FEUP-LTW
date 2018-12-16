@@ -6,7 +6,7 @@
   $posts = getPostOfUser($_GET['id']);
   $comments = getAllUserComments($_GET['id']);
   $karma = getUserKarma($_GET['id']);
-  $cakeday = getUserCakeDay($_GET['id']);
+  $cakeday = gmdate("Y-m-d", getUserCakeDay($_GET['id']));
   $avatar = getAvatar($_GET['id']);
 ?>
 
