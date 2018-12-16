@@ -27,6 +27,17 @@ body > header {
   grid-column: start / middle;
 }
 
+#user-profile-sidebar {
+  grid-row: nav / footer;
+  grid-column: middle / end;
+}
+
+
+#user-history {
+  grid-row: nav / footer;
+  grid-column: start / middle;
+}
+
 #search {
   grid-row: sort / posts;
   grid-column: middle / end;

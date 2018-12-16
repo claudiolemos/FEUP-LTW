@@ -44,7 +44,7 @@
 
 
   <div class="write-comment-div" id="write-top-level-comment-div">
-    <button type="submit" class="write-comment" value="<?= $post['id'] ?>" id="""> Write Comment... </button>
+    <button type="submit" class="write-comment" value="<?= $post['id'] ?>" id="""> Write Comment</button>
   </div>
 
 

@@ -22,7 +22,7 @@
   </div>
   <?php if(isset($_SESSION['username'])){ ?>
     <div class="subscription">
-      <button><?=isSubscribed($_SESSION['username'], $_GET['id'])? Unsubscribe : Subscribe?></button>
+      <button><?=isSubscribed($_SESSION['username'], $channel['name'])? Unsubscribe : Subscribe?></button>
     </div>
     <div class="add-text-post">
       <button onclick="document.getElementById('add-text-post-pop-up').style.display='block'" >Add text post</button>
