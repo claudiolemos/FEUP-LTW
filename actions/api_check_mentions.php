@@ -6,7 +6,7 @@
 
   $content = $_POST['content'];
 
-  $content = htmlspecialchars($content);
+  
 
 
   //check for user mentions
@@ -32,7 +32,7 @@
 
     if($userID!=-1){//if user exists
 
-      $userHTML = '<a href="/profile.php/?id='.$username.'">@'.$username.'</a>'; 
+      $userHTML = '<a href="/profile.php?id='.$username.'">@'.$username.'</a>'; 
 
       //replace username with link to users page in content
       $search = '@'.$username;
