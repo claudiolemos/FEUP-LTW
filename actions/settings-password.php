@@ -4,9 +4,9 @@
 
 
   $username = strtolower(trim(strip_tags($_SESSION['username'])));
-  $new_password = $_GET['new-pwd'];
-  $curr_password = $_GET['curr-pwd'];
-  $conf_new_password = $_GET['conf-new-pwd'];
+  $new_password = $_POST['new-pwd'];
+  $curr_password = $_POST['curr-pwd'];
+  $conf_new_password = $_POST['conf-new-pwd'];
 
   if($new_password != null && $curr_password != null && $conf_new_password != null)
     if(isLoginCorrect($username, $curr_password))

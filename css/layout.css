@@ -27,6 +27,22 @@ body > header {
   grid-column: start / middle;
 }
 
+#user-profile-sidebar {
+  grid-row: nav / footer;
+  grid-column: middle / end;
+}
+
+#settings-sidebar{
+  grid-row: nav / footer;
+  grid-column: middle / end;
+}
+
+
+#user-history {
+  grid-row: nav / footer;
+  grid-column: start / middle;
+}
+
 #search {
   grid-row: sort / posts;
   grid-column: middle / end;
@@ -38,10 +54,17 @@ body > header {
 }
 
 
-#posts, #search-posts, #channel-posts {
+#posts, #channel-posts {
   grid-row: posts / footer;
   grid-column: start / middle;
 }
+
+#channel-empty-block {
+  grid-row: sort / footer;
+  grid-column: start / middle;
+}
+
+
 
 #single-post {
   grid-row: single-post / footer;
@@ -112,14 +135,14 @@ body > header #logo {
 
 /* post blocks layout */
 
-#posts article, #single-post article, #search-posts article, #channel-posts article {
+#posts article, #single-post article, #search-posts article,  #search-comments article, #channel-posts article {
   display: grid;
   grid-template-columns: [voting] 2em [image] 5em [start] auto [end];
   grid-template-rows: [start] auto [info] auto [end];
   margin-bottom: 1em;
 }
 
-#posts article .voting, #single-post article .voting, #search-posts article .voting, #channel-posts article .voting {
+#posts article .voting, #single-post article .voting, #search-posts article .voting,  #search-comments article .voting, #channel-posts article .voting {
   grid-column: voting / image;
   grid-row: start / end;
   display: flex;
@@ -138,7 +161,18 @@ body > header #logo {
   font-size: 1.5em;
 }
 
+#search-comments article > header .preview {
+  grid-column: start / end;
+  grid-row: start / info;
+  /* margin: 0; */
+}
+
 #posts article > footer, #single-post article > footer, #search-posts article > footer, #channel-posts article > footer {
+  grid-column: start / end;
+  grid-row: info / end;
+}
+
+#search-comments article > footer {
   grid-column: start / end;
   grid-row: info / end;
 }

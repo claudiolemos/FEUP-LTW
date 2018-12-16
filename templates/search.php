@@ -7,12 +7,14 @@
   <form method="get" action="/search.php">
     <input type="text" name="query" value="<?=$_GET['query']?>" required>
     <button type="submit">
-      <i class="fa fa-search"></i>
+      <i class="fa fa-search fa-2x"></i>
     </button>
   </form>
 </div>
+
 <div id="search-results">
   <h1>Search Results</h1>
+
   <section id="search-posts">
     <h2>Posts</h2>
     <?php if($searchPosts != null) { ?>
@@ -31,8 +33,8 @@
           </header>
           <footer>
             <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-            <span class="username"><a href="/profile.php/?id=<?=$post['username']?>"><?=$post['username']?></a></span>
-            <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>"><?=$post['channel']?></a></span>
+            <span class="username"><a href="/profile.php/?id=<?=$post['username']?>">@<?=$post['username']?></a></span>
+            <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>">#<?=$post['channel']?></a></span>
             <span class="comments"><?=getNoComments($post['id'])?></span>
           </footer>
         </article>
@@ -50,7 +52,7 @@
           <a href="/profile.php/?id=<?=$user['username']?>">
             <div class="user-block">
               <div class="thumbnail">
-                <img src="/images/profile/default.svg">
+                <img src="<?=getAvatar($user['username'])?>">
               </div>
               <p class="user"><?=$user['username']?></p>
             </div>

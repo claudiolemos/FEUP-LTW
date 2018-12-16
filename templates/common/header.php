@@ -14,8 +14,7 @@
   <link href="/css/layout.css" rel="stylesheet">
   <link href="/css/responsive.css" rel="stylesheet">
   <link href="/css/comments.css" rel="stylesheet">
-  <link href="/css/forms.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat:100,200,300,400,500,600,700,800,900,1000" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -27,7 +26,7 @@
     <nav id="channels">
       <ul>
         <?php foreach($topChannels as $channel) { ?>
-          <li><a href="channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
+          <li><a href="/channel.php/?id=<?=$channel['name']?>"><?=$channel['name']?></a></li>
         <?php } ?>
       </ul>
     </nav>
@@ -77,9 +76,9 @@
         <div class="user-dropdown">
           <button class="dropdown-button"><?=$_SESSION['username']?></button>
           <div class="user-dropdown-content">
-            <a href="profile.php?id=<?=$_SESSION['username']?>">Profile</a>
-            <a href="settings.php?id=<?=$_SESSION['username']?>">Settings</a>
-            <a href="actions/logout.php">Logout</a>
+            <a href="/profile.php?id=<?=$_SESSION['username']?>">Profile</a>
+            <a href="/settings.php?id=<?=$_SESSION['username']?>">Settings</a>
+            <a href="/actions/logout.php">Logout</a>
           </div>
         </div>
       <?php } ?>

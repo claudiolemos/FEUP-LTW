@@ -5,15 +5,16 @@
   $current_channel = $_GET['id'];
   $posts = getPosts("new", $current_channel, $curr_offset);
   $curr_offset = $curr_offset + 5;
-  
+
 ?>
 
 
+  <?php if(sizeof($posts) > 0) { ?>
 <div id="sort">
   <ul>
-    <li name="new">New</a></li>
-    <li name="top">Top</a></li>
-    <li name="controversial">Controversial</a></li>
+    <li name="new"><a>New</a></li>
+    <li name="top"><a>Top</a></li>
+    <li name="controversial"><a>Controversial</a></li>
   </ul>
 </div>
 <section id="channel-posts">
@@ -43,3 +44,9 @@
     <input type="hidden" id="curr_offset" value="<?= $curr_offset ?>">
     <input type="button" class="load-more-posts-btn" id="load-more-posts" value="Load More Posts">
 </section>
+<?php } else { ?>
+<div id="channel-empty-block">
+  <img src="/images/empty.png">
+  <p class="empty-message">It seems like nobody has posted here yet.</p>
+</div>
+<?php } ?>
