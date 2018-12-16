@@ -8,8 +8,9 @@
   $username = $_SESSION['username'];
   $post_id = $_POST['post_id'];
   $content = $_POST['content'];
+
   $parent_id = $_POST['parent_id'];
-  $date = time(); 
+  $date = time();
 
   if(isset($username)){
     $user_id = getUserID($username);

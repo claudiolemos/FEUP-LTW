@@ -40,11 +40,42 @@ if(sortSubscriptions != null){
 function updatePosts(request){
   if (request.readyState==4 && request.status==200){
     let posts = JSON.parse(request.responseText);
-    while(postsNode.firstChild)
-      postsNode.removeChild(postsNode.firstChild);
+    while(postsNode.firstChild){
+      if (postsNode.firstChild.nodeName!='input' )
+        postsNode.removeChild(postsNode.firstChild);
+    }
 
     for(let i = 0; i < posts.length; i++)
       createArticle(posts[i]);
+
+
+
+    //isto cria o necessario para fazer load de mais posts, o problema é que 
+    //como crias requests dentro daquele loop, isto vai correr antes dos requests
+    //logo vai ficar no topo da pagina... Não sei se a unica maneirda de resolver é
+    //forçar no css a ir para o fundo ou assim.
+    let currSortInput = document.createElement('input');
+    currSortInput.type = "hidden";
+    currSortInput.id = "curr_sort";
+    currSortInput.value = currentSort;
+
+    postsNode.append(currSortInput);
+
+    let currOffsetInput = document.createElement('input');
+    currOffsetInput.type = "hidden";
+    currOffsetInput.id = "curr_offset";
+    currOffsetInput.value = 5;
+
+    postsNode.append(currOffsetInput);
+
+    let loadMoreBtn = document.createElement('input');
+    loadMoreBtn.type = "button";
+    loadMoreBtn.class = "load-more-posts-btn";
+    loadMoreBtn.id = "load-more-posts";
+    loadMoreBtn.value = "Load More Posts";
+
+    postsNode.append(loadMoreBtn);
+
   }
 }
 

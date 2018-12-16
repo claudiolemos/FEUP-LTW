@@ -99,11 +99,15 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                         if(this.responseText!=""){
 
 
+
+
                             let newID = JSON.parse(this.responseText)["comment_id"];
                             let post_id = JSON.parse(this.responseText)["post_id"];
                             let parent_id = JSON.parse(this.responseText)["parent_id"];
                             let user_profile = JSON.parse(this.responseText)["user_profile"];
                             let date = JSON.parse(this.responseText)["date"];
+
+                            
 
                             let newComment = "<div style='display:none' class="+"user-comment"+" id="+"user-comment-"+newID+">"
                                 + "<div class='voting comment-voting'>"
