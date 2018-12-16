@@ -15,11 +15,9 @@
   <h1><?php echo($_GET['id'])?></h1>
   <h3>Karma: <?php echo($karma)?> </h3>
   <h3>Cake day: <?php echo($cakeday)?> </h3>
-  <section id="images">
-    <article class="image">
-        <img src="<?=$avatar?>" width="200" height="200">
-    </article>
-  </section>
+  <div id="avatar">
+    <img src="<?=$avatar?>">
+  </div>
   <?php if(isset($_SESSION['username']) && $_SESSION['username'] == $_GET['id']) { ?>
   <div class="post">
     <button class="new_post"><a href="index.php">New Post</a></button>

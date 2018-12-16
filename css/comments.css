@@ -1,13 +1,12 @@
 .user-comment {
   padding: 10px;
-  margin: 10px 0 10px 0;
+  margin: 20px 0 10px 0;
   border: #c1c1c9 solid 1px;
   color: #19191a;
   width: 90%;
   padding: 10px;
   border-left-width: 5px !important;
 }
-
 
 .comment-info{
 	padding: 5px;
@@ -145,7 +144,3 @@
 .write-comment-div{
   margin-left: 30px;
 }
-
-
-
-

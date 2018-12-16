@@ -19,7 +19,7 @@
         <? else: ?>
           <p class="title"><a href="<?='/post.php/?id='.$post['id']?>"><?=$post['title']?></a>
         <? endif; ?>
-        
+
         <?php if($post['user_id'] == $uID) : ?>
           <img id='post-edit-<?=$post['id']?>' class='post-edit' src='/images/edit.png'">
           <img id='post-delete-<?=$post['id']?>' class='post-trashcan' src='/images/garbage.png'">
@@ -35,8 +35,8 @@
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-        <span class="username"><a href="/profile.php/?id=<?=getUserName($post['user_id'])?>"><?=getUserName($post['user_id'])?></a></span>
-        <span class="channel"><a href="/channel.php/?id=<?=getChannelName($post['channel_id'])?>"><?=getChannelName($post['channel_id'])?></a></span>
+        <span class="username"><a href="/profile.php/?id=<?=getUserName($post['user_id'])?>">@<?=getUserName($post['user_id'])?></a></span>
+        <span class="channel"><a href="/channel.php/?id=<?=getChannelName($post['channel_id'])?>">#<?=getChannelName($post['channel_id'])?></a></span>
         <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>

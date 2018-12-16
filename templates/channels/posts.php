@@ -7,9 +7,9 @@
 
 <div id="sort">
   <ul>
-    <li name="new">New</a></li>
-    <li name="top">Top</a></li>
-    <li name="controversial">Controversial</a></li>
+    <li name="new"><a>New</a></li>
+    <li name="top"><a>Top</a></li>
+    <li name="controversial"><a>Controversial</a></li>
   </ul>
 </div>
 <section id="channel-posts">
@@ -28,8 +28,8 @@
       </header>
       <footer>
         <span class="date"><?=gmdate("Y-m-d", $post['date'])?></span>
-        <span class="username"><a href="/profile.php/?id=<?=$post['username']?>"><?=$post['username']?></a></span>
-        <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>"><?=$post['channel']?></a></span>
+        <span class="username"><a href="/profile.php/?id=<?=$post['username']?>">@<?=$post['username']?></a></span>
+        <span class="channel"><a href="/channel.php/?id=<?=$post['channel']?>">#<?=$post['channel']?></a></span>
         <span class="comments"><?=getNoComments($post['id'])?></span>
       </footer>
     </article>

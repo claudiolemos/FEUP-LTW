@@ -7,14 +7,14 @@
   <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
     <button type="submit">
-      <i class="fa fa-search"></i>
+      <i class="fa fa-search fa-2x"></i>
     </button>
   </form>
 </div>
 <aside id="sidebar">
   <?php if(isset($_SESSION['username'])){ ?>
     <div id="subscription-list">
-      <span class="subscriptions-title">My Subscriptions</span>
+      <div class="subscriptions-title">My Subscriptions</div>
       <?php if($subscribedChannels != null){ ?>
         <ul>
           <?php foreach($subscribedChannels as $channel) { ?>
@@ -22,7 +22,7 @@
           <?php } ?>
         </ul>
       <?php } else { ?>
-        <span class="no-subscriptions">You haven't subscribed to a channel</span>
+        <p class="no-subscriptions" style="text-align: center;">You haven't subscribed to a channel</p>
       <?php } ?>
     </div>
     <div class="create-channel">
@@ -42,7 +42,12 @@
         </div>
       </form>
     </div>
-  <?php } ?>
+  <?php } else{  ?>
+  <div class="create-channel">
+    <button onclick="document.getElementById('login-pop-up').style.display='block'" >Create Channel</button>
+  </div>
+
+<?php } ?>
   <div class="random-channel">
     <button onclick="location.href='/channel.php/?id=<?=getRandomChannel()?>';">Random channel</button>
   </div>

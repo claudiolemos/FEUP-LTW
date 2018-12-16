@@ -8,7 +8,7 @@
   --blue2: #4484ce;
   --blue3: #67a6ef;
   --yellow1: #ecc200;
-  --yellow2: #fedc3d;
+  --yellow2: #ffc30b;
   --yellow3: #ffeb8c;
   --green1: #087a50;
   --green2: #0aae72;
@@ -20,6 +20,12 @@
   --pink2: #fa578d;
   --pink3: #ffa9c5;
 }
+
+a {
+  text-decoration: none;
+  text-decoration-color: white;
+}
+
 
 body {
   width: auto;
@@ -37,6 +43,7 @@ body > footer {
   background-color: var(--dark2);
   padding: 1em;
   color: white;
+  text-align: center;
 }
 
 body > header a {
@@ -48,6 +55,16 @@ body > header #logo {
   font-family: 'Comfortaa';
   margin: auto;
   margin-left: 1em;
+}
+
+body > header #logo img {
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+}
+
+body > header #logo img:hover {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 
 #signup form > input{
@@ -295,10 +312,6 @@ button:hover {
   padding: 7px;
   text-decoration-color: white;
 }
-/* TODO:  */
-/* #search form > input[type=submit], #search-big form > input[type=submit]{
-  margin: 0.7em;
-} */
 
 #posts, #channel-posts {
   margin: 0em 2em;
@@ -359,10 +372,15 @@ article .votes {
   height:5em;
 }
 
-
 #search-users .user-block .thumbnail {
   width:5em;
   height:5em;
+}
+
+#avatar > img {
+  object-fit: cover;
+  width:200px;
+  height:200px;
 }
 
 #posts article .thumbnail > img, #single-post article .thumbnail > img, #search-posts article .thumbnail > img, #channel-posts article .thumbnail > img, #search-users .user-block .thumbnail > img {
@@ -397,8 +415,16 @@ article .votes {
   margin-top: 0;
 }
 
+#posts article .username:before, #single-post article .username:before, #search-posts article .username:before, #channel-posts article .username:before {
+  content: ' · posted by ';
+}
+
 #posts article .username:after, #single-post article .username:after, #search-posts article .username:after, #channel-posts article .username:after {
-  content: ' @';
+  content: ' in';
+}
+
+#posts article .comments:before, #single-post article .comments:before, #search-posts article .comments:before, #channel-posts article .comments:before {
+  content: '· ';
 }
 
 #posts article .comments:after, #single-post article .comments:after, #search-posts article .comments:after, #channel-posts article .comments:after {
@@ -429,6 +455,7 @@ article .votes {
   border-style: solid;
   border-width: 1px;
   padding: 10px;
+  height: 20px;
   margin-right: 10px;
 }
 
@@ -457,7 +484,7 @@ article .votes {
 }
 
 body > header #channels {
-  margin: 2em;
+  margin: 0em 6.5vw;
   align-self: center;
 }
 
@@ -477,8 +504,18 @@ body > header #channels li, #search-channels li {
   margin-right: 1em;
 }
 
-body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):hover{
+body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):hover, #subscription-list li:nth-child(n):hover{
   opacity: 0.8;
+}
+
+#channel-id div{
+  text-align: center;
+  margin: 5px 0;
+}
+
+#channel-id .name{
+  font-weight: 500;
+  font-size: 2em;
 }
 
 #search-posts{
@@ -509,25 +546,51 @@ body > header #channels li:nth-child(n):hover, #search-channels li:nth-child(n):
   width: 100%;
 }
 
+#subscription-list .subscriptions-title{
+  font-weight: bolder;
+  text-align: center;
+}
 
+#subscription-list ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
 
-body > header #channels li:nth-child(1), #search-channels li:nth-child(n){
+#subscription-list li {
+  border-color: var(--light1);
+  border-radius: 100px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 4px;
+  text-align: center;
+  margin: 2px;
+  text-align: center;
+}
+
+#subscription-list li a{
+  color: white;
+}
+body > header #channels li:nth-child(1), #search-channels li:nth-child(5n+1), #subscription-list li:nth-child(5n+1){
   background-color: var(--blue2);
 }
 
-body > header #channels li:nth-child(2), #search-channels li:nth-child(2n){
+body > header #channels li:nth-child(2), #search-channels li:nth-child(5n+2), #subscription-list li:nth-child(5n+2){
   background-color: var(--red2);
 }
 
-body > header #channels li:nth-child(3), #search-channels li:nth-child(3n){
+body > header #channels li:nth-child(3), #search-channels li:nth-child(5n+3), #subscription-list li:nth-child(5n+3){
   background-color: var(--yellow2);
 }
 
-body > header #channels li:nth-child(4), #search-channels li:nth-child(4n){
+body > header #channels li:nth-child(4), #search-channels li:nth-child(5n+4), #subscription-list li:nth-child(5n+4){
   background-color: var(--green2);
 }
 
-body > header #channels li:nth-child(5), #search-channels li:nth-child(5n){
+body > header #channels li:nth-child(5), #search-channels li:nth-child(5n+5), #subscription-list li:nth-child(5n+5){
   background-color: var(--pink2);
 }
 

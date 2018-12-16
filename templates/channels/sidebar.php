@@ -1,7 +1,9 @@
 <div id="search">
   <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
-    <input type="submit" value="Submit">
+    <button type="submit">
+      <i class="fa fa-search fa-2x"></i>
+    </button>
   </form>
 </div>
 <aside id="sidebar">
@@ -53,5 +55,15 @@
         </div>
       </form>
     </div>
-  <?php } ?>
+  <?php } else{ ?>
+    <div class="subscription">
+      <button onclick="document.getElementById('login-pop-up').style.display='block'">Subscribe</button>
+    </div>
+    <div class="add-text-post">
+      <button onclick="document.getElementById('login-pop-up').style.display='block'" >Add text post</button>
+    </div>
+    <div class="add-link-post">
+      <button onclick="document.getElementById('login-pop-up').style.display='block'" >Add link post</button>
+    </div>
+  <?php }?>
 </aside>
