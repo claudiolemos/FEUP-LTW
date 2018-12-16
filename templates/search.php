@@ -5,8 +5,10 @@
 
 <div id="search-big">
   <form method="get" action="/search.php">
-    <input type="text" name="query" placeholder="Search..." required>
-    <input type="submit" value="Submit">
+    <input type="text" name="query" value="<?=$_GET['query']?>" required>
+    <button type="submit">
+      <i class="fa fa-search"></i>
+    </button>
   </form>
 </div>
 <div id="search-results">

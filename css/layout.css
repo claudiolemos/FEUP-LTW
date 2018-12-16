@@ -78,18 +78,15 @@ body > footer {
 /* header layout */
 
 body > header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: grid;
+  grid-template-columns: [logo] 10% [channels] 80% [login] 10% [end];
+  grid-template-rows: [start] auto [end];
+  vertical-align: center;
 }
 
 body > header #logo {
   display: flex;
   justify-content: space-around;
-}
-
-body > header #channels, body > header #channel {
-  flex-grow: 0.5;
 }
 
 #channels ul {

@@ -77,6 +77,7 @@
     return ($stmt->fetch()['email'] == $email);
   }
 
+  /**
    * Checks if a email exists
    * @param  string $email user's email
    * @return boolean true if email exists or false if it doesn't
@@ -85,8 +86,8 @@
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT email FROM Users WHERE email = ?');
     $stmt->execute(array($email));
-
-    if($stmt->fetch() != null)
+    return ($stmt->fetch() != null);
+  }
 
   function updateUserPassword($username, $password){
     $db = Database::instance()->db();
@@ -124,15 +125,12 @@
     $stmt = $db->prepare('SELECT id FROM Users WHERE username = ?');
     $stmt->execute(array($username));
 
-    
+
     $user_id = $stmt->fetch()['id'];
     if($user_id != null)
       return $user_id;
     else
       return -1;
-
-
-
   }
 
   /**

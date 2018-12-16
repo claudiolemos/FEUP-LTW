@@ -15,7 +15,8 @@
   <link href="/css/responsive.css" rel="stylesheet">
   <link href="/css/comments.css" rel="stylesheet">
   <link href="/css/forms.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <header>
@@ -76,7 +77,7 @@
         <div class="user-dropdown">
           <button class="dropdown-button"><?=$_SESSION['username']?></button>
           <div class="user-dropdown-content">
-            <a href="/profilepage.php?id=<?=$_SESSION['username']?>">Profile</a>
+            <a href="/profile.php?id=<?=$_SESSION['username']?>">Profile</a>
             <a href="#">Settings</a>
             <a href="/actions/logout.php">Logout</a>
           </div>

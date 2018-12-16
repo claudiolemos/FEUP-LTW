@@ -6,7 +6,9 @@
 <div id="search">
   <form method="get" action="/search.php">
     <input type="text" name="query" placeholder="Search..." required>
-    <input type="submit" value="Submit">
+    <button type="submit">
+      <i class="fa fa-search"></i>
+    </button>
   </form>
 </div>
 <aside id="sidebar">

@@ -7,8 +7,9 @@
   $comments = getAllUserComments($_GET['id']);
   $karma = getUserKarma($_GET['id']);
   $cakeday = getUserCakeDay($_GET['id']);
-  $avatar = getAvatar($_SESSION['username']);
+  $avatar = getAvatar($_GET['id']);
 ?>
+
 <?php if(userExists($_GET['id'])) {?>
 <form id="sidebar">
   <h1><?php echo($_GET['id'])?></h1>
@@ -34,7 +35,7 @@
         <button class="downvote"></button>
       </div>
       <div class="thumbnail">
-        <img src="images/text_post.png" alt="Reddito logo">
+        <img src="/images/text_post.png" alt="Reddito logo">
       </div>
       <header>
         <p class="title"><?=$post['title']?></p>

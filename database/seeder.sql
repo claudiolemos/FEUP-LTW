@@ -7,7 +7,7 @@ INSERT INTO Users VALUES (
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", -- sha256 encryption of 12345
   1533300418,
   0,
-  "../images/profile/default.jpg"
+  "../images/profile/default.svg"
 );
 
 INSERT INTO Users VALUES (
@@ -17,7 +17,7 @@ INSERT INTO Users VALUES (
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", -- sha256 encryption of 12345
   1537889458,
   0,
-  "../images/profile/default.jpg"
+  "../images/profile/default.svg"
 );
 
 INSERT INTO Users VALUES (
@@ -27,7 +27,7 @@ INSERT INTO Users VALUES (
   "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",  -- sha256 encryption of 12345
   1538580658,
   0,
-  "../images/profile/default.jpg"
+  "../images/profile/default.svg"
 );
 
 -- Channels:

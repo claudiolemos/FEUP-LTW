@@ -21,7 +21,8 @@ CREATE TABLE Users (
 	email 					VARCHAR UNIQUE NOT NULL,
 	password 				VARCHAR NOT NULL,
 	cake_day 				INTEGER NOT NULL,
-	karma 					INT NOT NULL
+	karma 					INT NOT NULL,
+	avatar					VARCHAR NOT NULL
 );
 
 CREATE TABLE Channels (
