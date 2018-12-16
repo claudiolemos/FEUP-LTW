@@ -205,7 +205,7 @@ div .register > button {
     position: relative;
 }
 
-div .container > button, #user-profile-sidebar input[type=submit]{
+div .container > button, #user-profile-sidebar input[type=submit], .load-more-posts-btn{
     background-color: var(--red2);
     color: white;
     padding: 14px 20px;

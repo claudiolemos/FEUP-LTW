@@ -11,7 +11,6 @@
   $searchPosts = searchPosts($_GET['query']);
   $searchUsers = searchUsers($_GET['query']);
   $searchChannels = searchChannels($_GET['query']);
-  $searchComments = searchComments($_GET['query']);
 
   include('templates/common/header.php');
   include('templates/search.php');

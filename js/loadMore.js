@@ -3,19 +3,19 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
     var current_offset = $("#curr_offset").val();
     var current_sort = $("#curr_sort").val();
     let request = new XMLHttpRequest();
-    request.open("post", "/../actions/api_load_more_posts.php", true); 
+    request.open("post", "/../actions/api_load_more_posts.php", true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     if($("#curr_channel").length){
-        var curr_channel = $("#curr_channel").val(); 
+        var curr_channel = $("#curr_channel").val();
         request.send(encodeForAjax({current_offset: current_offset, current_sort: current_sort, curr_channel: curr_channel}));
     }
     else{
         request.send(encodeForAjax({current_offset: current_offset, current_sort: current_sort}));
     }
 
-    
-    
+
+
 
     request.onreadystatechange = function () {
 
@@ -62,14 +62,12 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
 
 
                 updateVotingButtons();
-
-
-
-
             }
 
             
-            
+
+
+
 
         }
 
@@ -78,5 +76,5 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
 
 
 
-         
+
 });

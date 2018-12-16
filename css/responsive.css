@@ -8,8 +8,107 @@
   }
 }
 
-@media (max-width: 30em) {
+@media (max-width: 45em) {
   #channels{
     display: none;
+  }
+
+  body > header {
+    display: grid;
+    grid-template-columns: [logo] auto [login] auto [end];
+    grid-template-rows: [start] auto [end];
+    vertical-align: center;
+  }
+
+  #signup{
+    margin:auto;
+  }
+}
+
+@media (max-width: 30em) {
+  body {
+    display: grid;
+    grid-template-columns: [start] auto [end];
+    grid-template-rows: [start] 7em [nav error] auto [search-big search] auto [sort] auto [single-post posts search-results] auto [sidebar] auto [footer] auto [end];
+  }
+
+  /* main layout */
+
+  body > header {
+    grid-row: start / nav;
+    grid-column: start / end;
+  }
+
+  #sort {
+    grid-row: sort / posts;
+    grid-column: start / end;
+    margin: 0em;
+    margin-left: 3em;
+  }
+
+  #user-profile-sidebar {
+    grid-row: sidebar / footer;
+    grid-column: start / end;
+    margin: 2em;
+  }
+
+  #settings-sidebar{
+    grid-row: sidebar / footer;
+    grid-column: start / end;
+    margin: 2em;
+  }
+
+
+  #user-history {
+    grid-row: posts / sidebar;
+    grid-column: start / end;
+  }
+
+  #search {
+    grid-row: search / sort;
+    grid-column: start / end;
+    margin: 1em 2em;
+  }
+
+  #sidebar {
+    grid-row: sidebar / footer
+    grid-column: start / end;
+    margin: 2em;
+  }
+
+
+  #posts, #channel-posts {
+    grid-row: posts / sidebar;
+    grid-column: start / end;
+  }
+
+  #channel-empty-block {
+    grid-row: sort / footer;
+    grid-column: start / end;
+  }
+
+  #single-post {
+    grid-row: single-post / sidebar;
+    grid-column: start / end;
+  }
+
+  #search-results {
+    grid-row: search-results / footer;
+    grid-column: start / end;
+  }
+
+  #search-big {
+    grid-row: search-big / search-results;
+    grid-column: start / end;
+  }
+
+  #error-block{
+    grid-row: error / end;
+    grid-column: start / end;
+  }
+
+  body > footer {
+    grid-row: footer / end;
+    grid-column: start / end;
   }
 }
