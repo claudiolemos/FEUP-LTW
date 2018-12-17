@@ -329,6 +329,10 @@ button:hover {
   margin: 0em 2em;
 }
 
+#load-more {
+  margin: 2em;
+}
+
 #user-history{
   margin-top: 2em;
 }

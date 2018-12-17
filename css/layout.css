@@ -12,7 +12,7 @@
 body {
   display: grid;
   grid-template-columns: [start] 4fr [middle] 1.25fr [end];
-  grid-template-rows: [start] 7em [nav sort search-big search error single-post] auto [posts search-results] auto [load-more] auto [sidebar] auto [footer] auto [end];
+  grid-template-rows: [start] 7em [nav sort search-big search error single-post] auto [posts search-results] auto [sidebar] auto [load-more] auto [footer] auto [end];
 }
 
 /* main layout */
@@ -49,7 +49,7 @@ body > header {
 }
 
 #sidebar {
-  grid-row: posts / sidebar
+  grid-row: posts / sidebar;
   grid-column: middle / end;
 }
 
