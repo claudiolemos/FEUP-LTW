@@ -121,33 +121,27 @@
     if($channel == null){
       switch ($sort) {
         case "new":
-            $stmt = $db->prepare('SELECT t.*
-                            FROM(
+            $stmt = $db->prepare('
                               SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
-                                  LIMIT 5 OFFSET ? ) t
-                                  ORDER BY date DESC ');
+                                  ORDER BY date DESC LIMIT 5 OFFSET ? ');
             break;
         case "top":
-            $stmt = $db->prepare('SELECT t.*
-                            FROM(
+            $stmt = $db->prepare('
                           SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id
-                                  LIMIT 5 OFFSET ? ) t
-                                  ORDER BY votes DESC, date ASC ');
+                                  ORDER BY votes DESC, date ASC LIMIT 5 OFFSET ? ');
             break;
         case "controversial":
-            $stmt = $db->prepare('SELECT t.*
-                            FROM(
+            $stmt = $db->prepare('
                         SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
                                   FROM Posts p1, Users, Channels, (
     	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
                                   )
                                   WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post
-                                  LIMIT 5 OFFSET ?) t
-                                  ORDER BY comments DESC, votes DESC ');
+                                  ORDER BY comments DESC, votes DESC LIMIT 5 OFFSET ?');
             break;
       }
 
@@ -156,33 +150,27 @@
     else{
       switch ($sort) {
         case "new":
-            $stmt = $db->prepare('SELECT t.*
-                            FROM(
+            $stmt = $db->prepare('
               SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
                                   WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ?
-                                  LIMIT 5 OFFSET ?) t
-                                  ORDER BY date DESC ');
+                                  ORDER BY date DESC LIMIT 5 OFFSET ?');
             break;
         case "top":
-            $stmt = $db->prepare('SELECT t.*
-                            FROM(
+            $stmt = $db->prepare('
               SELECT Posts.id, Posts.title, Posts.content, Posts.link, Posts.date, Posts.votes, Users.username, Channels.name as channel
                                   FROM Posts, Users, Channels
-                                  WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ?
-                                  LIMIT 5 OFFSET ? ) t
-                                  ORDER BY votes DESC, date ASC ');
+                                  WHERE Posts.user_id = Users.id AND Posts.channel_id = Channels.id AND Channels.name = ? 
+                                  ORDER BY votes DESC, date ASC LIMIT 5 OFFSET ?');
             break;
         case "controversial":
-            $stmt = $db->prepare('SELECT t.*
-                            FROM(
+            $stmt = $db->prepare('
               SELECT p1.id, p1.title, p1.content, p1.link, p1.date, p1.votes, Users.username, Channels.name as channel, comments
                                   FROM Posts p1, Users, Channels, (
     	                               SELECT p2.id as id_post, count(Comments.id) as comments FROM Posts p2, Comments WHERE Comments.post_id = p2.id GROUP BY p2.id
                                   )
                                   WHERE p1.user_id = Users.id AND p1.channel_id = Channels.id AND p1.id = id_post AND Channels.name = ?
-                                  LIMIT 5 OFFSET ? ) t
-                                  ORDER BY comments DESC, votes DESC ');
+                                  ORDER BY comments DESC, votes DESC LIMIT 5 OFFSET ? ');
             break;
       }
 

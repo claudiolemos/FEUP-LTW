@@ -12,6 +12,7 @@
 
   if($curr_channel!=null){
 
+
     $more_posts = getPosts($current_sort, $curr_channel, $current_offset);
 
     foreach($more_posts as $post => &$val){

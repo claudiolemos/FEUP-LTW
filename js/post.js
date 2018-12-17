@@ -99,7 +99,7 @@ $(document.body).on('click', '.post-comment-btn' ,function(e){
                         if(this.responseText!=""){
 
 
-
+                            
 
                             let newID = JSON.parse(this.responseText)["comment_id"];
                             let post_id = JSON.parse(this.responseText)["post_id"];

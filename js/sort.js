@@ -20,6 +20,9 @@ for(var i = 0; i < sort.length; i++) {
     this.style.backgroundColor = "var(--red2)"
 
     currentSort = this.getAttribute("name");
+    document.querySelector('#curr_channel').value = channelID;
+    document.querySelector('#curr_sort').value = currentSort;
+    document.querySelector('#curr_offset').value = 5;
     let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: currentSort, subscribed: sortSubscribed, username: username}) : createRequest("/../../actions/api_sort.php", {sort: currentSort, id: channelID});
     request.onreadystatechange=function(){updatePosts(request);}
   });
@@ -48,33 +51,7 @@ function updatePosts(request){
     for(let i = 0; i < posts.length; i++)
       createArticle(posts[i]);
 
-
-
-    //isto cria o necessario para fazer load de mais posts, o problema é que 
-    //como crias requests dentro daquele loop, isto vai correr antes dos requests
-    //logo vai ficar no topo da pagina... Não sei se a unica maneirda de resolver é
-    //forçar no css a ir para o fundo ou assim.
-    let currSortInput = document.createElement('input');
-    currSortInput.type = "hidden";
-    currSortInput.id = "curr_sort";
-    currSortInput.value = currentSort;
-
-    postsNode.append(currSortInput);
-
-    let currOffsetInput = document.createElement('input');
-    currOffsetInput.type = "hidden";
-    currOffsetInput.id = "curr_offset";
-    currOffsetInput.value = 5;
-
-    postsNode.append(currOffsetInput);
-
-    let loadMoreBtn = document.createElement('input');
-    loadMoreBtn.type = "button";
-    loadMoreBtn.class = "load-more-posts-btn";
-    loadMoreBtn.id = "load-more-posts";
-    loadMoreBtn.value = "Load More Posts";
-
-    postsNode.append(loadMoreBtn);
+    
 
   }
 }

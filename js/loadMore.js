@@ -21,7 +21,10 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
 
         if(request.readyState === 4 && request.status === 200) {
 
-            for (var i = JSON.parse(this.responseText).length - 1; i >= 0; i--) {
+            //for (var i = JSON.parse(this.responseText).length - 1; i >= 0; i--) {
+
+            for (var i = 0; i < JSON.parse(this.responseText).length; i++) {
+                
                 let post_id = JSON.parse(this.responseText)[i]["id"];
                 let title = JSON.parse(this.responseText)[i]["title"];
                 let content = JSON.parse(this.responseText)[i]["content"];
@@ -56,7 +59,13 @@ $(document.body).on('click', '#load-more-posts' ,function(e){
                 + '</footer>'
                 + '</article>';
 
-                $('#load-more-posts').before(html);
+                if($('#posts').length){
+                    $('#posts').append(html);
+                }
+                else
+                    $('#channel-posts').append(html);
+
+               
 
                 $("#curr_offset").val(parseInt(current_offset) + 5);
 

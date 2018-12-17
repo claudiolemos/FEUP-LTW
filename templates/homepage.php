@@ -40,9 +40,10 @@
       </footer>
     </article>
     <?php } ?>
-
-    <input type="hidden" id="curr_sort" value="new">
-    <input type="hidden" id="curr_offset" value="<?= $curr_offset ?>">
-    <input type="button" class="load-more-posts-btn" id="load-more-posts" value="Load More Posts">
-
 </section>
+<div id ="load-more">
+  <input type="hidden" id="curr_sort" value="new">
+  <input type="hidden" id="curr_offset" value="<?= $curr_offset ?>">
+  <input type="button" class="load-more-posts-btn" id="load-more-posts" value="Load More Posts">
+</div>
+
