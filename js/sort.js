@@ -20,7 +20,9 @@ for(var i = 0; i < sort.length; i++) {
     this.style.backgroundColor = "var(--red2)"
 
     currentSort = this.getAttribute("name");
-    document.querySelector('#curr_channel').value = channelID;
+
+    if(document.querySelector('#curr_channel') != null)
+      document.querySelector('#curr_channel').value = channelID;
     document.querySelector('#curr_sort').value = currentSort;
     document.querySelector('#curr_offset').value = 5;
     let request = channelID == null? createRequest("/../../actions/api_sort.php", {sort: currentSort, subscribed: sortSubscribed, username: username}) : createRequest("/../../actions/api_sort.php", {sort: currentSort, id: channelID});
