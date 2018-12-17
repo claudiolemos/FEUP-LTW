@@ -28,12 +28,12 @@ body > header {
 }
 
 #user-profile-sidebar {
-  grid-row: nav / footer;
+  grid-row: nav / sidebar;
   grid-column: middle / end;
 }
 
 #settings-sidebar{
-  grid-row: nav / footer;
+  grid-row: nav / sidebar;
   grid-column: middle / end;
 }
 
