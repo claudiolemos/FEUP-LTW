@@ -3,6 +3,7 @@ let registerEmail = document.querySelector('#register-pop-up .container input[na
 let registerPassword = document.querySelector('#register-pop-up .container input[name=password]');
 let confirmPassword = document.querySelector('#register-pop-up .container input[name=confirm]');
 
+
 if(registerUsername != null){
   registerUsername.addEventListener('change', function() {
     let request = createRequest("/../../actions/api_register.php", {type: "username", value: registerUsername.value});
@@ -19,17 +20,17 @@ if(registerEmail != null){
 
 if(registerPassword != null){
   registerPassword.addEventListener('change', function() {
-    updatePasswordIcons();
+    updateRegisterIcons();
   });
 }
 
 if(confirmPassword != null){
   confirmPassword.addEventListener('change', function() {
-    updatePasswordIcons();
+    updateRegisterIcons();
   });
 }
 
-function updatePasswordIcons(){
+function updateRegisterIcons(){
   if(confirmPassword.value != registerPassword.value && confirmPassword.value != ""){
     registerPassword.style.backgroundImage = "none";
     confirmPassword.style.backgroundImage = "url('/../../images/warning.svg')";
